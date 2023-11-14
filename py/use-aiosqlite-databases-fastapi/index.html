@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>使用 FastAPI+aiosqlite+databases 搭建服务端的基础用法 | 喵喵小窝</title><meta name="author" content="hikariyo"><meta name="copyright" content="hikariyo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="说明 本文是主要为从未使用过这些框架的人做一个介绍，并没有太多的技术含量。 连接池 首先先把我最焦虑的问题放在这里，到底要不要一个连接池？ 我在 aiosqlite 的仓库中搜到了这样一条 issue，作者为我们介绍了为什么使用 sqlite 数据库时连接池不是那么重要。我并没有说它不重要，只是在轻量级使用中可以不在意这点。我这里把原文复制过来，并且把重要句子标粗。  Generally spea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 FastAPI+aiosqlite+databases 搭建服务端的基础用法">
+<meta property="og:url" content="https://blog.hikariyo.net/py/use-aiosqlite-databases-fastapi/index.html">
+<meta property="og:site_name" content="喵喵小窝">
+<meta property="og:description" content="说明 本文是主要为从未使用过这些框架的人做一个介绍，并没有太多的技术含量。 连接池 首先先把我最焦虑的问题放在这里，到底要不要一个连接池？ 我在 aiosqlite 的仓库中搜到了这样一条 issue，作者为我们介绍了为什么使用 sqlite 数据库时连接池不是那么重要。我并没有说它不重要，只是在轻量级使用中可以不在意这点。我这里把原文复制过来，并且把重要句子标粗。  Generally spea">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hikariyo.net/avatar.jpg">
+<meta property="article:published_time" content="2023-01-13T02:04:43.473Z">
+<meta property="article:modified_time" content="2023-01-13T05:24:25.387Z">
+<meta property="article:author" content="hikariyo">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hikariyo.net/avatar.jpg"><link rel="shortcut icon" href="https://hikariyo.net/favicon.png"><link rel="canonical" href="https://blog.hikariyo.net/py/use-aiosqlite-databases-fastapi/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"本文距上次更新已有","messageNext":"天，其中某些内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '使用 FastAPI+aiosqlite+databases 搭建服务端的基础用法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-13 13:24:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC"><meta name="google-site-verification" content="t_zjV_wyFxxj__nLDxCALeuSV1V8Nv7QO7nSe5LHsxk" /><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="喵喵小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="喵喵小窝"><span class="site-name">喵喵小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">使用 FastAPI+aiosqlite+databases 搭建服务端的基础用法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-13T02:04:43.473Z" title="发表于 2023-01-13 10:04:43">2023-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-13T05:24:25.387Z" title="更新于 2023-01-13 13:24:25">2023-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Dev/">Dev</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="说明">说明</h2>
+<p>本文是主要为从未使用过这些框架的人做一个介绍，并没有太多的技术含量。</p>
+<h2 id="连接池">连接池</h2>
+<p>首先先把我最焦虑的问题放在这里，到底要不要一个连接池？</p>
+<p>我在 <code>aiosqlite</code> 的仓库中搜到了这样一条 <a target="_blank" rel="noopener" href="https://github.com/omnilib/aiosqlite/issues/163">issue</a>，作者为我们介绍了为什么使用 <code>sqlite</code> 数据库时连接池不是<strong>那么重要</strong>。我并没有说它不重要，只是在轻量级使用中可以不在意这点。我这里把原文复制过来，并且把重要句子标粗。</p>
+<hr>
+<p>Generally speaking, the other DB libraries are pooling connections because <strong>a) making a network connection takes a significant amount of time between TCP handshake, etc</strong>, so having connections already made and waiting is faster; and <strong>b) because network bandwidth is limited</strong>, so preventing too many simultaneous connections can help ensure better network utilization.</p>
+<p>However, since sqlite by definition is a local database, either on-disk or in memory, the benefits from connection pooling are minimal: there is no network delay to opening a file on disk or allocating memory, and disk bandwidth is much higher (and better managed by the kernel). “Connections” are lightweight compared to mysql or postgres, and can generally be opened or closed at will. The biggest cost to a new connection will likely be spinning up another thread.</p>
+<p>I added a simple perf test to measure speed of creating connections, and on my M1 Mac Mini with Python 3.10.2, I was able to open ~4700 connections per second from a file, or ~5300/s for in-memory DBs:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(.venv) jreese@mordin ~/workspace/aiosqlite main  » python -m unittest aiosqlite.tests.perf.PerfTest -k test_connection</span><br><span class="line">Running perf tests for at least 2.0s each...</span><br><span class="line">..</span><br><span class="line">Perf Test                 Iterations  Duration         Rate</span><br><span class="line">connection_file                 9454      2.0s     4726.7/s</span><br><span class="line">connection_memory              10504      2.0s     5251.8/s</span><br><span class="line"></span><br><span class="line">Ran 2 tests in 4.005s</span><br></pre></td></tr></table></figure>
+<p>When it comes to concurrency, you can simply create more connections with aiosqlite, <strong>without needing a connection pool</strong>. Pooling connections could potentially still help in that regard if you expect to be making a very large number of concurrent requests and want to limit the number of background threads, though you will likely end up with contention on the limited number of connections in the pool instead.</p>
+<p>My general suggestion for most use cases with aiosqlite is to just keep the code simple, and <strong>open a new connection using a context manager anywhere in the code you need to talk to the db</strong>. This also helps keep transactions isolated, and prevents a wide class of bugs around managing queries on shared connection threads.</p>
+<hr>
+<p>简而言之，就是使用 <code>sqlite</code> 这种本地文件的数据库，连接池相较于 <code>MySQL</code> 那种通过网络连接的数据库来说就没有那么必要了，所以你可以放心大胆的在需要的时候创建数据库连接。</p>
+<h2 id="依赖">依赖</h2>
+<p>均可通过 <code>pip install</code> 下载。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/encode/databases">databases</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/omnilib/aiosqlite">aiosqlite</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tiangolo/fastapi">fastapi</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/encode/uvicorn">uvicorn</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pydantic/pydantic">pydantic</a></li>
+</ul>
+<h2 id="实践">实践</h2>
+<p>首先，如果去看 <code>databases/core.py</code> 源码的话，可以注意到以下几行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">__aenter__</span>(<span class="params">self</span>) -&gt; <span class="string">&quot;Database&quot;</span>:</span><br><span class="line">    <span class="keyword">await</span> self.connect()</span><br><span class="line">    <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">__aexit__</span>(<span class="params"></span></span><br><span class="line"><span class="params">    self,</span></span><br><span class="line"><span class="params">    exc_type: typing.<span class="type">Optional</span>[typing.<span class="type">Type</span>[BaseException]] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params">    exc_value: typing.<span class="type">Optional</span>[BaseException] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params">    traceback: typing.<span class="type">Optional</span>[TracebackType] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">await</span> self.disconnect()</span><br></pre></td></tr></table></figure>
+<p>所以说我们可以通过异步的 <code>context manager</code> 也就是 <code>async with</code> 来管理一个 <code>databases.Database</code> 对象。</p>
+<p>假设我们有一个储存文本，并根据关键字随机获取的需求，我们需要创建一个表，包含 <code>id</code> 和 <code>text</code> 字段。那么我为了方便，创建了一个工具类来帮助我们管理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> databases</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> Iterable, <span class="type">Optional</span>, AsyncGenerator</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Database</span>:</span><br><span class="line">    _instance: <span class="type">Optional</span>[<span class="string">&#x27;Database&#x27;</span>] = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, db: databases.Database</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self._db = db</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">get_instance</span>(<span class="params">cls</span>) -&gt; <span class="string">&#x27;Database&#x27;</span>:</span><br><span class="line">        <span class="keyword">if</span> cls._instance <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line">        db = databases.Database(<span class="string">&#x27;sqlite+aiosqlite:///./db.sqlite&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">async</span> <span class="keyword">with</span> db:</span><br><span class="line">            <span class="comment"># Initialize tables.</span></span><br><span class="line">            <span class="keyword">await</span> db.execute(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">            CREATE TABLE IF NOT EXISTS texts (</span></span><br><span class="line"><span class="string">                `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,</span></span><br><span class="line"><span class="string">                `text` TEXT NOT NULL UNIQUE</span></span><br><span class="line"><span class="string">            );</span></span><br><span class="line"><span class="string">            &#x27;&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        cls._instance = cls(db)</span><br><span class="line">        <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">add_texts</span>(<span class="params">self, texts: Iterable[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">async</span> <span class="keyword">with</span> self._db <span class="keyword">as</span> db:</span><br><span class="line">            query = <span class="string">&#x27;INSERT OR IGNORE INTO texts (text) VALUES (:text)&#x27;</span></span><br><span class="line">            values = [&#123;<span class="string">&#x27;text&#x27;</span>: text&#125; <span class="keyword">for</span> text <span class="keyword">in</span> texts]</span><br><span class="line">            <span class="keyword">await</span> db.execute_many(query, values)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">get_random_text</span>(<span class="params">self, keyword: <span class="built_in">str</span></span>) -&gt; <span class="type">Optional</span>[<span class="built_in">str</span>]:</span><br><span class="line">        <span class="keyword">async</span> <span class="keyword">with</span> self._db <span class="keyword">as</span> db:</span><br><span class="line">            query = <span class="string">&#x27;SELECT text FROM texts WHERE INSTR (text, :keyword) &gt; 0 ORDER BY RANDOM() LIMIT 1&#x27;</span></span><br><span class="line">            values = &#123;<span class="string">&#x27;keyword&#x27;</span>: keyword&#125;</span><br><span class="line">            <span class="keyword">if</span> result := <span class="keyword">await</span> db.fetch_one(query, values):</span><br><span class="line">                <span class="keyword">return</span> result[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>为了方便，本项目直接写 <code>SQL</code> 语句了，就没用 <code>sqlalchemy</code>，如果数据复杂就不要直接写 <code>SQL</code> 语句了。</p>
+<h2 id="FastAPI">FastAPI</h2>
+<p>介绍完了我们的工具类，接下来就是集成到 <code>FastAPI</code> 中了。这里我们使用了<strong>依赖注入</strong>来获取工具类 <code>Database</code> 的实例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pydantic <span class="keyword">import</span> BaseModel</span><br><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI, Depends</span><br><span class="line"><span class="keyword">from</span> fastapi.responses <span class="keyword">import</span> JSONResponse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PostBody</span>(<span class="title class_ inherited__">BaseModel</span>):</span><br><span class="line">    texts: <span class="built_in">list</span>[<span class="built_in">str</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">get_db</span>() -&gt; Database:</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> Database.get_instance()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.post(<span class="params"><span class="string">&#x27;/text&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">handle_add_texts</span>(<span class="params">body: PostBody, db: Database = Depends(<span class="params">get_db</span>)</span>):</span><br><span class="line">    <span class="keyword">await</span> db.add_texts(body.texts)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&#x27;/text&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">handle_text</span>(<span class="params">keyword: <span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span>, db: Database = Depends(<span class="params">get_db</span>)</span>):</span><br><span class="line">    <span class="keyword">if</span> text := <span class="keyword">await</span> db.get_random_text(keyword):</span><br><span class="line">        <span class="keyword">return</span> text</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> JSONResponse(</span><br><span class="line">        content=<span class="string">f&#x27;no text contains given keyword <span class="subst">&#123;keyword&#125;</span>&#x27;</span>,</span><br><span class="line">        status_code=<span class="number">404</span>,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>之后用 <code>uvicorn</code> 运行，就搭建了一个简单的服务端了，基本上 <code>CRUD</code> 都可以实现。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uvicorn server:app --port 8080</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net">hikariyo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net/py/use-aiosqlite-databases-fastapi/">https://blog.hikariyo.net/py/use-aiosqlite-databases-fastapi/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.hikariyo.net" target="_blank">喵喵小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">hikariyo</div><div class="author-info__description">喜欢做点有趣的事情</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://hikariyo.net"><i class="fas fa-home"></i><span>主页</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/hikariyo" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/381759497" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://hikariyo.net/email" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/hikariyo1" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a><a class="social-icon" href="https://blog.hikariyo.net/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">记录学习算法过程中的知识点和易错易混点以便将来复习。<br>P.S. 用魔法访问本站可以大幅减少加载时间。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number">2.</span> <span class="toc-text">连接池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96"><span class="toc-number">3.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5"><span class="toc-number">4.</span> <span class="toc-text">实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FastAPI"><span class="toc-number">5.</span> <span class="toc-text">FastAPI</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/basic/wrong/" title="挂分合集">挂分合集</a><time datetime="2023-11-04T14:21:00.000Z" title="发表于 2023-11-04 22:21:00">2023-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/ds/mono-stack/" title="数据结构 - 单调栈">数据结构 - 单调栈</a><time datetime="2023-10-31T07:54:00.000Z" title="发表于 2023-10-31 15:54:00">2023-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/mod-shortest-path/" title="数学 - 同余最短路">数学 - 同余最短路</a><time datetime="2023-10-27T08:30:00.000Z" title="发表于 2023-10-27 16:30:00">2023-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/prime-divisor/" title="数学 - 质数约数相关例题">数学 - 质数约数相关例题</a><time datetime="2023-10-26T12:22:00.000Z" title="发表于 2023-10-26 20:22:00">2023-10-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/math-basic/" title="数学 - 基础公式">数学 - 基础公式</a><time datetime="2023-10-26T09:22:00.000Z" title="发表于 2023-10-26 17:22:00">2023-10-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By hikariyo</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20220523" target="_blank">萌ICP备20220523号</a> <br> <span id="realtime_duration"></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/dayjs.min.js"></script><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/duration.min.js"></script><script src="/scripts/realtime.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

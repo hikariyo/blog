@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python itertools 简单介绍和运用例 | 喵喵小窝</title><meta name="author" content="hikariyo"><meta name="copyright" content="hikariyo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最近写 Python 比较多，不可避免地要处理一堆可迭代对象，发现 Python 对于迭代器&#x2F;生成器的支持相较于其它语言来说是更为丰富的，所以简单记录一下 itertools 这个内置包中几个常见的函数。 文末附一个实例，是一个关于扫雷的算法，用到了文中提到的一些函数。注意，我知道它们并不是真正的函数，而是以类的形式定义。为了方便起见，本文就把它们当成函数看代。 介绍 使用迭代器&#x2F;生成器的好处是节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python itertools 简单介绍和运用例">
+<meta property="og:url" content="https://blog.hikariyo.net/py/python-itertools-introduction-examples/index.html">
+<meta property="og:site_name" content="喵喵小窝">
+<meta property="og:description" content="最近写 Python 比较多，不可避免地要处理一堆可迭代对象，发现 Python 对于迭代器&#x2F;生成器的支持相较于其它语言来说是更为丰富的，所以简单记录一下 itertools 这个内置包中几个常见的函数。 文末附一个实例，是一个关于扫雷的算法，用到了文中提到的一些函数。注意，我知道它们并不是真正的函数，而是以类的形式定义。为了方便起见，本文就把它们当成函数看代。 介绍 使用迭代器&#x2F;生成器的好处是节">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hikariyo.net/avatar.jpg">
+<meta property="article:published_time" content="2023-01-21T09:46:23.261Z">
+<meta property="article:modified_time" content="2023-02-13T04:52:42.514Z">
+<meta property="article:author" content="hikariyo">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hikariyo.net/avatar.jpg"><link rel="shortcut icon" href="https://hikariyo.net/favicon.png"><link rel="canonical" href="https://blog.hikariyo.net/py/python-itertools-introduction-examples/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"本文距上次更新已有","messageNext":"天，其中某些内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python itertools 简单介绍和运用例',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-13 12:52:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC"><meta name="google-site-verification" content="t_zjV_wyFxxj__nLDxCALeuSV1V8Nv7QO7nSe5LHsxk" /><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="喵喵小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="喵喵小窝"><span class="site-name">喵喵小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Python itertools 简单介绍和运用例</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-21T09:46:23.261Z" title="发表于 2023-01-21 17:46:23">2023-01-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-13T04:52:42.514Z" title="更新于 2023-02-13 12:52:42">2023-02-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Learn/">Learn</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span></div></div></div><article class="post-content" id="article-container"><p>最近写 Python 比较多，不可避免地要处理一堆可迭代对象，发现 Python 对于<strong>迭代器/生成器</strong>的支持相较于其它语言来说是更为丰富的，所以简单记录一下 <code>itertools</code> 这个内置包中几个常见的函数。</p>
+<p>文末附一个实例，是一个关于扫雷的算法，用到了文中提到的一些函数。注意，我知道它们并<strong>不是真正的函数</strong>，而是以类的形式定义。为了方便起见，本文就把它们当成函数看代。</p>
+<h2 id="介绍">介绍</h2>
+<p>使用<strong>迭代器/生成器</strong>的好处是节省无意义的内存消耗，就像 Java 里的 <code>Stream API</code> 一样（当然也有很多不同，这里不再展开讨论）。假设我们最终要对一个 <code>iterable</code> 进行<strong>求和</strong>或者其它 <code>reduce</code> 操作，那是没有必要为此创建一堆数组的。</p>
+<p>反例如 JS 中 <code>Array</code> 上的 <code>map</code>，<code>filter</code> 等操作，它们都会创建一个新的数组，但是这点的性能其实不值一提，只是<strong>锦上添花</strong>而已。就像上文说的，只是节省<strong>无意义</strong>的内存消耗。</p>
+<p>扯多了，回到我们的 <code>itertools</code> 上面来。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>count(start=0, step=1)</code></td>
+<td>参数可以为 <code>int</code> 或 <code>float</code>，类似于 <code>range</code> 但它是无限的。</td>
+<td><code>count(10, 2) --&gt; 10 12 14 ...</code></td>
+</tr>
+<tr>
+<td><code>cycle(p)</code></td>
+<td>重复遍历一个可迭代对象。</td>
+<td><code>cycle('ABC') --&gt; A B C A ... </code></td>
+</tr>
+<tr>
+<td><code>repeat(elem, times=None)</code></td>
+<td>重复同一个元素，如果不指定次数 <code>times</code> 就是无限重复。</td>
+<td><code>repeat(10, 3) --&gt; 10 10 10</code></td>
+</tr>
+<tr>
+<td><code>chain(p, q, ...)</code></td>
+<td>把所有的参数连接成一个可迭代对象。</td>
+<td><code>chain('ABC', 'DEF') -&gt; A B C D E F</code></td>
+</tr>
+<tr>
+<td><code>chain.from_iterable(p)</code></td>
+<td>相当于把参数解包传给 <code>chain</code> 函数。</td>
+<td><code>chain(['ABC', 'DEF']) --&gt; A B C D E F</code></td>
+</tr>
+<tr>
+<td><code>comparess(data, selectors)</code></td>
+<td>以 <code>selectors</code> 是否为 <code>truthy value</code>（这是 JS 的说法，就是它们是否被当作 <code>true</code>）来筛选数据。</td>
+<td><code>compress('ABC', [0, 1, 1]) --&gt; B C</code></td>
+</tr>
+<tr>
+<td><code>product(p, q, ..., repeat=1)</code></td>
+<td>相当于嵌套 <code>for</code> 循环。</td>
+<td><code>product('AB', 'CD') --&gt;  AC, AD, BC, BD</code></td>
+</tr>
+<tr>
+<td><code>pairwise(iterable)</code></td>
+<td>成对迭代一个可迭代对象。</td>
+<td><code>pairwise('ABCDE') --&gt; AB BC CD DE</code></td>
+</tr>
+<tr>
+<td><code>takewhile(predicate, iterable)</code></td>
+<td>直到 <code>predicate(i)</code> 返回一个 <code>falsy value</code>。</td>
+<td><code>takewhile(lambda x: x&lt;5, [1, 4, 6, 1]) -&gt; 1 4</code></td>
+</tr>
+<tr>
+<td><code>dropwhile(predicate, iterable)</code></td>
+<td>当 <code>predicate(i)</code> 返回一个 <code>falsy value</code> 时开始。</td>
+<td><code>dropwhile(lambda x: x&lt;5, [1, 4, 6, 1]) --&gt; 6 1</code></td>
+</tr>
+<tr>
+<td><code>islice(iterable, stop), islice(iterable, start, stop, step=1)</code></td>
+<td>针对一个可迭代对象的切片操作。</td>
+<td>见下文</td>
+</tr>
+<tr>
+<td><code>tee(iterable, n=2)</code></td>
+<td>将一个可迭代对象分裂成多个，不是线程安全的。</td>
+<td>见下文</td>
+</tr>
+</tbody>
+</table>
+<p>实际上还有很多，可以参考 <a target="_blank" rel="noopener" href="https://docs.python.org/3.10/library/itertools.html">Python 官方文档</a>，这里只是挑了几个我比较喜欢用的。</p>
+<h2 id="示例">示例</h2>
+<p>下面详细说一下其中几个，举几个例子。</p>
+<ul>
+<li>
+<p><code>repeat</code> 可以搭配 <code>map</code> 一起使用，看一下代码就明白怎么用了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> n: <span class="built_in">pow</span>(n, <span class="number">3</span>), <span class="built_in">range</span>(<span class="number">5</span>)))</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">27</span>, <span class="number">64</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">pow</span>, <span class="built_in">range</span>(<span class="number">5</span>), repeat(<span class="number">3</span>)))</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">27</span>, <span class="number">64</span>]</span><br></pre></td></tr></table></figure>
+<p>因为 <code>map</code> 在任何一个可迭代对象结束之后就会结束，所以我们直接让它无限重复 <code>3</code> 作为 <code>pow</code> 的第二个参数，就达到了我们求立方的目的。</p>
+</li>
+<li>
+<p><code>cycle</code> 与 <code>islice</code> 一起使用，重复从一个可迭代对象中取出特定个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&#x27;</span>.join(islice(cycle(<span class="string">&#x27;ABCD&#x27;</span>), <span class="number">7</span>))</span><br><span class="line"><span class="string">&#x27;ABCDABC&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>本来我还想说 <code>count</code> 和 <code>islice</code> 一起用，但我又想到这不就是 <code>range</code> 么，不说了喵。</p>
+</li>
+<li>
+<p><code>tee</code> 的实现原理挺有意思的，我这里把官方文档里的等价代码粘贴过来。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">tee</span>(<span class="params">iterable, n=<span class="number">2</span></span>):</span><br><span class="line">    it = <span class="built_in">iter</span>(iterable)</span><br><span class="line">    deques = [collections.deque() <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gen</span>(<span class="params">mydeque</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> mydeque:             <span class="comment"># when the local deque is empty</span></span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    newval = <span class="built_in">next</span>(it)   <span class="comment"># fetch a new value and</span></span><br><span class="line">                <span class="keyword">except</span> StopIteration:</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> deques:        <span class="comment"># load it to all the deques</span></span><br><span class="line">                    d.append(newval)</span><br><span class="line">            <span class="keyword">yield</span> mydeque.popleft()</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(gen(d) <span class="keyword">for</span> d <span class="keyword">in</span> deques)</span><br></pre></td></tr></table></figure>
+<p>它使用了先进先出的队列来保存迭代器返回的数据，实现还是比较巧妙的，下面贴上使用方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a, b = tee(<span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line"><span class="meta">... </span>    <span class="built_in">print</span>(i)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> j <span class="keyword">in</span> b:</span><br><span class="line"><span class="meta">... </span>    <span class="built_in">print</span>(j)</span><br></pre></td></tr></table></figure>
+<p>但其实当数据比较大的时候，它还是会消耗很多内存，所以慎重使用。</p>
+</li>
+<li>
+<p><code>product</code> 可以展平嵌套 <code>for</code> 循环，以下两种写法结果相同。我这里就不把输出粘贴过来了，有点长。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line"><span class="meta">... </span>   <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line"><span class="meta">... </span>       <span class="built_in">print</span>(x, y)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x, y <span class="keyword">in</span> product(<span class="built_in">range</span>(<span class="number">2</span>), <span class="built_in">range</span>(<span class="number">3</span>)):</span><br><span class="line"><span class="meta">... </span>   <span class="built_in">print</span>(x, y)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>dropwhile</code> 可以忽略前几个不符条件的元素，<code>takewhile</code> 可以只保留前几个符合条件的元素。用处还是挺大的。</p>
+</li>
+<li>
+<p>下面是计算扫雷游戏中每个格子周围有几个雷的算法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> product(<span class="built_in">range</span>(width), <span class="built_in">range</span>(height)):</span><br><span class="line">    self[x, y].count = <span class="built_in">sum</span>(</span><br><span class="line">        self[x + dx, y + dy].is_mine</span><br><span class="line">        <span class="keyword">for</span> dx, dy <span class="keyword">in</span> product((-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>), repeat=<span class="number">2</span>)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>我只把和本节相关的代码贴了出来，下面是一些解释。</p>
+<ul>
+<li>
+<p>这是一个实例方法，它所在的类实现了<code>__getitem__</code>，当坐标无效时会返回一个所有的属性都是 <code>0</code> 或 <code>False</code> 的对象，避免进行判空。</p>
+</li>
+<li>
+<p>格子对象的 <code>is_mine</code> 是一个布尔值，它可以被当成 <code>int</code> 参与运算。</p>
+</li>
+<li>
+<p>这段代码也会把当前格子是否是雷给计算上，它对游戏是无关紧要的，因为当这个格子是雷的时候，计数也不会被显示出来。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>就这样，白白喵。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net">hikariyo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net/py/python-itertools-introduction-examples/">https://blog.hikariyo.net/py/python-itertools-introduction-examples/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.hikariyo.net" target="_blank">喵喵小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">hikariyo</div><div class="author-info__description">喜欢做点有趣的事情</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://hikariyo.net"><i class="fas fa-home"></i><span>主页</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/hikariyo" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/381759497" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://hikariyo.net/email" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/hikariyo1" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a><a class="social-icon" href="https://blog.hikariyo.net/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">记录学习算法过程中的知识点和易错易混点以便将来复习。<br>P.S. 用魔法访问本站可以大幅减少加载时间。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/basic/wrong/" title="挂分合集">挂分合集</a><time datetime="2023-11-04T14:21:00.000Z" title="发表于 2023-11-04 22:21:00">2023-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/ds/mono-stack/" title="数据结构 - 单调栈">数据结构 - 单调栈</a><time datetime="2023-10-31T07:54:00.000Z" title="发表于 2023-10-31 15:54:00">2023-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/mod-shortest-path/" title="数学 - 同余最短路">数学 - 同余最短路</a><time datetime="2023-10-27T08:30:00.000Z" title="发表于 2023-10-27 16:30:00">2023-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/prime-divisor/" title="数学 - 质数约数相关例题">数学 - 质数约数相关例题</a><time datetime="2023-10-26T12:22:00.000Z" title="发表于 2023-10-26 20:22:00">2023-10-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/math-basic/" title="数学 - 基础公式">数学 - 基础公式</a><time datetime="2023-10-26T09:22:00.000Z" title="发表于 2023-10-26 17:22:00">2023-10-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By hikariyo</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20220523" target="_blank">萌ICP备20220523号</a> <br> <span id="realtime_duration"></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/dayjs.min.js"></script><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/duration.min.js"></script><script src="/scripts/realtime.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

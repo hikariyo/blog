@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>学习基础Proxy | 喵喵小窝</title><meta name="author" content="hikariyo"><meta name="copyright" content="hikariyo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景  本文是我先学习MDN之后写下的，但是实现功能的代码都是我自己根据学习所得知识写出来的，不会照搬。  Proxy 是 ES6 为我们新增的对象，和它的名字一样，它起到一个代理作用，可以拦截对对象的操作，比如获取数据，设置属性等。 Proxy 下面是从MDN摘过来的，但是释义是我自己写的： 1const p &#x3D; new Proxy(target, handler)   target 被Prox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习基础Proxy">
+<meta property="og:url" content="https://blog.hikariyo.net/js/learn-basic-proxy/index.html">
+<meta property="og:site_name" content="喵喵小窝">
+<meta property="og:description" content="背景  本文是我先学习MDN之后写下的，但是实现功能的代码都是我自己根据学习所得知识写出来的，不会照搬。  Proxy 是 ES6 为我们新增的对象，和它的名字一样，它起到一个代理作用，可以拦截对对象的操作，比如获取数据，设置属性等。 Proxy 下面是从MDN摘过来的，但是释义是我自己写的： 1const p &#x3D; new Proxy(target, handler)   target 被Prox">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hikariyo.net/avatar.jpg">
+<meta property="article:published_time" content="2022-05-24T05:28:42.000Z">
+<meta property="article:modified_time" content="2022-12-10T11:39:56.845Z">
+<meta property="article:author" content="hikariyo">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hikariyo.net/avatar.jpg"><link rel="shortcut icon" href="https://hikariyo.net/favicon.png"><link rel="canonical" href="https://blog.hikariyo.net/js/learn-basic-proxy/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"本文距上次更新已有","messageNext":"天，其中某些内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '学习基础Proxy',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-10 19:39:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC"><meta name="google-site-verification" content="t_zjV_wyFxxj__nLDxCALeuSV1V8Nv7QO7nSe5LHsxk" /><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="喵喵小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="喵喵小窝"><span class="site-name">喵喵小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">学习基础Proxy</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-24T05:28:42.000Z" title="发表于 2022-05-24 13:28:42">2022-05-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-10T11:39:56.845Z" title="更新于 2022-12-10 19:39:56">2022-12-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Learn/">Learn</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="背景">背景</h2>
+<blockquote>
+<p>本文是我先学习<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy">MDN</a>之后写下的，但是实现功能的代码都是我自己根据学习所得知识写出来的，不会照搬。</p>
+</blockquote>
+<p><code>Proxy</code> 是 <code>ES6</code> 为我们新增的对象，和它的名字一样，它起到一个<strong>代理</strong>作用，可以拦截对对象的操作，比如获取数据，设置属性等。</p>
+<h2 id="Proxy">Proxy</h2>
+<p>下面是从MDN摘过来的，但是释义是我自己写的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>target</code></p>
+<p>被<code>Proxy</code>代理的对象，或者叫原始对象。</p>
+</li>
+<li>
+<p><code>handler</code></p>
+<p>定义了各种函数属性的对象，拦截捕捉对<code>target</code>对象的各种行为。</p>
+</li>
+</ul>
+<h2 id="handler">handler</h2>
+<p>这里只说一些表层的方法，像捕捉<code>Object.getPrototypeOf</code>的<code>handler.getPrototype</code>这种较为底层的方法就不再进行说明了，因为那些大概是只有开发类库的时候才会用到。</p>
+<p>所有的<code>Reflect.xxx</code>都相当于对应操作的默认行为，因为我们的目的是<strong>拦截操作</strong>，而非<strong>改变这个操作的行为</strong>，比如<code>set</code>就是设置属性，<strong>不能把属性删除了</strong>，所以在每个拦截函数中都调用了对应在<code>Reflect</code>对象上的API。</p>
+<h2 id="handler-has-target-key">handler.has(target, key)</h2>
+<p>拦截<code>in</code>操作符。</p>
+<h3 id="参数">参数</h3>
+<ul>
+<li>
+<p><code>target</code></p>
+<p>原始对象。</p>
+</li>
+<li>
+<p><code>key</code></p>
+<p>被检测属性的键。</p>
+</li>
+<li>
+<p>返回值</p>
+<p>布尔值，表示存在与否。</p>
+</li>
+</ul>
+<h3 id="示例">示例</h3>
+<p>下面示例的作用是过滤掉对私有属性的检测，即以下划线开头的属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">    <span class="attr">foo</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">_bar</span>: <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="title function_">has</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">&#x27;_&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">has</span>(target, key)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;foo&#x27;</span> <span class="keyword">in</span> p)</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;_bar&#x27;</span> <span class="keyword">in</span> p)</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h2 id="handler-get-target-key-receiver">handler.get(target, key, receiver)</h2>
+<p>拦截获取属性的操作。</p>
+<h3 id="参数-2">参数</h3>
+<ul>
+<li>
+<p><code>target</code></p>
+<p>原始对象。</p>
+</li>
+<li>
+<p><code>key</code></p>
+<p>被获取属性的键。</p>
+</li>
+<li>
+<p><code>receiver</code></p>
+<p><code>Proxy</code>对象或者从原型链上获取时的对象，下方有代码解释。</p>
+</li>
+<li>
+<p>返回值</p>
+<p>任意，但当通过<code>Object.defineProperty</code>给原始对象赋值时，存在一定约束，详情请见<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/Proxy/get#%E7%BA%A6%E6%9D%9F">MDN</a>，因为本文只说基础应用。</p>
+</li>
+</ul>
+<h3 id="示例-2">示例</h3>
+<p>下面示例的作用是禁止获取私有属性，即以下划线开头的属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">    <span class="attr">foo</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">_bar</span>: <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">&#x27;_&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p.<span class="property">foo</span>)</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p.<span class="property">_bar</span>)</span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>此外，我们再探究一下<code>receiver</code>，这里的<code>receiver</code>和下方函数的<code>receiver</code>逻辑相同：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(&#123;&#125;, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (receiver === obj) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;receiver is obj&#x27;</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (receiver === p) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;receiver is p&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(p)</span><br><span class="line"></span><br><span class="line">p.<span class="property">foo</span></span><br><span class="line"><span class="comment">// receiver is p</span></span><br><span class="line"></span><br><span class="line">obj.<span class="property">foo</span></span><br><span class="line"><span class="comment">// receiver is obj</span></span><br></pre></td></tr></table></figure>
+<p>当我们访问<code>p</code>时, <code>p</code>这个代理本身被传入<code>receiver</code>; 当我们访问<code>obj.foo</code>时, 这时继承<code>p</code>的<code>obj</code>被传入<code>receiver</code>。</p>
+<h2 id="handler-set-target-key-value-receiver">handler.set(target, key, value, receiver)</h2>
+<p>拦截设置属性的操作。</p>
+<h3 id="参数-3">参数</h3>
+<ul>
+<li>
+<p><code>target</code></p>
+<p>原始对象。</p>
+</li>
+<li>
+<p><code>key</code></p>
+<p>被设置属性的键。</p>
+</li>
+<li>
+<p><code>value</code></p>
+<p>被设置属性的值。</p>
+</li>
+<li>
+<p><code>receiver</code></p>
+<p>与<code>get</code>中的<code>receiver</code>相同。</p>
+</li>
+<li>
+<p>返回值</p>
+<p>布尔值，表示操作成功与否。</p>
+</li>
+</ul>
+<h3 id="示例-3">示例</h3>
+<p>下面示例的作用是禁止设置私有属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">    <span class="attr">foo</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">_bar</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">&#x27;_&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p.<span class="property">foo</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">p.<span class="property">_bar</span> = <span class="number">20</span></span><br><span class="line"><span class="comment">// TypeError: &#x27;set&#x27; on proxy: trap returned falsish for property &#x27;_bar&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>只有当严格模式下，即<code>'use strict'</code>，返回<code>false</code>时才会引发<code>TypeError</code>，但无论什么模式，这里的<code>_bar</code>都不会被成功赋值。</p>
+<h2 id="handler-deleteProperty-target-key">handler.deleteProperty(target, key)</h2>
+<p>拦截<code>delete</code>操作符。</p>
+<h3 id="参数-4">参数</h3>
+<ul>
+<li>
+<p><code>target</code></p>
+<p>原始对象。</p>
+</li>
+<li>
+<p><code>key</code></p>
+<p>被删除属性的值。</p>
+</li>
+<li>
+<p>返回值</p>
+<p>布尔值，表示操作成功与否。</p>
+<p>但如果在<code>target</code>上的某属性是用<code>Object.defineProperty</code>定义为不可配置，那么该属性无法被删除，其实这个地方不需要我们太留意，因为<code>Reflect.deleteProperty</code>不会让这种操作成功进行。</p>
+</li>
+</ul>
+<h3 id="示例-4">示例</h3>
+<p>下面示例的作用是禁止删除私有属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">    <span class="attr">foo</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">_bar</span>: <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="title function_">deleteProperty</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">&#x27;_&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">deleteProperty</span>(target, key)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> p.<span class="property">foo</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> p.<span class="property">_bar</span></span><br><span class="line"><span class="comment">// TypeError: &#x27;deleteProperty&#x27; on proxy: trap returned falsish for property &#x27;_bar&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>与<code>set</code>相同，这里要开启严格模式才会报错。</p>
+<h2 id="handler-apply-target-thisArg-args">handler.apply(target, thisArg, args)</h2>
+<p>拦截调用操作。</p>
+<p>注意，<code>target</code>本身应该就是一个函数，如果不是在调用时会直接抛出一个<code>TypeError</code>。</p>
+<h3 id="参数-5">参数</h3>
+<ul>
+<li>
+<p><code>target</code></p>
+<p>原始<strong>函数</strong>，注意它应该是一个函数。</p>
+</li>
+<li>
+<p><code>thisArg</code></p>
+<p>原来调用<code>target</code>时<code>this</code>应该是谁，它就是谁。</p>
+</li>
+<li>
+<p><code>args</code></p>
+<p>传进来的参数，是一个数组。</p>
+</li>
+<li>
+<p>返回值</p>
+<p>任意。</p>
+</li>
+</ul>
+<h3 id="示例-5">示例</h3>
+<p>下面示例的作用是把原函数返回值都取反：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(sum, &#123;</span><br><span class="line">    <span class="title function_">apply</span>(<span class="params">target, thisArg, args</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="title class_">Reflect</span>.<span class="title function_">apply</span>(target, thisArg, args)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">sum</span>(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">p</span>(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment">// -3</span></span><br></pre></td></tr></table></figure>
+<h2 id="handler-construct-target-args-newTarget">handler.construct(target, args, newTarget)</h2>
+<p>拦截<code>new</code>操作符。</p>
+<p>注意这里的<code>target</code>本身就应该是一个构造函数或类，它可以被<code>new</code>调用，否则会直接抛出<code>TypeError</code>。</p>
+<h3 id="参数-6">参数</h3>
+<ul>
+<li>
+<p><code>target</code></p>
+<p>原始构造函数。</p>
+</li>
+<li>
+<p><code>args</code></p>
+<p><code>new</code>时传入的参数。</p>
+</li>
+<li>
+<p><code>newTarget</code></p>
+<p>类似<code>set</code>和<code>get</code>的<code>receiver</code>，下面有解释。</p>
+</li>
+<li>
+<p>返回值</p>
+<p>必须是一个对象，即构造出的对象。</p>
+</li>
+</ul>
+<h3 id="示例-6">示例</h3>
+<p>下面示例的作用是把所有传入的参数都乘10：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">x</span> = x</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">y</span> = y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">PointProxy</span> = <span class="keyword">new</span> <span class="title class_">Proxy</span>(<span class="title class_">Point</span>, &#123;</span><br><span class="line">    <span class="title function_">construct</span>(<span class="params">target, args, newTarget</span>) &#123;</span><br><span class="line">        args = args.<span class="title function_">map</span>(<span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">10</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">construct</span>(target, args, newTarget)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>关于<code>newTarget</code>到底是谁，下面做一个探究：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">FooProxy</span> = <span class="keyword">new</span> <span class="title class_">Proxy</span>(<span class="title class_">Foo</span>, &#123;</span><br><span class="line">    <span class="title function_">construct</span>(<span class="params">target, args, newTarget</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(newTarget)</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">construct</span>(target, args, newTarget)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bar</span> <span class="keyword">extends</span> <span class="title class_ inherited__">FooProxy</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">FooProxy</span>()</span><br><span class="line"><span class="comment">// [class Foo]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Bar</span>()</span><br><span class="line"><span class="comment">// [class Bar extends Foo]</span></span><br></pre></td></tr></table></figure>
+<p>也就是说你<code>new</code>的是谁，这里的<code>newTarget</code>就是谁。</p>
+<h2 id="Proxy-revocable-target-handler">Proxy.revocable(target, handler)</h2>
+<p>参数与<code>new Proxy</code>时相同，但会返回一个<code>proxy</code>对象和<code>revoke</code>函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; proxy, revoke &#125; = <span class="title class_">Proxy</span>.<span class="title function_">revocable</span>(target, handler)</span><br></pre></td></tr></table></figure>
+<p>这里的<code>revoke</code>可以让<code>proxy</code>不可用，通常应用于只允许用户访问<code>proxy</code>对象且访问结束后就要销毁，从而不让用户把<code>proxy</code>对象保存下来以后再次访问。</p>
+<h3 id="示例-7">示例</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; proxy, revoke &#125; = <span class="title class_">Proxy</span>.<span class="title function_">revocable</span>(&#123;&#125;, &#123;&#125;)</span><br><span class="line"></span><br><span class="line">proxy.<span class="property">foo</span> = <span class="number">1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>)</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">revoke</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>)</span><br><span class="line"><span class="comment">// TypeError: Cannot perform &#x27;get&#x27; on a proxy that has been revoked</span></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net">hikariyo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net/js/learn-basic-proxy/">https://blog.hikariyo.net/js/learn-basic-proxy/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.hikariyo.net" target="_blank">喵喵小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JS/">JS</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">hikariyo</div><div class="author-info__description">喜欢做点有趣的事情</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">148</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://hikariyo.net"><i class="fas fa-home"></i><span>主页</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/hikariyo" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/381759497" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://hikariyo.net/email" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/hikariyo1" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a><a class="social-icon" href="https://blog.hikariyo.net/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">记录学习算法过程中的知识点和易错易混点以便将来复习。<br>P.S. 用魔法访问本站可以大幅减少加载时间。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy"><span class="toc-number">2.</span> <span class="toc-text">Proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#handler"><span class="toc-number">3.</span> <span class="toc-text">handler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#handler-has-target-key"><span class="toc-number">4.</span> <span class="toc-text">handler.has(target, key)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.2.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#handler-get-target-key-receiver"><span class="toc-number">5.</span> <span class="toc-text">handler.get(target, key, receiver)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-2"><span class="toc-number">5.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">5.2.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#handler-set-target-key-value-receiver"><span class="toc-number">6.</span> <span class="toc-text">handler.set(target, key, value, receiver)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-3"><span class="toc-number">6.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-3"><span class="toc-number">6.2.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#handler-deleteProperty-target-key"><span class="toc-number">7.</span> <span class="toc-text">handler.deleteProperty(target, key)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-4"><span class="toc-number">7.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-4"><span class="toc-number">7.2.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#handler-apply-target-thisArg-args"><span class="toc-number">8.</span> <span class="toc-text">handler.apply(target, thisArg, args)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-5"><span class="toc-number">8.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-5"><span class="toc-number">8.2.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#handler-construct-target-args-newTarget"><span class="toc-number">9.</span> <span class="toc-text">handler.construct(target, args, newTarget)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-6"><span class="toc-number">9.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-6"><span class="toc-number">9.2.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy-revocable-target-handler"><span class="toc-number">10.</span> <span class="toc-text">Proxy.revocable(target, handler)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-7"><span class="toc-number">10.1.</span> <span class="toc-text">示例</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/basic/wrong/" title="挂分合集">挂分合集</a><time datetime="2023-11-04T14:21:00.000Z" title="发表于 2023-11-04 22:21:00">2023-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/ds/mono-stack/" title="数据结构 - 单调栈">数据结构 - 单调栈</a><time datetime="2023-10-31T07:54:00.000Z" title="发表于 2023-10-31 15:54:00">2023-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/mod-shortest-path/" title="数学 - 同余最短路">数学 - 同余最短路</a><time datetime="2023-10-27T08:30:00.000Z" title="发表于 2023-10-27 16:30:00">2023-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/prime-divisor/" title="数学 - 质数约数相关例题">数学 - 质数约数相关例题</a><time datetime="2023-10-26T12:22:00.000Z" title="发表于 2023-10-26 20:22:00">2023-10-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/math-basic/" title="数学 - 基础公式">数学 - 基础公式</a><time datetime="2023-10-26T09:22:00.000Z" title="发表于 2023-10-26 17:22:00">2023-10-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By hikariyo</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20220523" target="_blank">萌ICP备20220523号</a> <br> <span id="realtime_duration"></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/dayjs.min.js"></script><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/duration.min.js"></script><script src="/scripts/realtime.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>喵喵小窝</title>
+  
+  
+  <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
+  
+  <link href="https://blog.hikariyo.net/"/>
+  <updated>2023-11-14T11:49:20.080Z</updated>
+  <id>https://blog.hikariyo.net/</id>
+  
+  <author>
+    <name>hikariyo</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>挂分合集</title>
+    <link href="https://blog.hikariyo.net/oi/basic/wrong/"/>
+    <id>https://blog.hikariyo.net/oi/basic/wrong/</id>
+    <published>2023-11-04T14:21:00.000Z</published>
+    <updated>2023-11-14T11:49:20.080Z</updated>
+    
+    
+    <summary type="html">整理一下遇到的各种各样奇葩的问题，和一些令人智熄的迷惑操作，持续更新。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构 - 单调栈</title>
+    <link href="https://blog.hikariyo.net/oi/ds/mono-stack/"/>
+    <id>https://blog.hikariyo.net/oi/ds/mono-stack/</id>
+    <published>2023-10-31T07:54:00.000Z</published>
+    <updated>2023-11-04T10:36:02.040Z</updated>
+    
+    
+    <summary type="html">单调栈是一种在线性复杂度内求解「左右第一个比某个数大」的元素的方式，与单调队列类似，都是将不可能作为答案的元素去掉来进行优化的思想。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学 - 同余最短路</title>
+    <link href="https://blog.hikariyo.net/oi/math/mod-shortest-path/"/>
+    <id>https://blog.hikariyo.net/oi/math/mod-shortest-path/</id>
+    <published>2023-10-27T08:30:00.000Z</published>
+    <updated>2023-11-04T10:36:20.880Z</updated>
+    
+    
+    <summary type="html">同余最短路是用最短路的方式求解「用若干个整数凑出其它整数」这一问题，可以看做类似于背包问题的一种 DP，但是需要用到最短路求解。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学 - 质数约数相关例题</title>
+    <link href="https://blog.hikariyo.net/oi/math/prime-divisor/"/>
+    <id>https://blog.hikariyo.net/oi/math/prime-divisor/</id>
+    <published>2023-10-26T12:22:00.000Z</published>
+    <updated>2023-10-30T23:33:30.010Z</updated>
+    
+    
+    <summary type="html">利用各种筛法可以预处理出一定范围内的质数以及相关数论函数，筛法并不局限于只能处理 [1, N] 区间内的信息，也可以是 [L,R]，然后对题目进行求解。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学 - 基础公式</title>
+    <link href="https://blog.hikariyo.net/oi/math/math-basic/"/>
+    <id>https://blog.hikariyo.net/oi/math/math-basic/</id>
+    <published>2023-10-26T09:22:00.000Z</published>
+    <updated>2023-11-04T10:36:54.560Z</updated>
+    
+    
+    <summary type="html">基础数学公式记录，主要关于复杂度分析和一些数论基础。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学 - 逆元</title>
+    <link href="https://blog.hikariyo.net/oi/math/inv/"/>
+    <id>https://blog.hikariyo.net/oi/math/inv/</id>
+    <published>2023-10-22T12:20:00.000Z</published>
+    <updated>2023-11-14T06:19:18.150Z</updated>
+    
+    
+    <summary type="html">系统整理一下逆元相关的知识点，包括快速幂求逆元、拓展欧几里得求逆元、线性递推求逆元。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 树链剖分</title>
+    <link href="https://blog.hikariyo.net/oi/graph/heavy-light-decomp/"/>
+    <id>https://blog.hikariyo.net/oi/graph/heavy-light-decomp/</id>
+    <published>2023-10-17T12:59:00.000Z</published>
+    <updated>2023-11-04T10:34:24.500Z</updated>
+    
+    
+    <summary type="html">树链剖分是一种将树上路径转化为对数级别的连续区间的技术，可以把树上询问转化为区间询问，然后用线段树等数据结构维护信息。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 树上差分</title>
+    <link href="https://blog.hikariyo.net/oi/graph/diff-tree/"/>
+    <id>https://blog.hikariyo.net/oi/graph/diff-tree/</id>
+    <published>2023-10-17T10:35:00.000Z</published>
+    <updated>2023-11-04T10:38:22.040Z</updated>
+    
+    
+    <summary type="html">树上差分可以用线性的复杂度处理树上路径的修改，最后通过树上前缀和还原出每个点的权值，在这种情况下它比树链剖分的复杂度更优。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动态规划 - 树形 DP</title>
+    <link href="https://blog.hikariyo.net/oi/dp/tree/"/>
+    <id>https://blog.hikariyo.net/oi/dp/tree/</id>
+    <published>2023-10-03T15:01:00.000Z</published>
+    <updated>2023-11-04T10:38:37.100Z</updated>
+    
+    
+    <summary type="html">树形 DP 的主要思想是在树上对每个结点设计状态，并且父结点的状态可以从子结点转移。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DP" scheme="https://blog.hikariyo.net/tags/DP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基础算法 - 拆位</title>
+    <link href="https://blog.hikariyo.net/oi/basic/split-bits/"/>
+    <id>https://blog.hikariyo.net/oi/basic/split-bits/</id>
+    <published>2023-09-25T00:44:00.000Z</published>
+    <updated>2023-11-14T06:38:37.817Z</updated>
+    
+    
+    <summary type="html">由于位运算的各位都是相互独立的，所以在处理位运算问题的时候可以考虑把每一位单独拆开处理。特别地，对于异或操作，通过前缀和的思想，加上异或的自反性（一个数异或自己结果为零），我们可以在预处理后在常数时间内求出来一段区间的异或值。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 基环树</title>
+    <link href="https://blog.hikariyo.net/oi/graph/pseudo-tree/"/>
+    <id>https://blog.hikariyo.net/oi/graph/pseudo-tree/</id>
+    <published>2023-09-24T02:04:00.000Z</published>
+    <updated>2023-11-04T10:47:15.980Z</updated>
+    
+    
+    <summary type="html">基环树是一个环上挂着若干颗树，通常是断环上一条边然后分类讨论，转为树上问题。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 圆方树</title>
+    <link href="https://blog.hikariyo.net/oi/graph/round-square-tree/"/>
+    <id>https://blog.hikariyo.net/oi/graph/round-square-tree/</id>
+    <published>2023-09-22T07:51:00.000Z</published>
+    <updated>2023-09-24T01:17:41.500Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学 - 快速数论变换 NTT</title>
+    <link href="https://blog.hikariyo.net/oi/math/ntt/"/>
+    <id>https://blog.hikariyo.net/oi/math/ntt/</id>
+    <published>2023-09-20T17:33:00.000Z</published>
+    <updated>2023-09-20T22:49:15.700Z</updated>
+    
+    
+    <summary type="html">由于 FFT 需要用到大量的浮点运算，既耗时间也会造成精度问题，所以就有了 NTT，利用原根与单位根相似的性质来做到加速求多项式积的目的。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学 - 快速傅立叶变换 FFT</title>
+    <link href="https://blog.hikariyo.net/oi/math/fft/"/>
+    <id>https://blog.hikariyo.net/oi/math/fft/</id>
+    <published>2023-09-20T07:17:00.000Z</published>
+    <updated>2023-09-20T22:39:08.080Z</updated>
+    
+    
+    <summary type="html">用点表示法可以 O(n) 的复杂度内求出多项式之积，FFT 可以在 O(nlog(n)) 的复杂度内在多项式的点表示法和系数表示法之间转换。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 连通分量例题</title>
+    <link href="https://blog.hikariyo.net/oi/graph/cc-example/"/>
+    <id>https://blog.hikariyo.net/oi/graph/cc-example/</id>
+    <published>2023-09-19T12:57:00.000Z</published>
+    <updated>2023-10-18T10:35:59.900Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;USACO03FALL-Popular-Cows-G&quot;&gt;[USACO03FALL] Popular Cows G&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;每一头牛的愿望就是变成一头最受欢迎的牛。&lt;/p&gt;
+&lt;p&gt;现在有 N 头牛，编号从 1 到 N，给你 M</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 连通分量模板</title>
+    <link href="https://blog.hikariyo.net/oi/graph/cc/"/>
+    <id>https://blog.hikariyo.net/oi/graph/cc/</id>
+    <published>2023-09-19T12:55:00.000Z</published>
+    <updated>2023-09-19T12:59:54.420Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;边的分类&quot;&gt;边的分类&lt;/h2&gt;
+&lt;p&gt;这里先讨论关于边的几种分类，参考《算法导论》给出的定义。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;树边：如果结点 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 拓扑排序</title>
+    <link href="https://blog.hikariyo.net/oi/graph/topsort/"/>
+    <id>https://blog.hikariyo.net/oi/graph/topsort/</id>
+    <published>2023-09-17T23:15:00.000Z</published>
+    <updated>2023-10-10T08:42:14.650Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;模板&quot;&gt;模板&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;给定一个 n 个点 m 条边的有向图，点的编号是 1 到 n，图中可能存在重边和自环。&lt;/p&gt;
+&lt;p&gt;请输出任意一个该有向图的拓扑序列，如果拓扑序列不存在，则输出</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构 - 李超线段树</title>
+    <link href="https://blog.hikariyo.net/oi/ds/li-chao-tree/"/>
+    <id>https://blog.hikariyo.net/oi/ds/li-chao-tree/</id>
+    <published>2023-09-13T10:39:00.000Z</published>
+    <updated>2023-11-14T13:16:01.137Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;HEOI2013-Segment&quot;&gt;[HEOI2013] Segment&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;要求在平面直角坐标系下维护两个操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在平面上加入一条线段。记第 &lt;span class=&quot;katex&quot;&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基础算法 - 排序</title>
+    <link href="https://blog.hikariyo.net/oi/basic/sort/"/>
+    <id>https://blog.hikariyo.net/oi/basic/sort/</id>
+    <published>2023-09-08T01:11:00.000Z</published>
+    <updated>2023-09-13T23:52:55.190Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;归并排序求逆序对&quot;&gt;归并排序求逆序对&lt;/h2&gt;
+&lt;p&gt;由于我们得到的 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - Prufer 编码</title>
+    <link href="https://blog.hikariyo.net/oi/graph/prufer/"/>
+    <id>https://blog.hikariyo.net/oi/graph/prufer/</id>
+    <published>2023-09-05T08:00:00.000Z</published>
+    <updated>2023-10-14T03:23:20.070Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;Prufer 编码用长度为 &lt;code&gt;n-2&lt;/code&gt; 的序列表示一个无根树，构造一个 Prufer</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+</feed>
