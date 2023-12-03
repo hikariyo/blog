@@ -54,23 +54,23 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
   </entry>
   
   <entry>
-    <title>挂分合集</title>
+    <title>杂项 - 挂分合集</title>
     <link href="https://blog.hikariyo.net/oi/basic/wrong/"/>
     <id>https://blog.hikariyo.net/oi/basic/wrong/</id>
     <published>2023-11-04T14:21:00.000Z</published>
-    <updated>2023-12-03T11:17:14.880Z</updated>
+    <updated>2023-12-03T11:24:10.043Z</updated>
     
     
-    <summary type="html">整理一下遇到的各种各样奇葩的问题，和一些令人智熄的迷惑操作，持续更新。</summary>
+    <summary type="html">整理一下遇到的各种各样奇葩的问题，和一些令人智熄的迷惑操作。</summary>
     
     
     
@@ -121,9 +121,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -146,9 +146,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -169,9 +169,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -192,9 +192,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -274,7 +274,7 @@
     <link href="https://blog.hikariyo.net/oi/basic/split-bits/"/>
     <id>https://blog.hikariyo.net/oi/basic/split-bits/</id>
     <published>2023-09-25T00:44:00.000Z</published>
-    <updated>2023-11-14T06:38:37.000Z</updated>
+    <updated>2023-12-03T11:24:02.204Z</updated>
     
     
     <summary type="html">由于位运算的各位都是相互独立的，所以在处理位运算问题的时候可以考虑把每一位单独拆开处理。特别地，对于异或操作，通过前缀和的思想，加上异或的自反性（一个数异或自己结果为零），我们可以在预处理后在常数时间内求出来一段区间的异或值。</summary>
@@ -357,9 +357,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -380,9 +380,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
