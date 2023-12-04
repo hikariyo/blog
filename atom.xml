@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-04T04:35:49.044Z</updated>
+  <updated>2023-12-04T04:38:59.594Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,20 +21,10 @@
     <link href="https://blog.hikariyo.net/oi/dp/dynamic/"/>
     <id>https://blog.hikariyo.net/oi/dp/dynamic/</id>
     <published>2023-12-04T03:58:00.000Z</published>
-    <updated>2023-12-04T04:35:49.044Z</updated>
+    <updated>2023-12-04T04:38:59.594Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
-&lt;p&gt;动态 DP 是一种带修求 DP 值的技术，通过广义矩阵维护各 DP 值之间的关系，然后修改的时候修改转移矩阵即可达到带修求 DP 值的目的。&lt;/p&gt;
-&lt;h2 id=&quot;模板&quot;&gt;模板&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;给定一棵</summary>
-        
-      
+    <summary type="html">动态 DP 是一种带修求 DP 值的技术，通过广义矩阵乘法维护各 DP 值之间的关系，然后修改的时候修改转移矩阵即可达到带修求 DP 值的目的，可以结合树剖将树上的某些 DP 转化成重儿子和轻儿子之间的转化，然后用树剖线段树维护广义矩阵之积。</summary>
     
     
     
@@ -54,18 +44,10 @@
     <link href="https://blog.hikariyo.net/oi/ds/segment-tree-merge/"/>
     <id>https://blog.hikariyo.net/oi/ds/segment-tree-merge/</id>
     <published>2023-12-04T02:30:00.000Z</published>
-    <updated>2023-12-04T03:24:16.904Z</updated>
+    <updated>2023-12-04T04:39:15.487Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
-&lt;p&gt;线段树合并指建立一棵新的线段树，每个节点都是原来两棵树对应结点的合并后的结果，常与树上差分或者树形 DP 一起使用，用于维护每个点有多个信息，并且需要合并之后求最大值或者某些线段树支持的操作。&lt;/p&gt;
-&lt;h2</summary>
-        
-      
+    <summary type="html">线段树合并指建立一棵新的线段树，每个节点都是原来两棵树对应结点的合并后的结果，常与树上差分或者树形 DP 一起使用，用于维护每个点有多个信息，并且需要合并之后求最大值或者某些线段树支持的操作。</summary>
     
     
     
@@ -108,18 +90,10 @@
     <link href="https://blog.hikariyo.net/oi/graph/min-spanning-tree-example/"/>
     <id>https://blog.hikariyo.net/oi/graph/min-spanning-tree-example/</id>
     <published>2023-12-03T09:31:00.000Z</published>
-    <updated>2023-12-04T03:32:21.826Z</updated>
+    <updated>2023-12-04T04:41:23.218Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;CF1245D-Shichikuji-and-Power-Grid&quot;&gt;[CF1245D] Shichikuji and Power Grid&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;给定 &lt;span class=&quot;katex&quot;&gt;&lt;span</summary>
-        
-      
+    <summary type="html">最小生成树例题练习，主要看如何将问题转化成最小生成树的模型，然后进行求解。</summary>
     
     
     
