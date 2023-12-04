@@ -86,6 +86,29 @@
   </entry>
   
   <entry>
+    <title>数学 - 矩阵</title>
+    <link href="https://blog.hikariyo.net/oi/math/matrix/"/>
+    <id>https://blog.hikariyo.net/oi/math/matrix/</id>
+    <published>2023-12-03T09:40:00.000Z</published>
+    <updated>2023-12-04T06:38:40.808Z</updated>
+    
+    
+    <summary type="html">矩阵乘法是可以用来描述线性递推的一种技术，并且矩阵乘法具有结合律，因此我们可以进行快速幂操作，从而快速地求出知道递推数列某一项的值。除此之外，矩阵也可以描述一些变量之间的线性关系，观察到相互影响的线性关系的变量就可以考虑能否使用矩阵进行优化。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>图论 - 最小生成树例题</title>
     <link href="https://blog.hikariyo.net/oi/graph/min-spanning-tree-example/"/>
     <id>https://blog.hikariyo.net/oi/graph/min-spanning-tree-example/</id>
@@ -123,9 +146,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -190,9 +213,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -215,9 +238,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -238,9 +261,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -261,9 +284,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -426,9 +449,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -449,43 +472,11 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论 - 连通分量例题</title>
-    <link href="https://blog.hikariyo.net/oi/graph/cc-example/"/>
-    <id>https://blog.hikariyo.net/oi/graph/cc-example/</id>
-    <published>2023-09-19T12:57:00.000Z</published>
-    <updated>2023-10-18T10:35:59.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;USACO03FALL-Popular-Cows-G&quot;&gt;[USACO03FALL] Popular Cows G&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;每一头牛的愿望就是变成一头最受欢迎的牛。&lt;/p&gt;
-&lt;p&gt;现在有 N 头牛，编号从 1 到 N，给你 M</summary>
-        
-      
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
     
   </entry>
   
