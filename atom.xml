@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-04T15:35:58.999Z</updated>
+  <updated>2023-12-04T04:38:59.594Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,25 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>数学 - 由最短时间原理推导折射定律</title>
-    <link href="https://blog.hikariyo.net/math/law-of-refraction/"/>
-    <id>https://blog.hikariyo.net/math/law-of-refraction/</id>
-    <published>2023-12-04T14:52:00.000Z</published>
-    <updated>2023-12-04T15:35:58.999Z</updated>
-    
-    
-    <summary type="html">从最短时间原理出发，用导数值为零列方程，推导出折射定律中折射率等于速度之比的公式。</summary>
-    
-    
-    
-    <category term="Learn" scheme="https://blog.hikariyo.net/categories/Learn/"/>
-    
-    
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-  </entry>
   
   <entry>
     <title>动态规划 - 动态 DP</title>
@@ -78,6 +59,25 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微积分 - 由最短时间原理推导折射定律</title>
+    <link href="https://blog.hikariyo.net/calculus/law-of-refraction/"/>
+    <id>https://blog.hikariyo.net/calculus/law-of-refraction/</id>
+    <published>2023-12-03T14:52:00.000Z</published>
+    <updated>2023-12-04T15:40:34.222Z</updated>
+    
+    
+    <summary type="html">从最短时间原理出发，用导数值为零列方程，推导出折射定律中折射率等于速度之比的公式。</summary>
+    
+    
+    
+    <category term="Calculus" scheme="https://blog.hikariyo.net/categories/Calculus/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
   </entry>
   
