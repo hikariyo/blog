@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-04T03:24:16.904Z</updated>
+  <updated>2023-12-04T04:35:49.044Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>动态规划 - 动态 DP</title>
+    <link href="https://blog.hikariyo.net/oi/dp/dynamic/"/>
+    <id>https://blog.hikariyo.net/oi/dp/dynamic/</id>
+    <published>2023-12-04T03:58:00.000Z</published>
+    <updated>2023-12-04T04:35:49.044Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;动态 DP 是一种带修求 DP 值的技术，通过广义矩阵维护各 DP 值之间的关系，然后修改的时候修改转移矩阵即可达到带修求 DP 值的目的。&lt;/p&gt;
+&lt;h2 id=&quot;模板&quot;&gt;模板&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;给定一棵</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DP" scheme="https://blog.hikariyo.net/tags/DP/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构 - 线段树合并</title>
@@ -67,6 +100,37 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 最小生成树例题</title>
+    <link href="https://blog.hikariyo.net/oi/graph/min-spanning-tree-example/"/>
+    <id>https://blog.hikariyo.net/oi/graph/min-spanning-tree-example/</id>
+    <published>2023-12-03T09:31:00.000Z</published>
+    <updated>2023-12-04T03:32:21.826Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;CF1245D-Shichikuji-and-Power-Grid&quot;&gt;[CF1245D] Shichikuji and Power Grid&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;给定 &lt;span class=&quot;katex&quot;&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
     
   </entry>
   
@@ -326,7 +390,7 @@
     <link href="https://blog.hikariyo.net/oi/graph/pseudo-tree/"/>
     <id>https://blog.hikariyo.net/oi/graph/pseudo-tree/</id>
     <published>2023-09-24T02:04:00.000Z</published>
-    <updated>2023-11-04T10:47:15.000Z</updated>
+    <updated>2023-12-04T03:56:34.055Z</updated>
     
     
     <summary type="html">基环树是一个环上挂着若干颗树，通常是断环上一条边然后分类讨论，转为树上问题。</summary>
@@ -435,70 +499,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;每一头牛的愿望就是变成一头最受欢迎的牛。&lt;/p&gt;
 &lt;p&gt;现在有 N 头牛，编号从 1 到 N，给你 M</summary>
-        
-      
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论 - 连通分量模板</title>
-    <link href="https://blog.hikariyo.net/oi/graph/cc/"/>
-    <id>https://blog.hikariyo.net/oi/graph/cc/</id>
-    <published>2023-09-19T12:55:00.000Z</published>
-    <updated>2023-09-19T12:59:54.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;边的分类&quot;&gt;边的分类&lt;/h2&gt;
-&lt;p&gt;这里先讨论关于边的几种分类，参考《算法导论》给出的定义。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;树边：如果结点 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
-        
-      
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论 - 拓扑排序</title>
-    <link href="https://blog.hikariyo.net/oi/graph/topsort/"/>
-    <id>https://blog.hikariyo.net/oi/graph/topsort/</id>
-    <published>2023-09-17T23:15:00.000Z</published>
-    <updated>2023-10-10T08:42:14.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;模板&quot;&gt;模板&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;给定一个 n 个点 m 条边的有向图，点的编号是 1 到 n，图中可能存在重边和自环。&lt;/p&gt;
-&lt;p&gt;请输出任意一个该有向图的拓扑序列，如果拓扑序列不存在，则输出</summary>
         
       
     
