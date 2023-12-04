@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-03T11:20:03.311Z</updated>
+  <updated>2023-12-04T03:24:16.904Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构 - 线段树合并</title>
+    <link href="https://blog.hikariyo.net/oi/ds/segment-tree-merge/"/>
+    <id>https://blog.hikariyo.net/oi/ds/segment-tree-merge/</id>
+    <published>2023-12-04T02:30:00.000Z</published>
+    <updated>2023-12-04T03:24:16.904Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;线段树合并指建立一棵新的线段树，每个节点都是原来两棵树对应结点的合并后的结果，常与树上差分或者树形 DP 一起使用，用于维护每个点有多个信息，并且需要合并之后求最大值或者某些线段树支持的操作。&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构 - 可持久化</title>
@@ -54,9 +85,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -88,7 +119,7 @@
     <link href="https://blog.hikariyo.net/oi/ds/mono-stack/"/>
     <id>https://blog.hikariyo.net/oi/ds/mono-stack/</id>
     <published>2023-10-31T07:54:00.000Z</published>
-    <updated>2023-11-04T10:36:02.000Z</updated>
+    <updated>2023-12-03T13:51:26.133Z</updated>
     
     
     <summary type="html">单调栈是一种在线性复杂度内求解「左右第一个比某个数大」的元素的方式，与单调队列类似，都是将不可能作为答案的元素去掉来进行优化的思想。</summary>
@@ -121,9 +152,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -146,9 +177,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -169,9 +200,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -192,9 +223,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -357,9 +388,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -380,9 +411,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -481,39 +512,6 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构 - 李超线段树</title>
-    <link href="https://blog.hikariyo.net/oi/ds/li-chao-tree/"/>
-    <id>https://blog.hikariyo.net/oi/ds/li-chao-tree/</id>
-    <published>2023-09-13T10:39:00.000Z</published>
-    <updated>2023-11-14T13:16:01.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;HEOI2013-Segment&quot;&gt;[HEOI2013] Segment&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;要求在平面直角坐标系下维护两个操作：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;在平面上加入一条线段。记第 &lt;span class=&quot;katex&quot;&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
     
   </entry>
   
