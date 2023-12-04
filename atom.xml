@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-04T04:38:59.594Z</updated>
+  <updated>2023-12-04T15:35:16.111Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数学 - 由最短时间原理推导折射定律</title>
+    <link href="https://blog.hikariyo.net/math/law-of-refraction/"/>
+    <id>https://blog.hikariyo.net/math/law-of-refraction/</id>
+    <published>2023-12-04T14:52:00.000Z</published>
+    <updated>2023-12-04T15:35:16.111Z</updated>
+    
+    
+    <summary type="html">从最短时间原理出发，用导数值为零列方程，推导出折射定律中折射率等于速度之比的公式。</summary>
+    
+    
+    
+    <category term="Learn" scheme="https://blog.hikariyo.net/categories/Learn/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+  </entry>
   
   <entry>
     <title>动态规划 - 动态 DP</title>
@@ -100,9 +119,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -146,9 +165,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -213,9 +232,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -238,9 +257,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -261,9 +280,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -284,9 +303,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -449,32 +468,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数学 - 快速傅立叶变换 FFT</title>
-    <link href="https://blog.hikariyo.net/oi/math/fft/"/>
-    <id>https://blog.hikariyo.net/oi/math/fft/</id>
-    <published>2023-09-20T07:17:00.000Z</published>
-    <updated>2023-09-20T22:39:08.000Z</updated>
-    
-    
-    <summary type="html">用点表示法可以 O(n) 的复杂度内求出多项式之积，FFT 可以在 O(nlog(n)) 的复杂度内在多项式的点表示法和系数表示法之间转换。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
