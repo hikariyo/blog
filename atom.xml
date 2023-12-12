@@ -44,7 +44,7 @@
     <link href="https://blog.hikariyo.net/oi/ds/segment-tree-merge/"/>
     <id>https://blog.hikariyo.net/oi/ds/segment-tree-merge/</id>
     <published>2023-12-04T02:30:00.000Z</published>
-    <updated>2023-12-04T04:39:15.487Z</updated>
+    <updated>2023-12-12T16:51:18.170Z</updated>
     
     
     <summary type="html">线段树合并指建立一棵新的线段树，每个节点都是原来两棵树对应结点的合并后的结果，常与树上差分或者树形 DP 一起使用，用于维护每个点有多个信息，并且需要合并之后求最大值或者某些线段树支持的操作。</summary>
