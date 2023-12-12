@@ -111,7 +111,7 @@
     <link href="https://blog.hikariyo.net/oi/math/matrix/"/>
     <id>https://blog.hikariyo.net/oi/math/matrix/</id>
     <published>2023-12-03T09:40:00.000Z</published>
-    <updated>2023-12-04T06:38:40.808Z</updated>
+    <updated>2023-12-12T17:01:56.333Z</updated>
     
     
     <summary type="html">矩阵乘法是可以用来描述线性递推的一种技术，并且矩阵乘法具有结合律，因此我们可以进行快速幂操作，从而快速地求出知道递推数列某一项的值。除此之外，矩阵也可以描述一些变量之间的线性关系，观察到相互影响的线性关系的变量就可以考虑能否使用矩阵进行优化。</summary>
