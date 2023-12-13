@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-04T04:38:59.594Z</updated>
+  <updated>2023-12-13T12:42:51.683Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数学 - 快速沃尔什变换 FWT</title>
+    <link href="https://blog.hikariyo.net/oi/math/fwt/"/>
+    <id>https://blog.hikariyo.net/oi/math/fwt/</id>
+    <published>2023-12-13T12:41:00.000Z</published>
+    <updated>2023-12-13T12:42:51.683Z</updated>
+    
+    
+    <summary type="html">通过分治算法，将多项式在 O(nlog(n)) 的复杂度内进行变换，然后 O(n) 计算，最后进行一次逆变换进行求出位运算卷积。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>动态规划 - 动态 DP</title>
@@ -452,29 +475,6 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数学 - 快速数论变换 NTT</title>
-    <link href="https://blog.hikariyo.net/oi/math/ntt/"/>
-    <id>https://blog.hikariyo.net/oi/math/ntt/</id>
-    <published>2023-09-20T17:33:00.000Z</published>
-    <updated>2023-09-20T22:49:15.000Z</updated>
-    
-    
-    <summary type="html">由于 FFT 需要用到大量的浮点运算，既耗时间也会造成精度问题，所以就有了 NTT，利用原根与单位根相似的性质来做到加速求多项式积的目的。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
   </entry>
   
