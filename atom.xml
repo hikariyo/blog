@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-13T13:42:22.344Z</updated>
+  <updated>2023-12-23T23:18:05.007Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,113 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构 - Link Cut Tree</title>
+    <link href="https://blog.hikariyo.net/oi/ds/lct/"/>
+    <id>https://blog.hikariyo.net/oi/ds/lct/</id>
+    <published>2023-12-23T22:52:00.000Z</published>
+    <updated>2023-12-23T23:18:05.007Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;LCT 利用 Splay 对树进行虚实链剖分，同一实链上的结点处在同一个 Splay 中，排序的关键字是深度，因此 Splay 的中序遍历就是树的形态。这里并不是开好几个结构体数组去维护多个 Splay，只是一些 Splay</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图论 - 线段树优化建图</title>
+    <link href="https://blog.hikariyo.net/oi/graph/seg-optimize/"/>
+    <id>https://blog.hikariyo.net/oi/graph/seg-optimize/</id>
+    <published>2023-12-23T22:44:00.000Z</published>
+    <updated>2023-12-23T22:52:01.430Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;当涉及区间之间的连边操作时，可以考虑使用线段树优化建图，首先建立线段树，让父结点指向子结点或相反，边权为零，然后就会发现无论是最短路还是连通性，都与原图无区别。&lt;/p&gt;
+&lt;h2 id=&quot;CF786B-Legacy&quot;&gt;[CF786B]</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构 - 分块与莫队</title>
+    <link href="https://blog.hikariyo.net/oi/ds/mo/"/>
+    <id>https://blog.hikariyo.net/oi/ds/mo/</id>
+    <published>2023-12-23T07:39:00.000Z</published>
+    <updated>2023-12-23T23:40:38.376Z</updated>
+    
+    
+    <summary type="html">莫队算法是利用平衡复杂度的思想来优化暴力算法，通常是通过均值不等式求出一个最优复杂度，我不知道本文归到哪一类，感觉和数据结构关系更大一点。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构 - Kruskal 重构树</title>
+    <link href="https://blog.hikariyo.net/oi/ds/kruskal-tree/"/>
+    <id>https://blog.hikariyo.net/oi/ds/kruskal-tree/</id>
+    <published>2023-12-22T15:03:00.000Z</published>
+    <updated>2023-12-23T23:40:32.291Z</updated>
+    
+    
+    <summary type="html">一句话说明，在 Kruskal 算法中的并查集合并两点所在连通块这一步，新建一个虚点并将左右连通块代表点经过虚点连接起来，用二叉树的结构记录并查集的合并顺序即加边顺序。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
   
   <entry>
     <title>数学 - 快速沃尔什变换 FWT</title>
@@ -111,7 +218,7 @@
     <link href="https://blog.hikariyo.net/oi/ds/persistent/"/>
     <id>https://blog.hikariyo.net/oi/ds/persistent/</id>
     <published>2023-12-03T09:52:00.000Z</published>
-    <updated>2023-12-03T11:20:03.311Z</updated>
+    <updated>2023-12-23T17:19:38.288Z</updated>
     
     
     <summary type="html">可持久化数据结构包括可持久化数组，可持久化并查集，可持久化线段树，都是以复用现有结点的思想记录各个历史版本，从而做到在较低的空间复杂度储存每一次修改后数据结构中的数据。</summary>
@@ -180,7 +287,7 @@
     <link href="https://blog.hikariyo.net/oi/math/cantor/"/>
     <id>https://blog.hikariyo.net/oi/math/cantor/</id>
     <published>2023-11-16T10:21:00.000Z</published>
-    <updated>2023-11-16T16:16:31.532Z</updated>
+    <updated>2023-12-23T23:28:47.412Z</updated>
     
     
     <summary type="html">康托展开是对排列的完美哈希，其值为一个排列在字典序中的排行，通过树状数组进行优化后可以在 O(n log n) 的复杂度对一个排列康托展开。</summary>
@@ -295,7 +402,7 @@
     <link href="https://blog.hikariyo.net/oi/math/math-basic/"/>
     <id>https://blog.hikariyo.net/oi/math/math-basic/</id>
     <published>2023-10-26T09:22:00.000Z</published>
-    <updated>2023-12-18T15:58:35.132Z</updated>
+    <updated>2023-12-23T23:34:12.465Z</updated>
     
     
     <summary type="html">基础数学公式记录，主要关于复杂度分析和一些数论基础。</summary>
@@ -368,102 +475,6 @@
     
     
     <summary type="html">树上差分可以用线性的复杂度处理树上路径的修改，最后通过树上前缀和还原出每个点的权值，在这种情况下它比树链剖分的复杂度更优。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>动态规划 - 树形 DP</title>
-    <link href="https://blog.hikariyo.net/oi/dp/tree/"/>
-    <id>https://blog.hikariyo.net/oi/dp/tree/</id>
-    <published>2023-10-03T15:01:00.000Z</published>
-    <updated>2023-11-04T10:38:37.000Z</updated>
-    
-    
-    <summary type="html">树形 DP 的主要思想是在树上对每个结点设计状态，并且父结点的状态可以从子结点转移。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="DP" scheme="https://blog.hikariyo.net/tags/DP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基础算法 - 拆位</title>
-    <link href="https://blog.hikariyo.net/oi/basic/split-bits/"/>
-    <id>https://blog.hikariyo.net/oi/basic/split-bits/</id>
-    <published>2023-09-25T00:44:00.000Z</published>
-    <updated>2023-12-03T11:24:02.204Z</updated>
-    
-    
-    <summary type="html">由于位运算的各位都是相互独立的，所以在处理位运算问题的时候可以考虑把每一位单独拆开处理。特别地，对于异或操作，通过前缀和的思想，加上异或的自反性（一个数异或自己结果为零），我们可以在预处理后在常数时间内求出来一段区间的异或值。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论 - 基环树</title>
-    <link href="https://blog.hikariyo.net/oi/graph/pseudo-tree/"/>
-    <id>https://blog.hikariyo.net/oi/graph/pseudo-tree/</id>
-    <published>2023-09-24T02:04:00.000Z</published>
-    <updated>2023-12-04T11:26:46.527Z</updated>
-    
-    
-    <summary type="html">基环树是一个环上挂着若干颗树，通常是断环上一条边然后分类讨论，转为树上问题。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论 - 圆方树</title>
-    <link href="https://blog.hikariyo.net/oi/graph/round-square-tree/"/>
-    <id>https://blog.hikariyo.net/oi/graph/round-square-tree/</id>
-    <published>2023-09-22T07:51:00.000Z</published>
-    <updated>2023-09-24T01:17:41.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2</summary>
-        
-      
     
     
     
