@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-24T03:00:21.243Z</updated>
+  <updated>2023-12-25T09:43:49.111Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.hikariyo.net/oi/ds/lct/"/>
     <id>https://blog.hikariyo.net/oi/ds/lct/</id>
     <published>2023-12-23T22:52:00.000Z</published>
-    <updated>2023-12-24T03:00:21.243Z</updated>
+    <updated>2023-12-25T09:43:49.111Z</updated>
     
     
       
@@ -218,7 +218,7 @@
     <link href="https://blog.hikariyo.net/oi/ds/persistent/"/>
     <id>https://blog.hikariyo.net/oi/ds/persistent/</id>
     <published>2023-12-03T09:52:00.000Z</published>
-    <updated>2023-12-23T17:19:38.288Z</updated>
+    <updated>2023-12-25T09:39:25.557Z</updated>
     
     
     <summary type="html">可持久化数据结构包括可持久化数组，可持久化并查集，可持久化线段树，都是以复用现有结点的思想记录各个历史版本，从而做到在较低的空间复杂度储存每一次修改后数据结构中的数据。</summary>
@@ -241,7 +241,7 @@
     <link href="https://blog.hikariyo.net/oi/math/matrix/"/>
     <id>https://blog.hikariyo.net/oi/math/matrix/</id>
     <published>2023-12-03T09:40:00.000Z</published>
-    <updated>2023-12-20T14:48:31.089Z</updated>
+    <updated>2023-12-25T09:42:58.156Z</updated>
     
     
     <summary type="html">矩阵乘法是可以用来描述线性递推的一种技术，并且矩阵乘法具有结合律，因此我们可以进行快速幂操作，从而快速地求出知道递推数列某一项的值。除此之外，矩阵也可以描述一些变量之间的线性关系，观察到相互影响的线性关系的变量就可以考虑能否使用矩阵进行优化。</summary>
@@ -425,7 +425,7 @@
     <link href="https://blog.hikariyo.net/oi/math/inv/"/>
     <id>https://blog.hikariyo.net/oi/math/inv/</id>
     <published>2023-10-22T12:20:00.000Z</published>
-    <updated>2023-11-14T06:19:18.000Z</updated>
+    <updated>2023-12-25T09:42:43.603Z</updated>
     
     
     <summary type="html">系统整理一下逆元相关的知识点，包括快速幂求逆元、拓展欧几里得求逆元、线性递推求逆元。</summary>
