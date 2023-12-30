@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2023-12-25T09:43:49.111Z</updated>
+  <updated>2023-12-30T06:46:28.499Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构 - 分块与莫队</title>
+    <link href="https://blog.hikariyo.net/oi/ds/mo/"/>
+    <id>https://blog.hikariyo.net/oi/ds/mo/</id>
+    <published>2023-12-30T06:46:00.000Z</published>
+    <updated>2023-12-30T06:46:28.499Z</updated>
+    
+    
+    <summary type="html">莫队算法是利用平衡复杂度的思想来优化暴力算法，通常是通过均值不等式求出一个最优复杂度，我不知道本文归到哪一类，感觉和数据结构关系更大一点。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构 - Link Cut Tree</title>
@@ -74,29 +97,6 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构 - 分块与莫队</title>
-    <link href="https://blog.hikariyo.net/oi/ds/mo/"/>
-    <id>https://blog.hikariyo.net/oi/ds/mo/</id>
-    <published>2023-12-23T07:39:00.000Z</published>
-    <updated>2023-12-30T04:33:44.097Z</updated>
-    
-    
-    <summary type="html">莫队算法是利用平衡复杂度的思想来优化暴力算法，通常是通过均值不等式求出一个最优复杂度，我不知道本文归到哪一类，感觉和数据结构关系更大一点。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
     
   </entry>
   
