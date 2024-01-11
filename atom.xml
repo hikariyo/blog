@@ -10,7 +10,7 @@
   <id>https://blog.hikariyo.net/</id>
   
   <author>
-    <name>hikariyo</name>
+    <name>生理盐水</name>
     
   </author>
   
@@ -207,9 +207,9 @@
     <category term="Learn" scheme="https://blog.hikariyo.net/categories/Learn/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
   </entry>
   
