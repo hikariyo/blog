@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-11T18:48:43.605Z</updated>
+  <updated>2024-01-12T16:16:38.588Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.hikariyo.net/oi/ds/mo/"/>
     <id>https://blog.hikariyo.net/oi/ds/mo/</id>
     <published>2023-12-30T06:46:00.000Z</published>
-    <updated>2024-01-11T18:48:43.605Z</updated>
+    <updated>2024-01-12T16:16:38.588Z</updated>
     
     
     <summary type="html">莫队算法是利用平衡复杂度的思想来优化暴力算法，通常是通过均值不等式求出一个最优复杂度，我不知道本文归到哪一类，感觉和数据结构关系更大一点。</summary>
@@ -139,6 +139,34 @@
     
     
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基础算法 - IO 优化</title>
+    <link href="https://blog.hikariyo.net/oi/basic/io/"/>
+    <id>https://blog.hikariyo.net/oi/basic/io/</id>
+    <published>2023-12-12T15:44:00.000Z</published>
+    <updated>2024-01-12T16:13:18.192Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;IO 优化通常对于程序的常数提升并不是很大，但是在数据量比较大，大概 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
     
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
@@ -452,29 +480,6 @@
     
     
     <summary type="html">树链剖分是一种将树上路径转化为对数级别的连续区间的技术，可以把树上询问转化为区间询问，然后用线段树等数据结构维护信息。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论 - 树上差分</title>
-    <link href="https://blog.hikariyo.net/oi/graph/diff-tree/"/>
-    <id>https://blog.hikariyo.net/oi/graph/diff-tree/</id>
-    <published>2023-10-17T10:35:00.000Z</published>
-    <updated>2023-11-04T10:38:22.000Z</updated>
-    
-    
-    <summary type="html">树上差分可以用线性的复杂度处理树上路径的修改，最后通过树上前缀和还原出每个点的权值，在这种情况下它比树链剖分的复杂度更优。</summary>
     
     
     

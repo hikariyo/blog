@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>基础算法 - IO 优化 | 喵喵小窝</title><meta name="author" content="生理盐水"><meta name="copyright" content="生理盐水"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介 IO 优化通常对于程序的常数提升并不是很大，但是在数据量比较大，大概 10610^6106 级别的时候就要考虑加上 IO 优化了，如果数据量不大反而可能导致负优化。 基本原理是 C++ 标准库对于格式处理的比较多，而我们想要的一般来说只是输入和输出整数，所以自己实现起来常数会略有提升。 READ &#x2F; WRITE 输入的原理是从输入流中读取字符，过滤出非整数字符并记录是否含有负号，然后处理一段">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础算法 - IO 优化">
+<meta property="og:url" content="https://blog.hikariyo.net/oi/basic/io/index.html">
+<meta property="og:site_name" content="喵喵小窝">
+<meta property="og:description" content="简介 IO 优化通常对于程序的常数提升并不是很大，但是在数据量比较大，大概 10610^6106 级别的时候就要考虑加上 IO 优化了，如果数据量不大反而可能导致负优化。 基本原理是 C++ 标准库对于格式处理的比较多，而我们想要的一般来说只是输入和输出整数，所以自己实现起来常数会略有提升。 READ &#x2F; WRITE 输入的原理是从输入流中读取字符，过滤出非整数字符并记录是否含有负号，然后处理一段">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hikariyo.net/avatar.jpg">
+<meta property="article:published_time" content="2023-12-12T15:44:00.000Z">
+<meta property="article:modified_time" content="2024-01-12T16:13:18.192Z">
+<meta property="article:author" content="生理盐水">
+<meta property="article:tag" content="Algo">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hikariyo.net/avatar.jpg"><link rel="shortcut icon" href="https://hikariyo.net/favicon.png"><link rel="canonical" href="https://blog.hikariyo.net/oi/basic/io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"本文距上次更新已有","messageNext":"天，其中某些内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基础算法 - IO 优化',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-13 00:13:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC"><meta name="google-site-verification" content="t_zjV_wyFxxj__nLDxCALeuSV1V8Nv7QO7nSe5LHsxk" /><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="喵喵小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">150</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="喵喵小窝"><span class="site-name">喵喵小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/snippets/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-text"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://travellings.cn/go.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">基础算法 - IO 优化</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-12T15:44:00.000Z" title="发表于 2023-12-12 23:44:00">2023-12-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-12T16:13:18.192Z" title="更新于 2024-01-13 00:13:18">2024-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OI/">OI</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">720</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="简介">简介</h2>
+<p>IO 优化通常对于程序的常数提升并不是很大，但是在数据量比较大，大概 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">10^6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span> 级别的时候就要考虑加上 IO 优化了，如果数据量不大反而可能导致负优化。</p>
+<p>基本原理是 C++ 标准库对于格式处理的比较多，而我们想要的一般来说只是输入和输出整数，所以自己实现起来常数会略有提升。</p>
+<h2 id="READ-WRITE">READ / WRITE</h2>
+<p>输入的原理是从输入流中读取字符，过滤出非整数字符并记录是否含有负号，然后处理一段连续的整数，最后将符号加上，输出的原理是将给定数字的所有数位压到栈中，然后逆序输出。下面的 <code>gc, pc</code> 代表 <code>getchar, putchar</code>，后面可以进一步优化读写字符。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T </span>= <span class="type">int</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    T t = <span class="number">0</span>;</span><br><span class="line">    <span class="type">bool</span> neg = <span class="number">0</span>;</span><br><span class="line">    <span class="type">char</span> ch = <span class="built_in">gc</span>();</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(ch)) neg |= ch == <span class="string">&#x27;-&#x27;</span>, ch = <span class="built_in">gc</span>();</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">isdigit</span>(ch)) t = t*<span class="number">10</span> + (ch^<span class="number">48</span>), ch = <span class="built_in">gc</span>();</span><br><span class="line">    <span class="keyword">return</span> neg ? -t : t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">write</span><span class="params">(T t, <span class="type">char</span> sep = <span class="string">&#x27;\n&#x27;</span>)</span> </span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> stk[<span class="number">64</span>];</span><br><span class="line">    <span class="type">int</span> tp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (t &lt; <span class="number">0</span>) <span class="built_in">pc</span>(<span class="string">&#x27;-&#x27;</span>), t = -t;</span><br><span class="line">    <span class="keyword">do</span> stk[++tp] = t % <span class="number">10</span> + <span class="string">&#x27;0&#x27;</span>; <span class="keyword">while</span> (t /= <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">while</span> (tp) <span class="built_in">pc</span>(stk[tp--]);</span><br><span class="line">    <span class="built_in">pc</span>(sep);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="FREAD-FWRITE">FREAD / FWRITE</h2>
+<p>可以用 <code>fread/fwrite</code> 进一步优化读写字符的效率，但是很多选手对 <code>fread/fwrite</code> 大力压行劝退很多想学习使用的萌新（包括我），这里先介绍一下这两个函数的原型：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">fread</span><span class="params">(<span class="type">void</span>* buffer, <span class="type">size_t</span> size, <span class="type">size_t</span> count, FILE* stream)</span></span>;</span><br><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span>* buffer, <span class="type">size_t</span> size, <span class="type">size_t</span> count, FILE* stream)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>它们都返回成功处理的 <code>count</code>，对于读入单个字符，这里用 <code>p, q</code> 两个指针分别记录当前缓冲区没有处理的第一个字符和缓冲区的结尾，这里用到了 <code>fread</code> 的返回值，其中 <code>S</code> 是一般为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>16</mn></msup></mrow><annotation encoding="application/x-tex">2^{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span></span></span></span> 或 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>20</mn></msup></mrow><annotation encoding="application/x-tex">2^{20}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">20</span></span></span></span></span></span></span></span></span></span></span></span> 的常量。</p>
+<p>对于输出单个字符，先把它输出到缓冲区中，当缓冲区满的时候就调用 <code>fwrite</code> 写掉，并且重置记录当前位置的指针。</p>
+<p>为了让程序结束的时候自动调用 <code>flush</code>，可以用一个空的全局对象，然后在析构函数中调用 <code>flush</code>，这样程序结束时就会自动调用这个全局对象的析构函数，就把缓冲区剩余的内容输出了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">char</span> <span class="title">gc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> B[S], *p, *q;</span><br><span class="line">    <span class="keyword">if</span> (p == q) p = B, q = B + <span class="built_in">fread</span>(B, <span class="number">1</span>, S, stdin);</span><br><span class="line">    <span class="keyword">return</span> p == q ? EOF : *p++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> BUF[S], *P = BUF, *Q = BUF + S;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">flush</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">fwrite</span>(BUF, <span class="number">1</span>, P-BUF, stdout);</span><br><span class="line">    P = BUF;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">pc</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">    *P++ = ch;</span><br><span class="line">    <span class="keyword">if</span> (P == Q) <span class="built_in">flush</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FLUSH</span> &#123;</span><br><span class="line">    ~<span class="built_in">FLUSH</span>() &#123; <span class="built_in">flush</span>(); &#125;</span><br><span class="line">&#125; _FLUSH;</span><br></pre></td></tr></table></figure>
+<p>如果使用了自定义的字节输入输出，那么在 Shell 运行程序的时候要手动输入 Ctrl-D 来表示输入结束，在 Windows 下应该是 Ctrl-Z 表示输入结束。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net">生理盐水</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.hikariyo.net/oi/basic/io/">https://blog.hikariyo.net/oi/basic/io/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.hikariyo.net" target="_blank">喵喵小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algo/">Algo</a><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://hikariyo.net/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">生理盐水</div><div class="author-info__description">喜欢做点有趣的事情</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">150</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://hikariyo.net"><i class="fas fa-home"></i><span>主页</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/hikariyo" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/381759497" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://hikariyo.net/email" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/hikariyo1" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a><a class="social-icon" href="https://blog.hikariyo.net/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">记录学习算法过程中的知识点和易错易混点以便将来复习。<br>P.S. 用魔法访问本站可以大幅减少加载时间。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#READ-WRITE"><span class="toc-number">2.</span> <span class="toc-text">READ &#x2F; WRITE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FREAD-FWRITE"><span class="toc-number">3.</span> <span class="toc-text">FREAD &#x2F; FWRITE</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/ds/mo/" title="数据结构 - 分块与莫队">数据结构 - 分块与莫队</a><time datetime="2023-12-30T06:46:00.000Z" title="发表于 2023-12-30 14:46:00">2023-12-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/ds/lct/" title="数据结构 - Link Cut Tree">数据结构 - Link Cut Tree</a><time datetime="2023-12-23T22:52:00.000Z" title="发表于 2023-12-24 06:52:00">2023-12-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/graph/seg-optimize/" title="图论 - 线段树优化建图">图论 - 线段树优化建图</a><time datetime="2023-12-23T22:44:00.000Z" title="发表于 2023-12-24 06:44:00">2023-12-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/ds/kruskal-tree/" title="数据结构 - Kruskal 重构树">数据结构 - Kruskal 重构树</a><time datetime="2023-12-22T15:03:00.000Z" title="发表于 2023-12-22 23:03:00">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/oi/math/fwt/" title="数学 - 快速沃尔什变换 FWT">数学 - 快速沃尔什变换 FWT</a><time datetime="2023-12-13T12:41:00.000Z" title="发表于 2023-12-13 20:41:00">2023-12-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By 生理盐水</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20220523" target="_blank">萌ICP备20220523号</a> <br> <span id="realtime_duration"></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/dayjs.min.js"></script><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/duration.min.js"></script><script src="/scripts/realtime.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
