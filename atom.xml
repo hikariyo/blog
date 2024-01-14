@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-12T16:16:38.588Z</updated>
+  <updated>2024-01-12T17:48:02.699Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.hikariyo.net/oi/ds/mo/"/>
     <id>https://blog.hikariyo.net/oi/ds/mo/</id>
     <published>2023-12-30T06:46:00.000Z</published>
-    <updated>2024-01-12T16:16:38.588Z</updated>
+    <updated>2024-01-12T17:48:02.699Z</updated>
     
     
     <summary type="html">莫队算法是利用平衡复杂度的思想来优化暴力算法，通常是通过均值不等式求出一个最优复杂度，我不知道本文归到哪一类，感觉和数据结构关系更大一点。</summary>
@@ -151,7 +151,7 @@
     <link href="https://blog.hikariyo.net/oi/basic/io/"/>
     <id>https://blog.hikariyo.net/oi/basic/io/</id>
     <published>2023-12-12T15:44:00.000Z</published>
-    <updated>2024-01-12T17:08:56.307Z</updated>
+    <updated>2024-01-14T09:21:42.843Z</updated>
     
     
       
@@ -235,9 +235,9 @@
     <category term="Learn" scheme="https://blog.hikariyo.net/categories/Learn/"/>
     
     
-    <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
     
   </entry>
   
@@ -407,7 +407,7 @@
     <link href="https://blog.hikariyo.net/oi/math/prime-divisor/"/>
     <id>https://blog.hikariyo.net/oi/math/prime-divisor/</id>
     <published>2023-10-26T12:22:00.000Z</published>
-    <updated>2023-11-23T23:51:22.866Z</updated>
+    <updated>2024-01-14T14:16:08.933Z</updated>
     
     
     <summary type="html">利用各种筛法可以预处理出一定范围内的质数以及相关数论函数，筛法并不局限于只能处理 [1, N] 区间内的信息，也可以是 [L,R]，然后对题目进行求解。</summary>
@@ -426,11 +426,11 @@
   </entry>
   
   <entry>
-    <title>数学 - 基础公式</title>
+    <title>数学 - 基础公式及证明</title>
     <link href="https://blog.hikariyo.net/oi/math/math-basic/"/>
     <id>https://blog.hikariyo.net/oi/math/math-basic/</id>
     <published>2023-10-26T09:22:00.000Z</published>
-    <updated>2023-12-23T23:34:12.465Z</updated>
+    <updated>2024-01-14T13:59:43.189Z</updated>
     
     
     <summary type="html">基础数学公式记录，主要关于复杂度分析和一些数论基础。</summary>
