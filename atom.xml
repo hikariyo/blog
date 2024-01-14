@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-12T17:48:02.699Z</updated>
+  <updated>2024-01-14T20:39:06.890Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数学 - 中国剩余定理 CRT</title>
+    <link href="https://blog.hikariyo.net/oi/math/crt/"/>
+    <id>https://blog.hikariyo.net/oi/math/crt/</id>
+    <published>2024-01-14T18:50:00.000Z</published>
+    <updated>2024-01-14T20:39:06.890Z</updated>
+    
+    
+    <summary type="html">中国剩余定理是用来合并同余方程组的算法，当满足模数两两互质时有一种巧妙的构造解的方法，当不满足模数互质时同样可以通过两两合并的方式得到最终解。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构 - 分块与莫队</title>
@@ -468,29 +491,6 @@
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论 - 树链剖分</title>
-    <link href="https://blog.hikariyo.net/oi/graph/heavy-light-decomp/"/>
-    <id>https://blog.hikariyo.net/oi/graph/heavy-light-decomp/</id>
-    <published>2023-10-17T12:59:00.000Z</published>
-    <updated>2023-11-04T10:34:24.000Z</updated>
-    
-    
-    <summary type="html">树链剖分是一种将树上路径转化为对数级别的连续区间的技术，可以把树上询问转化为区间询问，然后用线段树等数据结构维护信息。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
     
   </entry>
   
