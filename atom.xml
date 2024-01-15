@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-14T20:39:06.890Z</updated>
+  <updated>2024-01-15T00:51:20.273Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>数据结构 - 左偏树</title>
+    <link href="https://blog.hikariyo.net/oi/ds/lefist-tree/"/>
+    <id>https://blog.hikariyo.net/oi/ds/lefist-tree/</id>
+    <published>2024-01-14T21:11:00.000Z</published>
+    <updated>2024-01-15T00:51:20.273Z</updated>
+    
+    
+    <summary type="html">左偏树是一种二叉树，它具有堆的性质，并且支持动态合并两颗左偏树，保持新树仍然满足左偏树的性质。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>数学 - 中国剩余定理 CRT</title>
     <link href="https://blog.hikariyo.net/oi/math/crt/"/>
     <id>https://blog.hikariyo.net/oi/math/crt/</id>
     <published>2024-01-14T18:50:00.000Z</published>
-    <updated>2024-01-14T20:39:06.890Z</updated>
+    <updated>2024-01-14T20:50:51.554Z</updated>
     
     
     <summary type="html">中国剩余定理是用来合并同余方程组的算法，当满足模数两两互质时有一种巧妙的构造解的方法，当不满足模数互质时同样可以通过两两合并的方式得到最终解。</summary>
@@ -457,29 +480,6 @@
     
     
     <summary type="html">基础数学公式记录，主要关于复杂度分析和一些数论基础。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数学 - 逆元</title>
-    <link href="https://blog.hikariyo.net/oi/math/inv/"/>
-    <id>https://blog.hikariyo.net/oi/math/inv/</id>
-    <published>2023-10-22T12:20:00.000Z</published>
-    <updated>2023-12-25T09:42:43.603Z</updated>
-    
-    
-    <summary type="html">系统整理一下逆元相关的知识点，包括快速幂求逆元、拓展欧几里得求逆元、线性递推求逆元。</summary>
     
     
     
