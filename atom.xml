@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-15T00:51:20.273Z</updated>
+  <updated>2024-01-15T01:03:03.054Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://blog.hikariyo.net/oi/ds/lefist-tree/"/>
     <id>https://blog.hikariyo.net/oi/ds/lefist-tree/</id>
     <published>2024-01-14T21:11:00.000Z</published>
-    <updated>2024-01-15T00:51:20.273Z</updated>
+    <updated>2024-01-15T01:03:03.054Z</updated>
     
     
-    <summary type="html">左偏树是一种二叉树，它具有堆的性质，并且支持动态合并两颗左偏树，保持新树仍然满足左偏树的性质。</summary>
+    <summary type="html">左偏树是一种二叉树，它具有堆的性质，支持动态合并两颗左偏树，保持新树仍然满足左偏树的性质，并且合并两颗树的复杂度是 O(log(n))，同时用并查集维护堆顶，不会增加复杂度。</summary>
     
     
     
@@ -281,9 +281,9 @@
     <category term="Learn" scheme="https://blog.hikariyo.net/categories/Learn/"/>
     
     
-    <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
     
   </entry>
   
