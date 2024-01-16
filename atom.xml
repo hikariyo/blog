@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-16T10:11:00.162Z</updated>
+  <updated>2024-01-16T12:11:46.796Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>杂项 - 主定理及证明</title>
+    <link href="https://blog.hikariyo.net/oi/misc/master/"/>
+    <id>https://blog.hikariyo.net/oi/misc/master/</id>
+    <published>2024-01-16T10:26:00.000Z</published>
+    <updated>2024-01-16T12:11:46.796Z</updated>
+    
+    
+    <summary type="html">分析递归的时间复杂度时通常需要用到主定理，我之前一直当作黑盒去用它，但是越来越想了解一下这个定理是如何证明的，发现其本质只是等比级数求和公式以及对数的相关公式，这里记录一下。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>杂项 - CDQ 分治</title>
@@ -464,29 +485,6 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数学 - 质数约数相关例题</title>
-    <link href="https://blog.hikariyo.net/oi/math/prime-divisor/"/>
-    <id>https://blog.hikariyo.net/oi/math/prime-divisor/</id>
-    <published>2023-10-26T12:22:00.000Z</published>
-    <updated>2024-01-14T14:16:08.933Z</updated>
-    
-    
-    <summary type="html">利用各种筛法可以预处理出一定范围内的质数以及相关数论函数，筛法并不局限于只能处理 [1, N] 区间内的信息，也可以是 [L,R]，然后对题目进行求解。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
   </entry>
   
