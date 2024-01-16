@@ -86,7 +86,7 @@
     <link href="https://blog.hikariyo.net/oi/math/crt/"/>
     <id>https://blog.hikariyo.net/oi/math/crt/</id>
     <published>2024-01-14T18:50:00.000Z</published>
-    <updated>2024-01-15T03:24:02.188Z</updated>
+    <updated>2024-01-16T16:01:21.266Z</updated>
     
     
     <summary type="html">中国剩余定理是用来合并同余方程组的算法，当满足模数两两互质时有一种巧妙的构造解的方法，当不满足模数互质时同样可以通过两两合并的方式得到最终解。</summary>
