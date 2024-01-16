@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-16T12:11:46.796Z</updated>
+  <updated>2024-01-16T12:13:06.429Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://blog.hikariyo.net/oi/misc/master/"/>
     <id>https://blog.hikariyo.net/oi/misc/master/</id>
     <published>2024-01-16T10:26:00.000Z</published>
-    <updated>2024-01-16T12:11:46.796Z</updated>
+    <updated>2024-01-16T12:13:06.429Z</updated>
     
     
-    <summary type="html">分析递归的时间复杂度时通常需要用到主定理，我之前一直当作黑盒去用它，但是越来越想了解一下这个定理是如何证明的，发现其本质只是等比级数求和公式以及对数的相关公式，这里记录一下。</summary>
+    <summary type="html">分析递归的时间复杂度时通常需要用到主定理，我之前一直当作黑盒去用它，但是越来越想了解一下这个定理是如何证明的，发现其本质只是等比级数与对数的相关公式，这里记录一下。</summary>
     
     
     
