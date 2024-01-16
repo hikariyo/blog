@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-15T03:18:54.979Z</updated>
+  <updated>2024-01-16T10:11:00.162Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>杂项 - CDQ 分治</title>
+    <link href="https://blog.hikariyo.net/oi/misc/cdq/"/>
+    <id>https://blog.hikariyo.net/oi/misc/cdq/</id>
+    <published>2024-01-16T08:46:00.000Z</published>
+    <updated>2024-01-16T10:11:00.162Z</updated>
+    
+    
+    <summary type="html">CDQ 分治是一种用来解决点对相关问题思想，比较有代表性的问题是三维偏序问题，通过结合归并排序与树状数组做到 2log 的复杂度。此外 CDQ 分治也可以将一些动态问题转化为静态问题来解决。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构 - 左偏树</title>
@@ -54,9 +75,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -182,9 +203,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -323,9 +344,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -369,9 +390,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -436,9 +457,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -461,32 +482,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数学 - 基础公式及证明</title>
-    <link href="https://blog.hikariyo.net/oi/math/math-basic/"/>
-    <id>https://blog.hikariyo.net/oi/math/math-basic/</id>
-    <published>2023-10-26T09:22:00.000Z</published>
-    <updated>2024-01-14T13:59:43.189Z</updated>
-    
-    
-    <summary type="html">基础数学公式记录，主要关于复杂度分析和一些数论基础。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
