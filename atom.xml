@@ -63,14 +63,14 @@
   </entry>
   
   <entry>
-    <title>数据结构 - 分块与莫队</title>
-    <link href="https://blog.hikariyo.net/oi/ds/mo/"/>
-    <id>https://blog.hikariyo.net/oi/ds/mo/</id>
+    <title>杂项 - 分块与莫队</title>
+    <link href="https://blog.hikariyo.net/oi/misc/mo/"/>
+    <id>https://blog.hikariyo.net/oi/misc/mo/</id>
     <published>2023-12-30T06:46:00.000Z</published>
-    <updated>2024-01-12T17:48:02.699Z</updated>
+    <updated>2024-01-16T08:48:34.980Z</updated>
     
     
-    <summary type="html">莫队算法是利用平衡复杂度的思想来优化暴力算法，通常是通过均值不等式求出一个最优复杂度，我不知道本文归到哪一类，感觉和数据结构关系更大一点。</summary>
+    <summary type="html">莫队算法是利用平衡复杂度的思想来优化暴力算法，通常是通过均值不等式求出一个最优复杂度。</summary>
     
     
     
@@ -80,8 +80,6 @@
     <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-    <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
     
   </entry>
   
@@ -193,11 +191,11 @@
   </entry>
   
   <entry>
-    <title>基础算法 - IO 优化</title>
-    <link href="https://blog.hikariyo.net/oi/basic/io/"/>
-    <id>https://blog.hikariyo.net/oi/basic/io/</id>
+    <title>杂项 - IO 优化</title>
+    <link href="https://blog.hikariyo.net/oi/misc/io/"/>
+    <id>https://blog.hikariyo.net/oi/misc/io/</id>
     <published>2023-12-12T15:44:00.000Z</published>
-    <updated>2024-01-14T09:21:42.843Z</updated>
+    <updated>2024-01-16T08:13:26.098Z</updated>
     
     
       
@@ -281,9 +279,9 @@
     <category term="Learn" scheme="https://blog.hikariyo.net/categories/Learn/"/>
     
     
-    <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
     
   </entry>
   
@@ -381,8 +379,8 @@
   
   <entry>
     <title>杂项 - 挂分合集</title>
-    <link href="https://blog.hikariyo.net/oi/basic/wrong/"/>
-    <id>https://blog.hikariyo.net/oi/basic/wrong/</id>
+    <link href="https://blog.hikariyo.net/oi/misc/wrong/"/>
+    <id>https://blog.hikariyo.net/oi/misc/wrong/</id>
     <published>2023-11-04T14:21:00.000Z</published>
     <updated>2023-12-03T11:24:10.043Z</updated>
     
