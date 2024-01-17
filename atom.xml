@@ -42,7 +42,7 @@
     <link href="https://blog.hikariyo.net/oi/misc/cdq/"/>
     <id>https://blog.hikariyo.net/oi/misc/cdq/</id>
     <published>2024-01-16T08:46:00.000Z</published>
-    <updated>2024-01-16T21:05:07.141Z</updated>
+    <updated>2024-01-17T00:11:51.530Z</updated>
     
     
     <summary type="html">CDQ 分治是一种用来解决点对相关问题思想，比较有代表性的问题是三维偏序问题，通过结合归并排序与树状数组做到 2log 的复杂度。此外 CDQ 分治也可以将一些动态问题转化为静态问题来解决。</summary>
