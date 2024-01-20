@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-16T13:32:03.053Z</updated>
+  <updated>2024-01-20T18:25:34.089Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数学 - 离散对数 BSGS</title>
+    <link href="https://blog.hikariyo.net/oi/math/bsgs/"/>
+    <id>https://blog.hikariyo.net/oi/math/bsgs/</id>
+    <published>2024-01-20T18:50:00.000Z</published>
+    <updated>2024-01-20T18:25:34.089Z</updated>
+    
+    
+    <summary type="html">BSGS 算法即大步小步算法是利用分块与哈希表，在根号的复杂度求解离散对数问题的算法。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>杂项 - 主定理及证明</title>
@@ -78,29 +101,6 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="DS" scheme="https://blog.hikariyo.net/tags/DS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数学 - 离散对数 BSGS</title>
-    <link href="https://blog.hikariyo.net/oi/math/bsgs/"/>
-    <id>https://blog.hikariyo.net/oi/math/bsgs/</id>
-    <published>2024-01-14T18:50:00.000Z</published>
-    <updated>2024-01-20T18:22:27.058Z</updated>
-    
-    
-    <summary type="html">BSGS 算法即大步小步算法是利用分块与哈希表，在根号的复杂度求解离散对数问题的算法。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
   </entry>
   
@@ -344,9 +344,9 @@
     <category term="Learn" scheme="https://blog.hikariyo.net/categories/Learn/"/>
     
     
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
     <category term="Calculus" scheme="https://blog.hikariyo.net/tags/Calculus/"/>
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
     
   </entry>
   
