@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-22T09:37:33.533Z</updated>
+  <updated>2024-01-22T12:37:09.106Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -20,8 +20,8 @@
     <title>数学 - Pollard Rho</title>
     <link href="https://blog.hikariyo.net/oi/math/pollard-rho/"/>
     <id>https://blog.hikariyo.net/oi/math/pollard-rho/</id>
-    <published>2024-01-22T09:36:00.000Z</published>
-    <updated>2024-01-22T09:37:33.533Z</updated>
+    <published>2024-01-22T12:37:00.000Z</published>
+    <updated>2024-01-22T12:37:09.106Z</updated>
     
     
     <summary type="html">Pollard Rho 算法利用生日悖论，可以在优秀的复杂度内找到一个合数的非 1 非自身因数，使用时需要搭配 Miller Rabin 算法首先判断一个数是否为质数。</summary>
@@ -44,7 +44,7 @@
     <link href="https://blog.hikariyo.net/oi/math/miller-rabin/"/>
     <id>https://blog.hikariyo.net/oi/math/miller-rabin/</id>
     <published>2024-01-22T08:19:00.000Z</published>
-    <updated>2024-01-22T08:38:12.251Z</updated>
+    <updated>2024-01-22T12:34:31.651Z</updated>
     
     
     <summary type="html">Miller Rabin 算法是一种用来快速判断一个数是否为质数的随机化算法，当数字选择恰当时可以保证在 uint64 范围内准确。</summary>
@@ -178,7 +178,7 @@
     <link href="https://blog.hikariyo.net/oi/math/crt/"/>
     <id>https://blog.hikariyo.net/oi/math/crt/</id>
     <published>2024-01-14T18:50:00.000Z</published>
-    <updated>2024-01-16T16:01:21.266Z</updated>
+    <updated>2024-01-22T11:06:12.020Z</updated>
     
     
     <summary type="html">中国剩余定理是用来合并同余方程组的算法，当满足模数两两互质时有一种巧妙的构造解的方法，当不满足模数互质时同样可以通过两两合并的方式得到最终解。</summary>
