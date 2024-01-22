@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-22T12:37:09.106Z</updated>
+  <updated>2024-01-22T12:40:48.464Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.hikariyo.net/oi/math/pollard-rho/"/>
     <id>https://blog.hikariyo.net/oi/math/pollard-rho/</id>
     <published>2024-01-22T12:37:00.000Z</published>
-    <updated>2024-01-22T12:37:09.106Z</updated>
+    <updated>2024-01-22T12:40:48.464Z</updated>
     
     
     <summary type="html">Pollard Rho 算法利用生日悖论，可以在优秀的复杂度内找到一个合数的非 1 非自身因数，使用时需要搭配 Miller Rabin 算法首先判断一个数是否为质数。</summary>
