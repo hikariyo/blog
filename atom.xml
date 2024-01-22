@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-21T16:24:51.815Z</updated>
+  <updated>2024-01-22T09:37:33.533Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数学 - Pollard Rho</title>
+    <link href="https://blog.hikariyo.net/oi/math/pollard-rho/"/>
+    <id>https://blog.hikariyo.net/oi/math/pollard-rho/</id>
+    <published>2024-01-22T09:36:00.000Z</published>
+    <updated>2024-01-22T09:37:33.533Z</updated>
+    
+    
+    <summary type="html">Pollard Rho 算法利用生日悖论，可以在优秀的复杂度内找到一个合数的非 1 非自身因数，使用时需要搭配 Miller Rabin 算法首先判断一个数是否为质数。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学 - Miller Rabin</title>
+    <link href="https://blog.hikariyo.net/oi/math/miller-rabin/"/>
+    <id>https://blog.hikariyo.net/oi/math/miller-rabin/</id>
+    <published>2024-01-22T08:19:00.000Z</published>
+    <updated>2024-01-22T08:38:12.251Z</updated>
+    
+    
+    <summary type="html">Miller Rabin 算法是一种用来快速判断一个数是否为质数的随机化算法，当数字选择恰当时可以保证在 uint64 范围内准确。</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
+    
+    
+    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
+    
+    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>数学 - 二次剩余</title>
@@ -31,9 +77,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -54,9 +100,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -142,9 +188,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -270,9 +316,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -411,9 +457,9 @@
     <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
     
     
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
     <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
+    
+    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
     
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
@@ -439,50 +485,6 @@
     <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
     <category term="Graph" scheme="https://blog.hikariyo.net/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数学 - 康托展开</title>
-    <link href="https://blog.hikariyo.net/oi/math/cantor/"/>
-    <id>https://blog.hikariyo.net/oi/math/cantor/</id>
-    <published>2023-11-16T10:21:00.000Z</published>
-    <updated>2023-12-23T23:28:47.412Z</updated>
-    
-    
-    <summary type="html">康托展开是对排列的完美哈希，其值为一个排列在字典序中的排行，通过树状数组进行优化后可以在 O(n log n) 的复杂度对一个排列康托展开。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="Math" scheme="https://blog.hikariyo.net/tags/Math/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>杂项 - 挂分合集</title>
-    <link href="https://blog.hikariyo.net/oi/misc/wrong/"/>
-    <id>https://blog.hikariyo.net/oi/misc/wrong/</id>
-    <published>2023-11-04T14:21:00.000Z</published>
-    <updated>2023-12-03T11:24:10.043Z</updated>
-    
-    
-    <summary type="html">整理一下遇到的各种各样奇葩的问题，和一些令人智熄的迷惑操作。</summary>
-    
-    
-    
-    <category term="OI" scheme="https://blog.hikariyo.net/categories/OI/"/>
-    
-    
-    <category term="Algo" scheme="https://blog.hikariyo.net/tags/Algo/"/>
-    
-    <category term="C++" scheme="https://blog.hikariyo.net/tags/C/"/>
     
   </entry>
   
