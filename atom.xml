@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-27T20:57:59.365Z</updated>
+  <updated>2024-01-27T21:04:00.501Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.hikariyo.net/oi/geometry/simpson/"/>
     <id>https://blog.hikariyo.net/oi/geometry/simpson/</id>
     <published>2024-01-27T14:51:00.000Z</published>
-    <updated>2024-01-27T20:57:59.365Z</updated>
+    <updated>2024-01-27T21:04:00.501Z</updated>
     
     
     <summary type="html">辛普森积分法是一种求数值积分的方法，用二次函数拟合被积函数达到较好的效果，同时还可以通过分治自适应地保证精度。同时，本文也比较详细地记录了辛普森积分法误差的推导过程。</summary>
