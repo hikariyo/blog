@@ -6,7 +6,7 @@
   <link href="https://blog.hikariyo.net/atom.xml" rel="self"/>
   
   <link href="https://blog.hikariyo.net/"/>
-  <updated>2024-01-27T14:41:01.580Z</updated>
+  <updated>2024-01-27T14:51:10.253Z</updated>
   <id>https://blog.hikariyo.net/</id>
   
   <author>
@@ -20,8 +20,8 @@
     <title>计算几何 - 自适应辛普森积分法</title>
     <link href="https://blog.hikariyo.net/oi/geometry/simpson/"/>
     <id>https://blog.hikariyo.net/oi/geometry/simpson/</id>
-    <published>2024-01-27T08:20:00.000Z</published>
-    <updated>2024-01-27T14:41:01.580Z</updated>
+    <published>2024-01-27T14:51:00.000Z</published>
+    <updated>2024-01-27T14:51:10.253Z</updated>
     
     
     <summary type="html">辛普森积分法是一种求数值积分的方法，用二次函数拟合被积函数达到较好的效果，同时还可以通过分治自适应地保证精度。</summary>
