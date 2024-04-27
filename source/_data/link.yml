@@ -1,0 +1,48 @@
+- class_name: ""
+  class_desc: 小伙伴们
+  link_list:
+    - name: 星夜笔记本
+      link: https://xingye.me/
+      avatar: https://xingye.me/favicon.ico
+      descr: 是某小游戏站长捏
+    - name: Zkeq
+      link: https://icodeq.com/
+      avatar: https://img.onmicrosoft.cn/Avatar.jpg
+      descr: Zkeq の Coding 日志
+    - name: ocero的博客
+      link: https://oceroblog.metalstudio.top/
+      avatar: https://image-store-ocero.vercel.app/img/headimg_dl
+      descr: 一个单调而有趣的博客
+    - name: 水厂日志
+      link: https://blog.ch34k.xyz
+      avatar: https://blog.ch34k.xyz/images/avatar.jpg
+      descr: 代码，是连接碳基生命和硅基生命的桥梁
+    - name: HikariLan's Blog
+      link: https://my.minecraft.kim/
+      avatar: https://my.minecraft.kim/avatar.png
+      descr: 兰草凋荡，星辰璀璨
+    - name: 豆焰
+      link: https://blog.beanflame.cn/
+      avatar: https://blog.beanflame.cn/img/beanflame.png
+      descr: 二次元编程宅
+    - name: 调皮豆干
+      link: https://blog.catrol.cn/
+      avatar: https://source.catrol.cn/icons/headIcon.jpg
+      descr: 高中小菜鸡，喜欢编程，打游戏以及学习（不是）
+    - name: MingxuanGame
+      link: https://blog.mxgame.top/
+      avatar: https://blog.mxgame.top/images/favicon.jpg
+      descr: NoneBot 裙友 可爱捏
+    - name: 重生云
+      link: https://xiaochopin.github.io/
+      avatar: https://avatars.githubusercontent.com/u/102412959
+      descr: 睡觉
+    - name: 栗木小站
+      link: https://misakishiki.site/
+      avatar: https://misakishiki.site/aquced.png
+      descr: 来点后现代
+    - name: 烂裤子
+      link: https://rotcool.me/
+      avatar: https://img.rotcool.me/i/2022/12/27/63aaca2a50b7d.jpg
+      descr: 跌跌撞撞的人生才是人生
+

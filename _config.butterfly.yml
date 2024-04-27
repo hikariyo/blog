@@ -1,0 +1,167 @@
+busuanzi:
+  site_uv: false
+  site_pv: false
+  page_pv: false
+
+avatar:
+  img: https://hikariyo.net/avatar.jpg
+
+runtimeshow:
+  enable: true
+  publish_date: 2022/05/18 12:49
+
+rightside_scroll_percent: true
+
+default_top_img: false
+highlight_theme: "mac light"
+
+cover:
+  index_enable: false
+  aside_enable: false
+  archives_enable: false
+
+# theme_color:
+#   enable: true
+#   main: "#9470dc"
+#   button_hover: "#8458B3"
+
+subtitle:
+  enable: true
+  effect: false
+  source: false
+  sub:
+    - Talk is cheap. Show me the code! ( ᗜ˰ᗜ )
+
+favicon: https://hikariyo.net/favicon.png
+
+footer_bg: true
+index_top_img_height: 550px
+
+menu:
+  主页: / || fas fa-home
+  文章 || fas fa-file-text:
+    归档: /archives/ || fas fa-archive
+    标签: /tags/ || fas fa-tags
+    分类: /categories/ || fas fa-folder-open
+  友链: /links/ || fas fa-link
+  关于: /about/ || fas fa-heart
+  开往: https://travellings.cn/go.html || fas fa-subway
+
+social:
+  fab fa-github: https://github.com/hikariyo || GitHub 
+  fab fa-bilibili: https://space.bilibili.com/381759497 || Bilibili
+  fas fa-envelope: https://hikariyo.net/email || Email
+  fab fa-telegram: https://t.me/hikariyo1 || Telegram
+  fas fa-rss: https://blog.hikariyo.net/atom.xml || RSS
+
+
+footer:
+  owner:
+    enable: true
+    since: 2022
+  custom_text:
+    <a href="https://icp.gov.moe/?keyword=20220523" target="_blank">萌ICP备20220523号</a>
+    <br>
+    <span id="realtime_duration"></span>
+
+katex:
+  enable: true
+  per_page: false
+  hide_scrollbar: true
+
+aside:
+  card_recent_post:
+    enable: true
+    limit: 5
+    sort: date
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_webinfo:
+    enable: true
+    last_push_date: true
+    post_count: true
+  card_tags:
+    enable: false
+    color: false
+  card_archives:
+    enable: false
+  card_announcement:
+    enable: true
+    content: 记录学习过程中遇到的各种题目，以及各种数据结构算法的基本原理与个人理解，便于日后复习。<br>P.S. 用魔法访问本站可以大幅减少加载时间。
+  card_author:
+    description: 喜欢做点有趣的事情
+    button:
+      enable: true
+      text: 主页
+      link: https://hikariyo.net
+      icon: fas fa-home
+
+lazyload:
+  enable: true
+
+index_post_content:
+  method: 2
+  length: 200
+
+inject:
+  head:
+    - <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC"> 
+    - <meta name="google-site-verification" content="t_zjV_wyFxxj__nLDxCALeuSV1V8Nv7QO7nSe5LHsxk" />
+  bottom:
+    - <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/dayjs.min.js"></script>
+    - <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/duration.min.js"></script>
+    - <script src="/scripts/realtime.js"></script>
+
+beautify:
+  enable: true
+  field: site
+
+error_404:
+  enable: true
+  subtitle: 什么也没有呢
+  background: https://i.hikariyo.net/banner/404.jpg
+
+wordcount:
+  enable: true
+  post_wordcount: true
+  min2read: true
+  total_wordcount: true
+
+# Displays outdated notice for a post (文章过期提醒)
+noticeOutdate:
+  enable: true
+  style: flat # style: simple/flat
+  limit_day: 90 # When will it be shown
+  position: top # position: top/bottom
+  message_prev: 本文距上次更新已有
+  message_next: 天，其中某些内容可能已过时。
+
+sharejs:
+  enable: false
+
+font:
+  global-font-size:
+  code-font-size:
+  font-family: -apple-system, "Noto Sans SC", "Segoe UI", "Helvetica Neue", Lato, Roboto, "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif
+  code-font-family: Menlo, "Dejavu Sans Mono", Consolas, monospace
+
+related_post:
+  enable: false
+
+post_pagination: false
+
+# Local search
+local_search:
+  enable: true
+  # Preload the search data when the page loads.
+  preload: false
+  # Show top n results per article, show all results by setting to -1
+  top_n_per_article: 2
+  # Unescape html strings to the readable one.
+  unescape: false
+
+post_meta:
+  page:
+    tags: true
