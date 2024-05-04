@@ -7,6 +7,7 @@ categories:
 description: 由于用自己没推导过的公式心里没有底，所以写篇博客记录一下推导超几何分布的期望和方差的过程。
 tags:
 - Math
+- Probability
 ---
 
 ## 简介
