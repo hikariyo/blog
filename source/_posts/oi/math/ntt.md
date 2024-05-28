@@ -39,7 +39,7 @@ g_n^k=g^{\frac{p-1}{n}k}
 $$
 对比单位根的定义：
 $$
-\omega_n^k=e^{\frac{2\pi i}{n}k}
+\omega_n^k=\exp(\frac{2\pi i}{n}k)
 $$
 形式上非常类似，然后性质也非常类似：
 $$

@@ -1,5 +1,6 @@
 ---
 date: 2023-09-20 15:17:00
+update: 2024-05-28 16:07:00
 title: 数学 - 快速傅立叶变换
 katex: true
 description: 用点表示法可以 O(n) 的复杂度内求出多项式之积，FFT 可以在 O(nlog(n)) 的复杂度内在多项式的点表示法和系数表示法之间转换。
@@ -27,7 +28,7 @@ $$
 
 单位根是 $x^n=1$ 在复数域上的所有解，记做：
 $$
-\omega_n^k = e^{2k\pi i/n}=\cos \frac{2k\pi}{n}+i\sin \frac{2k\pi}{n}
+\omega_n^k = \exp(\frac{2k\pi i}{n})=\cos \frac{2k\pi}{n}+i\sin \frac{2k\pi}{n}
 $$
 根据指数函数和三角函数的性质，我们可以轻松推出下面的性质，下面 $p,q,k,m,n$ 均为实数，其中 $m,n\ne 0$，本文就不讨论复数时是否成立了（应当也是成立的）。
 $$
