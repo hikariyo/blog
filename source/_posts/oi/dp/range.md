@@ -601,3 +601,107 @@ int main() {
 }
 ```
 
+## [SDCPC2024 M] 回文多边形
+
+> 按逆时针给出 $n$ 个点构成一个凸多边形，每个点有一个权值 $v_i$。问权值构成回文序列的子点集中构成的子多边形面积最大是多少，输出这个值 $\times 2$，可以证明这一定是一个整数。
+>
+> 数据范围：$3\le n\le 500,|x_i|,1\le v_i\le 10^9,|x_i|,|y_i|\le 10^9$​。
+
+答案与权值无关，首先离散化。
+
+设 $f(l,r)$ 代表 $l,r$ 逆时针组成的凸包的最大面积，满足 $v_l=v_r$，那么有这样一个转移方程：
+$$
+f(l,r)=\max_{l<l_1\le r_1<r}^{v_{l_1}=v_{r_1}}\{f(l_1,r_1)+S_{ll_1r_1}+S_{lr_1r}\}
+$$
+直接枚举是 $O(n^4)$，但是如果 $l_1,r_1$ 在区间 $(l,r)$ 内都不是最靠两边的同等权值的点，那么选上两边的一定更优。所以两个点一定有一个是最靠边上的，如果用二分确定这个点，那么复杂度就是 $O(n^3\log n)$​，可以通过。
+
+由于是环状的，所以需要将序列复制一遍接到尾部，保证能取到答案。
+
+面积用向量外积算一下就好，最大的面积显然是 $-10^9\sim 10^9$ 乘 $2$ 也不会超过 $8\times 10^{18}$，可以用 `long long`。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define eb emplace_back
+const int N = 1010;
+int T, n, id[N], x[N], y[N], f[N][N];
+vector<int> nums, points[N];
+
+int S(int a, int b, int c) {
+    int dx1 = x[a] - x[b], dy1 = y[a] - y[b];
+    int dx2 = x[a] - x[c], dy2 = y[a] - y[c];
+    return abs(dx1 * dy2 - dx2 * dy1);
+}
+
+int getr(int R, int p) {
+    int l = 0, r = points[id[p]].size() - 1;
+    while (l < r) {
+        int mid = (l+r+1) >> 1;
+        if (points[id[p]][mid] <= R) l = mid;
+        else r = mid - 1;
+    }
+    return points[id[p]][r];
+}
+
+int getl(int L, int p) {
+    int l = 0, r = points[id[p]].size() - 1;
+    while (l < r) {
+        int mid = (l+r) >> 1;
+        if (points[id[p]][mid] >= L) r = mid;
+        else l = mid + 1;
+    }
+    return points[id[p]][r];
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0), cout.tie(0);
+    cin >> T;
+    while (T--) {
+        nums.clear();
+        cin >> n;
+        for (int i = 1; i <= n; i++) {
+            cin >> id[i];
+            nums.eb(id[i]);
+            points[i].clear();
+        }
+        sort(nums.begin(), nums.end());
+        nums.erase(unique(nums.begin(), nums.end()), nums.end());
+        for (int i = 1; i <= n; i++) {
+            id[i] = lower_bound(nums.begin(), nums.end(), id[i]) - nums.begin() + 1;
+            points[id[i]].eb(i);
+        }
+
+        for (int i = 1; i <= n; i++) {
+            cin >> x[i] >> y[i];
+            x[i+n] = x[i], y[i+n] = y[i], id[i+n] = id[i];
+            points[id[i]].eb(i+n);
+        }
+
+        int ans = 0;
+        for (int len = 3; len <= n; len++) {
+            for (int l = 1, r; (r = l + len - 1) <= 2*n; l++) {
+                if ((id[l] != id[r])) continue;
+
+                f[l][r] = 0;
+                for (int l1 = l+1; l1 < r; l1++) {
+                    int r1 = getr(r-1, l1);
+                    f[l][r] = max(f[l][r], f[l1][r1] + S(l, l1, r) + S(l1, r1, r));
+                }
+
+                for (int r1 = r-1; r1 > l; r1--) {
+                    int l1 = getl(l+1, r1);
+                    f[l][r] = max(f[l][r], f[l1][r1] + S(l, l1, r) + S(l1, r1, r));
+                }
+                ans = max(ans, f[l][r]);    
+            }
+        }
+
+        cout << ans << '\n';
+    }
+    return 0;
+}
+```
+
