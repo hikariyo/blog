@@ -1,5 +1,6 @@
 ---
 date: 2023-10-26 17:22:00
+update: 2024-05-27 15:30:00
 title: 数学 - 基础公式及证明
 katex: true
 tags:
@@ -99,13 +100,11 @@ $$
 \sum_{i=1}^n -\ln(1-\frac{1}{p_i})=\ln(\ln n)
 $$
 
-还可以继续化简，证明 $\ln(x+1)\sim x$，洛一下即可：
+还可以继续化简，证明 $\ln(x+1)\sim x$：
 
 $$
-\lim_{x\to 0}\frac{\ln(x+1)}{x}=\lim_{x\to 0}\frac{1}{x+1}=1
+\lim_{x\to 0}\frac{\ln(x+1)}{x}=\lim_{x\to 0}\ln(x+1)^{\frac{1}{x}}=1
 $$
-
-
 
 所以：
 $$
@@ -186,4 +185,38 @@ $$
 $$
 \gcd(a,\gcd(b,c))=\prod p^{\min(\alpha,\min(\beta,\gamma))}=\prod p^{\min(\alpha,\beta,\gamma)}=\gcd(a,b,c)
 $$
-所以这也可以用于求 $n$ 个数的高精 $\text{lcm}$，不过考这个也挺没意思的。
+这也可以用于求 $n$ 个数的高精 $\text{lcm}$，不过考这个也挺没意思的。
+
+## 数论分块(整除分块)
+
+对于正整数 $n$，当 $k=\lfloor\frac{n}{x}\rfloor$ 时，$x$ 的最大值是 $\lfloor\frac{n}{k}\rfloor$。
+
+下面求一下这个值的来源：
+$$
+k=\lfloor\frac{n}{x}\rfloor=\lfloor\frac{n}{x+d}\rfloor
+$$
+设成余数的形式：
+$$
+\begin{cases}
+n=kx+r_1&r_1\in[0,x)\\
+n=k(x+d)+r_2&r_2\in[0,x+d)
+\end{cases}
+$$
+可以解出：
+$$
+\begin{aligned}
+r_2&=r_1-kd\ge 0\\
+d&\le \lfloor\frac{r_1}{k}\rfloor\\
+&=\lfloor \frac{n-kx}{k} \rfloor\\
+&=\lfloor \frac{n}{k} \rfloor -x
+\end{aligned}
+$$
+当 $d$ 取到最大值时，有：
+$$
+\begin{cases}
+r_2=n-k\lfloor\frac{n}{k}\rfloor=n\bmod k\\
+r_1=r_2+kd=n-kx=n-x\lfloor \frac{n}{x}\rfloor=n\bmod x
+\end{cases}
+$$
+有 $r_1$ 满足条件，$r_2\le r_1$ 肯定也满足条件。结论得证。
+
