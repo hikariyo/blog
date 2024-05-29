@@ -95,8 +95,9 @@ $$
 \begin{aligned}
 f(u)&=\binom{s_u-1}{s_1} \binom{s_u-1-s_1}{s_2}\cdots \binom{s_n}{s_n} \times \prod_{v\in son_u} f(v)\\
 &=\frac{(s_u-1)!}{(s_u-1-s_1)!s_1!}\times \frac{(s_u-1-s_1)!}{(s_u-1-s_1-s_2)!s_2!}\times \cdots \times 1\times \prod_{v\in son_u}f(v)\\
-&=(s_u-1)! \prod_{v\in son_u} \frac{f(v)}{s_v!}\\
-&=\frac{(s_u-1)!}{\prod_{v\in tree_u} s_v}
+&=\frac{(s_u-1)!}{\prod_{v\in son_u} s_v!}\prod_{v\in son_u}f(v)\\
+&=\frac{(s_u-1)!}{\prod_{v\in tree_u} s_v}\\
+&=\frac{n!}{\prod s_v}
 \end{aligned}
 $$
 当我们求解根节点的时候，设 $dp(u)$ 是以 $u$ 为根的所有结点的 $s_v$ 之积，有：
@@ -323,6 +324,27 @@ int main() {
     while (T--) solve();
 
     return 0;
+}
+```
+
+事实上，你也可以判断重儿子是否 $>n/2$​，这样会倍增到最后一个不满足重心要求的点。
+
+但是这样需要特判根为重心的情况，有些麻烦，下面是一个被验证过的正确的代码。
+
+```cpp
+pair<int, int> calc_res2(int u) {
+    int n = sz[u], v = 0;
+    if (sz[f[u][0]] <= n / 2) {
+        if (n % 2 == 0 && sz[f[u][0]] == n / 2) v = f[u][0];
+        return {u, v};
+    }
+
+    for (int k = K-1; k >= 0; k--)
+        if (f[f[u][k]][0] && sz[f[f[u][k]][0]] > n / 2)
+            u = f[u][k];
+    u = f[u][0];
+    if (n % 2 == 0 && sz[f[u][0]] == n/2) v = f[u][0];
+    return {u, v};
 }
 ```
 
