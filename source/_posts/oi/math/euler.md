@@ -67,7 +67,7 @@ $$
 
 若 $p$ 为质数，那么 $\varphi(p^k)=p^k(1-\frac{1}{p})=p^{k-1}(p-1)$，有 $\varphi(p^k)\ge k$
 
-证明：如果固定 $k$，那么 $\varphi(p^k)$ 是对 $p$ 单调递增的，因为是两个单调递增的函数相乘。
+证明：如果固定 $k$，那么 $\varphi(p^k)$ 是对 $p$ 单调递增的，因为是两个单调递增的恒正的函数相乘。
 
 因此，$\varphi(p^k)\ge \varphi(2^k)= 2^{k-1}\ge k$，关于最后一个不等式，我们可以构造函数 $f(x)=2^{x-1}-x$ 研究。
 $$
@@ -83,7 +83,7 @@ $$
 
 ### 证明
 
-首先，$\gcd(a,m)=1$ 时，有 $a^{\varphi(m)}\equiv 1\pmod m$，那么 $a^{b}\equiv a^{b-k\varphi(m)}\cdot a^{\varphi(m)}\pmod m$ 显然成立。主要证明 $\gcd(a,m)\ne 1$ 时的情况。
+首先，$\gcd(a,m)=1$ 时，有 $a^{\varphi(m)}\equiv 1\pmod m$，那么 $a^{b}\equiv a^{b\bmod\varphi(m)+\varphi(m)}\pmod m$ 显然成立。主要证明 $\gcd(a,m)\ne 1$ 时的情况。
 
 将 $m$ 分解质因数，只需要证明 $a^b\equiv a^{b\bmod \varphi(m)+\varphi(m)}\pmod {p_1^{k_1},p_2^{k_2},\cdots}$ 即可。
 
