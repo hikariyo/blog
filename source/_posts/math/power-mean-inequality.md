@@ -73,7 +73,7 @@ $$
 $$
 \left(\prod_{i=1}^n x_i\right)^{\frac{1}{n}}\le \left(\frac{1}{n}\sum_{i=1}^n x_i^p\right)^{\frac{1}{p}}
 $$
-对于 $-p$ 同理，于是 $M_p(x_1,\dots,x_n)$ 与 $M_0(x_1,\dots,x_n)$ 的关系得证。
+当且仅当 $x_1=\dots=x_n$ 取等，于是原式得证。对于 $-p$ 同理，于是 $M_p(x_1,\dots,x_n)$ 与 $M_0(x_1,\dots,x_n)$ 的关系得证。
 
 ### 步骤 2
 
@@ -89,5 +89,21 @@ $$
 $$
 f\left(\frac{1}{n}\sum_{i=1}^n x_i^p\right)\le \frac{1}{n}\sum_{i=1}^n f(x_i^p)=\frac{1}{n}\sum_{i=1}^n x_i^q
 $$
-当且仅当 $x_1=\dots=x_n$ 取等，于是原式得证。对于 $p<0<q$，以 $M_0(x_1,\dots,x_n)$ 为中间值同样可以证明幂平均不等式。
+当且仅当 $x_1=\dots=x_n$ 取等，于是原式得证。
+
+### 步骤 3
+
+对于实数 $-p<-q<0$，证明：
+$$
+\left(\frac{1}{n}\sum_{i=1}^n \frac{1}{x_i^p}\right)^{-\frac{1}{p}}\le \left(\frac{1}{n}\sum_{i=1}^n \frac{1}{x_i^q}\right)^{-\frac{1}{q}}
+$$
+两边取倒数，得到：
+$$
+\left(\frac{1}{n}\sum_{i=1}^n (\frac{1}{x_i})^p\right)^{\frac{1}{p}}\ge \left(\frac{1}{n}\sum_{i=1}^n (\frac{1}{x_i})^q\right)^{\frac{1}{q}}
+$$
+利用上面已经证明过的 $0<q<p$ 的结论得证。
+
+### 步骤 4
+
+对于实数 $p<0<q$，以 $M_0(x_1,\dots,x_n)$ 为中间值同样可以证明幂平均不等式。
 
