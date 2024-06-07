@@ -414,7 +414,7 @@ $$
 \varphi(d)\mid d\Leftrightarrow kd\frac{a}{b}=d\\
 b=ka
 $$
-也就是要求 $\varphi(d)=d/a$，要么 $\varphi(d)=d/2$ 要么 $\varphi(d)=d/3$，所以 $d$ 只能有 $2,3$ 两个约数。
+也就是要求 $\varphi(d)=d/k$，要么 $\varphi(d)=d/2$ 要么 $\varphi(d)=d/3$，所以 $d$ 只能有 $2,3$ 两个约数。
 
 将每个 $a_i$ 分解为 $2^a3^b$，设 $d=2^p3^q$，也就是需要满足 $p=\sum a,q=\sum b$ 的情况下保证花费最小，那么这显然是个背包问题。
 
@@ -555,20 +555,18 @@ int main() {
 >
 > 题目链接：[P10532](https://www.luogu.com.cn/problem/P10532)。
 
-首先 $i,j$ 是对称的，当 $i=j$ 时，只有 $i=j=1$ 时有 $\gcd(i,j)=1$，所以：
+首先 $i,j$ 是对称的，所以：
 $$
 \begin{aligned}
-\sum_{i,j}\lfloor\frac{n}{\max(i,j)}\rfloor[\gcd(i,j)=1]&=n+\sum_{(i,j)\ne(1,1)}\lfloor\frac{n}{\max(i,j)}\rfloor[\gcd(i,j)=1]\\
-&=n+\sum_{i<j}2\lfloor\frac{n}{j}\rfloor[\gcd(i,j)=1]\\
-&=n+2\sum_{j=1}^n\lfloor\frac{n}{j}\rfloor\varphi(j)\\
+\sum_{i=1}^n\sum_{j=1}^n\lfloor\frac{n}{\max(i,j)}\rfloor[\gcd(i,j)=1]&=2\sum_{i=1}^n\sum_{j=1}^i\lfloor\frac{n}{i}\rfloor[\gcd(i,j)=1]-\sum_{i=1}^n \lfloor\frac{n}{i}\rfloor[i=1]\\
+&=2\sum_{i=1}^n\lfloor\frac{n}{i}\rfloor\varphi(i)-n\\
 \end{aligned}
 $$
-观察：所有的 $\varphi(j)$ 都贡献给了 $j$ 的倍数，所以我们改成枚举某个数的所有因数：
+观察：$\lfloor n/i\rfloor$ 是 $i$ 的所有倍数中 $\le n$ 的个数，所以可以枚举 $d$ 为其所有合法倍数的因数，使 $\varphi(d)$ 贡献到答案，故原式等价于：
 $$
 \begin{aligned}
-\text{LHS}&=n+2\sum_{i=1}^n\sum_{j|i} \varphi(j)\\
-&=n+2\sum_{i=1}^n i\\
-&=n+n(n-1)\\
+2\sum_{i=1}^n\sum_{d\mid i} \varphi(d)-n&=2\sum_{i=1}^n i-n\\
+&=n(n+1)-n\\
 &=n^2
 \end{aligned}
 $$
