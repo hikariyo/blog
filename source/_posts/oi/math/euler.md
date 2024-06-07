@@ -1,5 +1,6 @@
 ---
 date: 2023-07-29 20:24:00
+update: 2024-06-07 17:08:00
 title: 数学 - 欧拉函数与欧拉定理
 katex: true
 tags:
@@ -12,40 +13,134 @@ categories:
 
 ## 欧拉函数
 
-欧拉函数 $\varphi(N)$ 的定义如下：在 1 ~ N 中所有与 N 互质的数字的个数，计算如下：
+对于正整数 $n$，欧拉函数 $\varphi(n)$ 代表小于 $n$ 的数中，所有与 $n$ 互质的数的个数。一般认为 $\varphi(1) = 1$。
+
+### 性质1
+
+对于素数 $p$，$1\sim (p-1)$ 都与其互质，所以 $\varphi(p)=p-1$。
+
+### 性质2
+
+对于互质的 $m,n$ 有 $\varphi(mn)=\varphi(m)\varphi(n)$，即欧拉函数为非完全积性函数。
+
+这个证明需要剩余系的复合，我不太会，可以参考 OI-WIKI。
+
+### 性质3
+
+对于素数 $p$，有 $\varphi(p^k)=p^k-p^{k-1}$。
+
+证明：小于 $p^k$​ 的所有数字中，只有 $1p,2p,\dots,(p^{k-1}-1)p$​ 共 $p^{k-1}-1$​ 个数与 $p^k$​ 不互质，一共有 $p^{k}-1$​ 个数，故 $\varphi(p^k)=p^{k}-1-(p^{k-1}-1)=p^k-p^{k-1}$​。
+
+### 性质4
+
+对于任意正整数 $n$，将其质因数分解为 $n=\prod_{i=1}^k p_i^{c_i}$，有：
 $$
 \begin{aligned}
-N&=p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_n^{\alpha_n}\\
-\varphi(N)&=N(1-\frac{1}{p_1})(1-\frac{1}{p_2})\cdots(1-\frac{1}{p_n})
+\varphi(n)&=\varphi\left(\prod_{i=1}^k p_i^{c_i}\right)\\
+&=\prod_{i=1}^k \varphi(p_i^{c_i})\\
+&=\prod_{i=1}^k p_i^{c_i}(1-\frac{1}{p_i})\\
+&=n\prod_{i=1}^k (1-\frac{1}{p_i})
 \end{aligned}
 $$
+这是也是欧拉函数的一种求法。
 
-证明需要用到容斥原理：先把所有 $p_i$ 的倍数排除，这时会把 $p_ip_j$ 的倍数排除两遍，把 $p_ip_jp_k$ 的倍数排除三遍；于是加入 $p_ip_j$ 的倍数，这样会把 $p_ip_jp_k$ 的倍数加入三遍；然后再排除 $p_ip_jp_k$ 的倍数... 如下：
+### 性质5
 
-
+对于欧拉函数，有下面这个常见的式子：
+$$
+\sum_{d|n}\varphi(d)=n
+$$
+证明：设 $f(n)=\sum_{d|n}\varphi(d)$，可以证明 $f(n)$ 为积性函数，设 $n,m$ 互质则显然 $n,m$ 的任何一个因子 $i,j$ 也是互质的：
 $$
 \begin{aligned}
-\varphi(N)=N&-\frac{N}{p_1}-\frac{N}{p_2}-\frac{N}{p_3}\cdots\\
-&+\frac{N}{p_1p_2}+\frac{N}{p_2p_3}+\frac{N}{p_1p_3}+\cdots\\
-&-\frac{N}{p_1p_2p_3}-\cdots\\
+f(n)f(m)&=\sum_{i|n}\sum_{j|m}\varphi(i)\varphi(j)\\
+&=\sum_{i|n}\sum_{j|m}\varphi(ij)\\
+&=\sum_{d|nm}\varphi(d)\\
+&=f(nm)
 \end{aligned}
 $$
-观察到，所有奇数个 $p$ 相乘的都为负，所有偶数个相乘的都为正，而且相乘的个数取决于有多少个$p$，因此开头给出的定义式展开符合这一点。
+对 $n$ 进行质因数分解，所以 $f(n)=f(p^{c_1})f(p^{c_2})\dots f(p^{c_k})$，又有：
+$$
+\begin{aligned}
+f(p^c)&=\sum_{i=0}^c \varphi(p^i)\\
+&=1+\sum_{i=1}^c (p^i-p^{i-1})\\
+&=p^c
+\end{aligned}
+$$
+因此 $f(n)=n$​，得证。
 
-可以进一步说明，对于有 $m$ 个 $p$ 相乘的项共有 $\binom{n}{m}$ 个，开头给出的式子中，在 $n$ 个括号中选出 $m$ 个含 $p$ 的项相乘共有 $\binom{n}{m}$ 中选法，所以等式成立。
+### 分解质因数求值
+
+复杂度为 $O(\sqrt n\log n)$，其中 $\log n$ 是指质因数分解后的 $n$ 的所有质数的指数之和，实际肯定是远小于 $\log n$ 的。
+
+```cpp
+int phi(int n) {
+    int res = n;
+    // O(sqrt(n)) 分解质因数
+    for (int i = 2; i <= n/i; i++) {
+        // 把当前因数除干净, 这样就保证一定是质因数了, 上界是 O(log n)
+        if (n % i == 0) {
+            res = res - res/i;
+            while (n % i == 0) n /= i;
+        }
+    }
+    // 最后可能没有除干净，这里特判一下
+    if (n > 1) res = res-res/n;
+    return res;
+}
+```
+
+这里你可能会对 $i^2\le n$ 这个循环条件存在疑问，因为 $n$ 随着循环是在变化的。首先 $i^2\le n$ 等价于 $i\le n/i$，然后 $i$ 是整数，所以等价于 $i\le \lfloor n/i\rfloor$。
+
+这里设当前 $n=p_ip_j$，其中 $p_i\le p_j$，那么因为还没有除掉 $p_i$，所以 $i\le p_i$ 是成立的，因此 $i^2\le p_ip_j=n$；所以只要 $n$ 还有多于两个未除掉的质因数，就不会结束循环。
+
+### 线性筛法求值
+
+复杂度同线性筛，为 $O(n)$。
+
+```cpp
+int phi[N], primes[N], cntp;
+bitset<N> st;
+
+void init(int n) {
+    phi[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        if (!st[i]) primes[cntp++] = i, phi[i] = i-1;
+        for (int j = 0; primes[j] <= n/i; j++) {
+            st[i*primes[j]] = 1;
+            if (i % primes[j]) phi[i*primes[j]] = phi[i] * phi[primes[j]];
+            else {
+                phi[i*primes[j]] = phi[i] * primes[j];
+                break;
+            }
+        }
+    }
+}
+```
+
+可以证明当要求 $i\cdot p_j$ 的时候，$\varphi(i)$ 一定已经求出来了：
+
+1. 如果 $i$ 是质数，那么它会在进入内层 `for` 循环前被求出来。
+2. 如果 $i$ 是合数，那么它会在 $i$ 循环到自己之前就被筛掉，筛掉的同时也就求出来了 $\varphi(i)$。
+
+接下来说明递推式：
+
+1. 如果 $i$ 是质数，那么在 $1 \sim i-1$ 中所有数都与它互质，所以有 $\varphi(i)=i-1$。
+2. 如果 $i \bmod  p_j=0$，此时 $p_j$ 是 $i$ 的最小质因数，由欧拉函数的解析式知，$\varphi(p_j\times i)=p_j\varphi(i)$。
+3. 如果 $i\bmod p_j\ne 0$，此时 $p_j$ 不是 $i$ 的质因数，那么 $\varphi(p_j\cdot i)=\varphi(p_j)\varphi(i)$。
 
 ## 欧拉定理
 
-若 $a$ 与 $x$ 互质，则 $a^{\varphi(x)}\equiv 1 \pmod x$：
+欧拉定理：若 $a$ 与 $x$ 互质，则 $a^{\varphi(x)}\equiv 1 \pmod x$。
 
-设所有小于 $x$ 的数中所有与 $x$ 互质的数是 $x_1, x_2, \cdots, x_{\varphi(x)}$，那么 $ax_1, ax_2, \cdots, ax_{\varphi(x)}$ 也与 $x$ 互质（无论是 $a$ 还是 $x_i$ 都与 $x$ 没有相同的质因数，所以 $ax_i$ 也与 $x$ 没有相同的质因数）。
+证明：设所有小于 $x$ 的数中所有与 $x$ 互质的数是 $x_1, x_2, \cdots, x_{\varphi(x)}$，那么 $ax_1, ax_2, \cdots, ax_{\varphi(x)}$ 也与 $x$ 互质（无论是 $a$ 还是 $x_i$ 都与 $x$ 没有相同的质因数，所以 $ax_i$ 也与 $x$ 没有相同的质因数）。
 
 并且 $ax_1, ax_2, \cdots, ax_{\varphi(x)}$ 对 $x$ 取模两两不相同，这步用反证法证明，假设 $ax_i\equiv ax_j\pmod x$ 由于 $\gcd(a,x)=1$ 有 $x_i\equiv x_j\pmod x$ 这是矛盾的。
 
 于是这两组数模 $x$ 之后其实是同一组数据，那么它们取模之后全部乘起来结果是相同的。
 $$
 \begin{aligned}
-\prod_{i=1}^{\varphi(x)}[(ax_i)\bmod x]&=\prod_{i=1}^{\varphi(x)}x_i\\
+\prod_{i=1}^{\varphi(x)}(ax_i)&\equiv\prod_{i=1}^{\varphi(x)}x_i\pmod x\\
 a^{\varphi(x)}\prod_{i=1}^{\varphi(x)}x_i&\equiv \prod_{i=1}^{\varphi(x)}x_i \pmod x\\
 \end{aligned}
 $$
@@ -55,7 +150,9 @@ $$
 
 ## 拓展欧拉定理
 
-不要求 $a,m$ 互质，且 $b\ge \varphi(m)$ 满足 $a^b\equiv a^{b\bmod  \varphi(m)+\varphi(m)}\pmod m$，这也是降幂公式。
+> 给定 $a,m,b$ 求 $a^b \bmod m$，其中 $1\le a\le 10^9,1\le b\le10^{20000000},1\le m\le 10^8$。
+
+不要求 $a,m$ 互质，且 $b\ge \varphi(m)$ 时满足 $a^b\equiv a^{b\bmod  \varphi(m)+\varphi(m)}\pmod m$，这也是降幂公式。
 
 ### 引理1
 
@@ -81,7 +178,7 @@ f(1)&=f(2)=0\\
 $$
 证毕。
 
-### 证明
+### 定理
 
 首先，$\gcd(a,m)=1$ 时，有 $a^{\varphi(m)}\equiv 1\pmod m$，那么 $a^{b}\equiv a^{b\bmod\varphi(m)+\varphi(m)}\pmod m$ 显然成立。主要证明 $\gcd(a,m)\ne 1$ 时的情况。
 
@@ -106,78 +203,9 @@ $$
     \end{aligned}
     $$
 
-综上，$a^b\equiv a^{b\bmod  \varphi(m)+\varphi(m)}\pmod{m},b\ge \varphi(m)$，这也被称作降幂公式。
+综上，$a^b\equiv a^{b\bmod  \varphi(m)+\varphi(m)}\pmod{m},b\ge \varphi(m)$​，这也被称作降幂公式。
 
-## 定义法求欧拉函数
-
-先找质因数，然后累项求积。
-
-```cpp
-int euler(int a) {
-    int res = a;
-    for (int i = 2; i <= a/i; i++) {
-        // 这里就是先用 if 然后在里面把 a 除干净
-        if (a % i == 0) {
-            // res(1-1/i) = res-res/i
-            res = res - res/i;
-            while (a % i == 0) a /= i;
-        }
-    }
-    // 一定注意不要落了 a 没除干净的情况
-    if (a > 1) res = res-res/a;
-    return res;
-}
-```
-
-## 线筛法求欧拉函数
-
-与筛选质数时的模板类似。
-
-```cpp
-#include <bitset>
-#include <iostream>
-using namespace std;
-
-const int N = 1e6+10;
-int phi[N], primes[N], cnt=0;
-bitset<N> st;
-
-void eular(int n) {
-    phi[1] = 1;
-    for (int i = 2; i <= n; i++) {
-        if (!st[i]) {
-            primes[cnt++] = i;
-            phi[i] = i-1;
-        }
-        for (int j = 0; primes[j] <= n/i; j++) {
-            st[i * primes[j]] = 1;
-            if (i % primes[j] == 0) {
-                phi[i * primes[j]] = phi[i] * primes[j];
-                break;
-            } else {
-                phi[i * primes[j]] = phi[i] * (primes[j] - 1);
-            }
-        }
-    }
-}
-```
-
-可以证明当要求 $i\cdot p_j$ 的时候，$\varphi(i)$ 一定已经求出来了：
-
-1. 如果 $i$ 是质数，那么它会在进入内层 `for` 循环前被求出来。
-2. 如果 $i$ 是合数，那么它会在 $i$ 循环到自己之前就被筛掉，筛掉的同时也就求出来了 $\varphi(i)$。
-
-接下来通过公式证明 $\varphi(i)$ 的这几个递推式：
-
-1. 如果 $i$ 是质数，那么在 $1 \sim i-1$ 中所有数都与它互质，所以有 $\varphi(i)=i-1$。
-2. 如果 $i \bmod  p_j=0$，此时 $p_j$ 是 $i$ 的最小质因数，$i$ 表示为 $p_1^{\alpha_1}p_2^{\alpha_2}\cdots$ 这个式子中一定包含了 $p_j$，由欧拉函数的定义知，$\varphi(p_j\cdot i)=p_j\varphi(i)$。
-3. 如果 $i\bmod p_j\ne 0$，此时 $p_j$ 不是 $i$ 的质因数，那么 $\varphi(p_j\cdot i)=\varphi(p_j)\cdot \varphi(i)=(p_j-1)\varphi(i)$。
-
-## [模板] 降幂
-
-> 给定 $a,m,b$ 求 $a^b \bmod m$，其中 $1\le a\le 10^9,1\le b\le10^{20000000},1\le m\le 10^8$。
->
-> 题目链接：[P5091](https://www.luogu.com.cn/problem/P5091)。
+### 代码
 
 对 $b$ 边读边取模即可。
 
@@ -236,7 +264,7 @@ int main() {
 }
 ```
 
-## 上帝与集合的正确用法
+## 幂塔
 
 > 定义 $a_0=1$，$a_n=2^{a_{n-1}}$，可以证明 $a_n\bmod p$ 在某一项后都是同一个值，求这个值。
 >
@@ -304,58 +332,62 @@ int main() {
 }
 ```
 
-## 可见的点
+## [SDOI2008] 仪仗队
 
-> 在一个平面直角坐标系的第一象限内，如果一个点 (x,y) 与原点 (0,0) 的连线中没有通过其他任何点，则称该点在原点处是可见的。
+> 给定正整数 $1\le n\le40000$，求出 $(0,0)$ 到 $(x,y)$ 的所有点中直接相连不经过其它点的所有点的数量。
 >
-> 例如，点 (4,2) 就是不可见的，因为它与原点的连线会通过点 (2,1)。
->
-> 编写一个程序，计算给定整数 N 的情况下，满足 0≤x, y≤N 的可见点 (x，y) 的数量（可见点不包括原点）。
->
-> 题目链接：[AcWing 201](https://www.acwing.com/problem/content/203/)。
+> 题目链接：[P2158](https://www.luogu.com.cn/problem/P2158)。
 
-如果一个点 $(x_0,y_0)$ 可见，必有 $k=y_0/x_0$ 不可化简，也就是 $y_0, x_0$ 互质。
+不经过其它点，除了 $(0,1),(1,0)$ 外，其它点都是 $(x,y)$ 且满足 $1\le x,y\le n-1$，所以先 $n\gets n-1$，然后考虑何为“不经过其它点”。
 
-所以答案是 $2\sum_{i=1}^n \varphi(i)+1$，去掉一个直线 $y=x$，加上两个直线 $y=0,x=0$
+若 $(0,0)$ 到 $(x_1,y_1)$ 经过 $(x_0,y_0)$，其中 $x_0<x_1,y_0<y_1$。那么这个连线，$Ox$ 轴，$x=x_1,x=x_2$ 这四条直线构成的两个三角形存在相似关系，也就是有 $y_1/x_1=y_0/x_0$，也就是说 $\gcd(x_1,y_1) \ne 1$。
+
+当 $\gcd(x_1,y_1)=1$ 时，则该点满足条件（这是原命题“若 $(x_1,y_1)$ 不满足条件，则 $\gcd(x_1,y_1)\ne 1$”的逆否命题）。
+
+所以答案就会是（别忘了 $(0,1),(1,0)$ 这两个点）：
+$$
+2+\sum_{i=1}^n\sum_{j=1}^n[\gcd(i,j)=1]
+$$
+原式具有对称性，继续化简：
+$$
+2+2\sum_{i=1}^n\sum_{j\le i}[\gcd(i,j)=1]-\sum_{i=1}^n[\gcd(i,i)=1]=1+2\sum_{i=1}^n\varphi(i)\\
+$$
+所以做一个线性筛就行了；其实暴力 $O(n^2\log n)$ 在这个范围同样可以通过。注意特判 $n=1$，上面的情况都是基于 $n\ge 2$ 时的。
 
 ```cpp
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1010, m = N-1;
-int phi[N];
-bool st[N];
-vector<int> primes;
+const int N = 40010;
+int primes[N], phi[N], cntp;
+bitset<N> st;
 
-void init() {
+void init(int n) {
     phi[1] = 1;
-    for (int i = 2; i <= m; i++) {
-        if (!st[i]) {
-            primes.push_back(i);
-            phi[i] = i-1;
-        }
-        for (int j = 0; primes[j] <= m/i; j++) {
-            st[i*primes[j]] = true;
-            if (i % primes[j] == 0) {
-                phi[i*primes[j]] = phi[i] * primes[j];
+    for (int i = 2; i <= n; i++) {
+        if (!st[i]) primes[cntp++] = i, phi[i] = i - 1;
+        for (int j = 0; primes[j] <= n/i; j++) {
+            st[i * primes[j]] = 1;
+            if (i % primes[j]) phi[i * primes[j]] = phi[i] * phi[primes[j]];
+            else {
+                phi[i * primes[j]] = phi[i] * primes[j];
                 break;
             }
-            phi[i*primes[j]] = phi[i] * (primes[j]-1);
         }
     }
 }
 
 int main() {
-    init();
-    int T; scanf("%d", &T);
-    for (int i = 1; i <= T; i++) {
-        int n, sum = 0;
-        scanf("%d", &n);
-        for (int j = 1; j <= n; j++)
-            sum += phi[j];
-        printf("%d %d %d\n", i, n, 2*sum+1);
+    int n, res = 1;
+    cin >> n;
+    if (n == 1) {
+        cout << 0 << endl;
+        return 0;
     }
+    n--;
+    init(n);
+    for (int i = 1; i <= n; i++) res += 2 * phi[i];
+    cout << res << endl;
     return 0;
 }
 ```
@@ -376,19 +408,15 @@ int main() {
 >
 > $1\le n\le 10^5, 1\le a_i\le 10^9,0\le c_i\le 10^9,1\le A,B\le 10^5,0\le k\le 40,d\le 10^{201}$
 
-首先：
+本题主要是 $\varphi(d)\mid d$ 引出的性质。首先：
 $$
 \varphi(d)=d(1-\frac{1}{2})(1-\frac{1}{3})\cdots=d\frac{a}{b}\\
-\varphi(d)\mid d\Leftrightarrow kd\frac{a}{b}=k\\
-a=kb
+\varphi(d)\mid d\Leftrightarrow kd\frac{a}{b}=d\\
+b=ka
 $$
-也就是 $\varphi(d)=d/a$，要么 $\varphi(d)=d/2$ 要么 $\varphi(d)=d/3$，所以 $d$ 只能有 $2,3$ 两个约数。
+也就是要求 $\varphi(d)=d/a$，要么 $\varphi(d)=d/2$ 要么 $\varphi(d)=d/3$，所以 $d$ 只能有 $2,3$ 两个约数。
 
-将每个 $a_i$ 分解为 $2^a3^b$，设 $d=2^p3^q$，也就是需要满足：
-$$
-p=\sum a,q=\sum b
-$$
-满足这个条件的情况下保证花费最小，那么这显然是个背包问题。
+将每个 $a_i$ 分解为 $2^a3^b$，设 $d=2^p3^q$，也就是需要满足 $p=\sum a,q=\sum b$ 的情况下保证花费最小，那么这显然是个背包问题。
 
 在 $10^9$ 范围内，满足 $2^a3^b$ 形式的数字，如果粗略的算一下就只有 $\log_2 10^9\times \log_310^9\approx 563$，这还没容斥就已经这么少了，然后 $p,q$ 的范围分别是 $\log_2 d,\log_3 d$，用 `map` 去重，复杂度是 $O(\log n\log^2 a\log^{2}d)$，实际上远小于这个数，肯定能过。
 
@@ -450,132 +478,201 @@ signed main() {
 }
 ```
 
-## 最大公约数
+## [蓝桥杯2018国B] 矩阵求和
 
-> 给定整数 N，求 1≤x,y≤N 且 GCD(x,y) 为素数的数对 (x,y) 有多少对。
+> 给定正整数 $n$，求：
+> $$
+> \sum_{i=1}^n\sum_{j=1}^n \Big(\gcd(i,j)\Big)^2
+> $$
+> 其中 $1\le n\le 10^7$，答案对 $10^9+7$​ 取模。
 >
-> 题目链接：[AcWing 220](https://www.acwing.com/problem/content/222/)。
+> 题目链接：[P8670](https://www.luogu.com.cn/problem/P8670)。
 
-题目是求（中间当作一个布尔表达式）：
+由于 $\gcd$ 具有交换律，所以原式具有对称性，所以可以引入限制条件，并减掉重复的项，原式化为：
 $$
-\sum_p \sum _{i=1}^n\sum_{j=1}^n [\gcd(i,j)=p]
+2\sum_{i=1}^n\sum_{j\le i}\Big(\gcd(i,j)\Big)^2-\sum_{i=1}^ni^2
 $$
-若 $i,j$ 为 $p$ 的倍数，那么下列式子等价：
+设 $S(n)=\sum_{i=1}^n i^2$，众所周知 $S(n)=\frac{n(n+1)(2n+1)}{6}$，设 $d=\gcd(i,j)$ 必然有 $d\mid i,d\mid j$，所以 $\gcd(i/d,j/d)=1$，由于 $j\le i$ 所以 $j/d\le i/d$，原式可化为：
 $$
-\gcd(i,j)=p \Leftrightarrow \gcd(i/p,j/p)=1
+2\sum_{i=1}^n\sum_{d\mid i}d^2\varphi(\frac{i}{d})-S(n)=2\sum_{i=1}^n\sum_{d\mid i}(\frac{i}{d})^2\varphi(d)-S(n)
 $$
-因此枚举 $i,j=kp$ 中的 $k$ 就可以：
+注意 $d,i/d$ 同样具有对称性，然后考虑 $\varphi(d)$ 对谁造成了贡献，考虑只有当 $i=d,2d,\dots,\lfloor \frac{n}{d}\rfloor d$ 时才会造成贡献，所以 $\varphi(d)$ 的贡献就是 $S(\lfloor\frac{n}{d}\rfloor)$。原式等价于：
 $$
-\sum_p \sum_{i=1}^{\lfloor n/p \rfloor}\sum_{j=1}^{\lfloor n/p \rfloor}[\gcd(i,j)=1]
+2\sum_{d=1}^n\varphi(d)S(\lfloor\frac{n}{d}\rfloor)-S(n)
 $$
-等价于：
-$$
-\sum_p[2\sum_{i=1}^{\lfloor n/p \rfloor} \varphi(i)-1]
-$$
-对欧拉函数简单求一个前缀和就可以。
+线性筛 $O(n)$ 足够通过本题，如果要求更高可以整除分块 + 高级筛法，这里就不拓展了，因为我也不会。
 
 ```cpp
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-typedef long long LL;
-const int N = 1e7+10;
-int phi[N];
-LL s[N];
-bool st[N];
-vector<int> primes;
+const int N = 10000010, P = 1e9+7;
+int phi[N], primes[N], cntp;
+bitset<N> st;
 
 void init(int n) {
-    s[1] = phi[1] = 1;
+    phi[1] = 1;
     for (int i = 2; i <= n; i++) {
-        if (!st[i]) {
-            primes.push_back(i);
-            phi[i] = i-1;
-        }
-        
+        if (!st[i]) primes[cntp++] = i, phi[i] = i-1;
         for (int j = 0; primes[j] <= n/i; j++) {
-            st[primes[j]*i] = true;
-            if (i % primes[j] == 0) {
-                phi[primes[j]*i] = phi[i]*primes[j];
+            st[i*primes[j]] = 1;
+            if (i % primes[j]) phi[i*primes[j]] = phi[i] * phi[primes[j]];
+            else {
+                phi[i*primes[j]] = phi[i] * primes[j];
                 break;
             }
-            phi[primes[j]*i] = phi[i]*(primes[j]-1);
         }
-        
-        s[i] = s[i-1] + phi[i];
     }
+}
+
+int S(int n) {
+    return 1ll * n * (n+1) % P * (2 * n + 1) % P * 166666668ll % P;
+}
+
+int Solve(int n) {
+    int res = 0;
+    init(n);
+    for (int i = 1; i <= n; i++) res = (res + 1ll * S(n / i) * phi[i]) % P;
+    res = (((2ll * res - S(n)) % P) + P) % P;
+    return res;
 }
 
 int main() {
     int n;
     cin >> n;
-    init(n);
-    LL ans = 0;
-    for (int p : primes) {
-        ans += 2*s[n/p]-1;
+    cout << Solve(n) << endl;
+    return 0;
+}
+```
+
+## [XJTUPC2024] 筛法
+
+> 给定正整数 $n$，求：
+> $$
+> \sum_{i=1}^n\sum_{j=1}^n \lfloor\frac{n}{\max(i,j)}\rfloor[\gcd(i,j)=1]
+> $$
+> 其中  $1\le n\le 10^9$​。
+>
+> 题目链接：[P10532](https://www.luogu.com.cn/problem/P10532)。
+
+首先 $i,j$ 是对称的，当 $i=j$ 时，只有 $i=j=1$ 时有 $\gcd(i,j)=1$，所以：
+$$
+\begin{aligned}
+\sum_{i,j}\lfloor\frac{n}{\max(i,j)}\rfloor[\gcd(i,j)=1]&=n+\sum_{(i,j)\ne(1,1)}\lfloor\frac{n}{\max(i,j)}\rfloor[\gcd(i,j)=1]\\
+&=n+\sum_{i<j}2\lfloor\frac{n}{j}\rfloor[\gcd(i,j)=1]\\
+&=n+2\sum_{j=1}^n\lfloor\frac{n}{j}\rfloor\varphi(j)\\
+\end{aligned}
+$$
+观察：所有的 $\varphi(j)$ 都贡献给了 $j$ 的倍数，所以我们改成枚举某个数的所有因数：
+$$
+\begin{aligned}
+\text{LHS}&=n+2\sum_{i=1}^n\sum_{j|i} \varphi(j)\\
+&=n+2\sum_{i=1}^n i\\
+&=n+n(n-1)\\
+&=n^2
+\end{aligned}
+$$
+所以代码就不写了。
+
+## [SDOI2012] Longge 的问题
+
+> 给定正整数 $n$，求：
+> $$
+> \sum_{i=1}^n \gcd(i,n)
+> $$
+> 其中 $1\le n\lt 2^{32}$​。
+>
+> 题目链接：[P2303](https://www.luogu.com.cn/problem/P2303)。
+
+还是枚举 $d=\gcd(i,n)$，则有 $d\mid n$，且 $d$ 出现的次数为满足 $\gcd(i/d,n/d)=1$ 的 $i$ 的个数，就是 $\varphi(\frac{n}{d})$，所以要求的值是：
+$$
+\sum_{d\mid n} d\varphi(\frac{n}{d})=\sum_{d\mid n}\frac{n}{d}\varphi(d)
+$$
+对 $n$ 质因数分解，以质因数分解的形式枚举所有 $d\mid n$，这个是 $O(\sqrt n)$ 的，然后对每个 $d$ 用解析式求 $\varphi(d)$，这个大概是 $O(\log n)$ 的，所以可以通过本题。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+const int K = 1 << 20;
+// factor, exponent, dfs exponent
+int n, fac[K], ep[K], dep[K], k, ans;
+
+void dfs(int u, int now) {
+    if (u > k) {
+        int phi = now;
+        for (int i = 1; i <= k; i++) if (dep[i]) phi -= phi / fac[i];
+        ans += phi * n / now;
+        return;
     }
+    for (dep[u] = 0; dep[u] <= ep[u]; dep[u]++, now = now * fac[u]) dfs(u+1, now);
+}
+
+signed main() {
+    cin >> n;
+    int n_copy = n;
+    for (int i = 2; i <= n_copy / i; i++) {
+        if (n_copy % i == 0) {
+            int cnt = 0;
+            while (n_copy % i == 0) n_copy /= i, cnt++;
+            ++k, fac[k] = i, ep[k] = cnt;
+        }
+    }
+    if (n_copy > 1) ++k, fac[k] = n_copy, ep[k] = 1;
+    dfs(1, 1);
     cout << ans << endl;
     return 0;
 }
 ```
 
-## [SDOI2012] 最大公约数求和
+## [湖北省队互测] GCD
 
-> 给定一个整数 $N$，求出 $\sum_{i=1}^n\gcd(i,n)$
+> 给定正整数 $n$，求 $1\le x,y\le n$ 且 $\gcd(x,y)$ 为素数的 $(x,y)$ 有多少对，其中 $\le n\le 10^7$。
 >
-> 题目链接：[P2303](https://www.luogu.com.cn/problem/P2303)，[AcWing 221](https://www.acwing.com/problem/content/223/)。
+> 题目链接：[BZOJ2818](https://darkbzoj.cc/problem/2818)。
 
-首先一定有 $\gcd(i,n)|n$，因此枚举 $n$ 的所有约数，看它在整个过程中出现了几次。
-
-对于其中一个约数 $d$，当 $\gcd(i,n)=d$ 时，有 $\gcd(i/d,n/d)=1$，其中 $i/d\in[1,n/d]$，因此它出现的个数就是 $\varphi(n/d)$，这样就有：
+枚举不超过 $n$ 的素数，然后为了书写方便令 $N=\lfloor n/p\rfloor$：
 $$
 \begin{aligned}
-\sum_{i=1}^n\gcd(i,n)&=\sum_{d|n}d\varphi(\frac{n}{d})\\
-&=\sum_{d|n}\frac{n}{d}\varphi(d)\\
-&=n\sum_{d|n}\prod_{i=1}^{k_d}(1-\frac{1}{p_i})
+\sum_p\sum_{i=1}^n\sum_{j=1}^n[\gcd(i,j)=p]&=\sum_{p}\sum_{i=1}^n\sum_{j=1}^n[p\mid i][p\mid j][\gcd(\frac{i}{p},\frac{j}{p})=1]\\
+&=\sum_p\sum_{i=1}^{\lfloor\frac{n}{p}\rfloor}\sum_{j=1}^{\lfloor\frac{n}{p}\rfloor}[\gcd(i,j)=1]\\
+&=\sum_p\left(2\sum_{i=1}^N\sum_{j=1}^i[\gcd(i,j)=1]-\sum_{i=1}^N[\gcd(i,i)=1]\right)\\
+&=\sum_p\left(2\sum_{i=1}^N\varphi(i)-1\right)\\
 \end{aligned}
 $$
-
-这里有一个常用的技巧，就是如果是枚举所有约数的某个性质的和，可以借鉴约数之和公式。
-$$
-(1+p_1^1+p_1^2+\cdots+p_1^{c_1})(1+p_2^1+p_2^2+\cdots+p_2^{c_2})\cdots
-$$
-映射到下面：
-$$
-[1+(1-\frac{1}{p_1})+(1-\frac{1}{p_1})+\cdots+(1-\frac{1}{p_1})]\cdots\\
-=\prod_{i=1}^k [1+c_i(1-\frac{1}{p_i})]
-$$
-所以原式等于：
-$$
-n\prod_{i=1}^k[1+c_i(1-\frac{1}{p_i})]
-$$
+线性筛 $O(n)$ 预处理 $\varphi(i)$ 的前缀和与不超过 $n$ 的素数，所以总复杂度为 $O(n)$。
 
 ```cpp
-#include <cstdio>
+#include <bits/stdc++.h>
 using namespace std;
 
-typedef long long LL;
+const int N = 10000010;
+int n, primes[N], cntp;
+long long ans, phi[N];
+bitset<N> st;
 
-int main() {
-    LL n;
-    scanf("%lld", &n);
-    LL res = n;
-    
-    for (int i = 2; i <= n/i; i++) {
-        if (n % i == 0) {
-            int c = 0, p = i;
-            while (n % i == 0) n /= i, c++;
-            // 先除再乘防溢出
-            res /= p;
-            res = res * (p + c*(p-1));
+void init(int n) {
+    phi[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        if (!st[i]) primes[cntp++] = i, phi[i] = i-1;
+        for (int j = 0; primes[j] <= n/i; j++) {
+            st[i * primes[j]] = 1;
+            if (i % primes[j]) phi[i * primes[j]] = phi[i] * phi[primes[j]];
+            else {
+                phi[i * primes[j]] = phi[i] * primes[j];
+                break;
+            }
         }
     }
-    if (n > 1) {
-        res /= n;
-        res = res * (n + n - 1);
-    }
-    printf("%lld\n", res);
+    for (int i = 1; i <= n; i++) phi[i] += phi[i-1];
+}
+
+int main() {
+    cin >> n;
+    init(n);
+    for (int i = 0; i < cntp; i++) ans += 2ll * phi[n / primes[i]] - 1;
+    cout << ans << endl;
     return 0;
 }
 ```
