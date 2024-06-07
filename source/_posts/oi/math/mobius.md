@@ -22,35 +22,19 @@ n=\prod_{i=1}^k p_i^{c_i}\\
 \end{aligned}
 \right.
 $$
-特别地，$n=1$ 时看作 $k=0$ 因此 $\mu(1)=1$
+特别地，$n=1$ 时看作 $k=0$ 因此 $\mu(1)=1$，下面证明 $\sum_{d\mid n}\mu(d)=[n=1]$：
 
-若函数 $S(n)$ 定义为：
-$$
-S(n)=\sum_{d|n}\mu(n)
-$$
-则其取值一定为下列情况：
-$$
-S(n)=\left\{\begin{aligned}
-&1,n=1\\
-&0,n>1
-\end{aligned}\right.
-$$
 当 $n=1$ 时，结果显然成立，下面证明 $n>1$ 时的情况，首先分解质因子：
 $$
-n=\prod_{i=1}^{k}p_i^{c_i}\\
-\text{Let }d=\prod_{i=1}^{k_0}p_i^{b_i}
+n=\prod_{i=1}^{k}p_i^{c_i},d=\prod_{i=1}^{k}p_i^{b_i},\forall b_i\le c_i
 $$
 当任意 $b_i>1$ 时，$\mu(d)=0$，所以不用考虑这种情况，因此就是从 $k$ 个质因子中选几个进行求和的问题了。
 $$
-S(n)=C_k^0(-1)^0+C_k^1(-1)^1+\cdots+C_k^k(-1)^k
-$$
-由二项式定理可知：
-$$
-(1+x)^k=C_k^0x^0+C_k^1x^1+\cdots+C_k^kx^k
-$$
-所以：
-$$
-S(n)=(1-1)^k=0
+\begin{aligned}
+\sum_{d\mid n}\mu(d)&=\binom{k}{0}(-1)^0+\binom{k}{1}(-1)^1+\cdots+\binom{k}{k}(-1)^k\\
+&=(-1+1)^k\\
+&=0
+\end{aligned}
 $$
 证毕。
 
@@ -58,37 +42,39 @@ $$
 
 莫比乌斯反演是一个反解的过程，第一个版本是枚举 $n$ 的约数 $d$：
 $$
-F(n)=\sum_{d|n}f(d)\\
-\Rightarrow f(n)=\sum_{d|n}\mu(d)F(\frac{n}{d})
+\begin{aligned}
+F(n)&=\sum_{d|n}f(d)\\
+f(n)&=\sum_{d|n}\mu(d)F(\frac{n}{d})
+\end{aligned}
 $$
 直接把定理的结论展开进行证明：
 $$
 \begin{aligned}
-\text{RHS}&=\sum_{d|n}\mu(d)F(\frac{n}{d})\\
-&=\sum_{d|n}\mu(d)\sum_{t|(n/d)}f(t)\\
-&=\sum_{t|n}f(t)\sum_{d|(n/t)}\mu(d)\\
-&=\sum_{t|n}f(t)S(\frac{n}{t})\\
-&=f(n)=\text{LHS}\\
+\sum_{d|n}\mu(d)F(\frac{n}{d})&=\sum_{d|n}\mu(d)\sum_{t|\frac{n}{d}}f(t)\\
+&=\sum_{t|n}f(t)\sum_{d|\frac{n}{t}}\mu(d)\\
+&=\sum_{t|n}f(t)[\frac{n}{t}=1]\\
+&=f(n)
 \end{aligned}
 $$
 交换求和顺序时，观察到 $d=1$ 时 $t$ 可以取遍 $n$ 的所有约数，那当枚举每一个 $t$ 时，与之对应的 $d$ 一定有 $t|(n/d)$，也就是 $d|(n/t)$，这个写成倍数然后代一下就能看出来。
 
 还有另一个版本，枚举 $n$ 的倍数 $d$：
 $$
-F(n)=\sum_{n|d}f(d)\\
-\Rightarrow f(n)=\sum_{n|d}\mu(\frac{d}{n})F(d)
+\begin{aligned}
+F(n)&=\sum_{n\mid d}f(d)\\
+f(n)&=\sum_{n\mid d}\mu(\frac{d}{n})F(d)
+\end{aligned}
 $$
 证明：
 $$
-\text{Let }d=kn,k\in \N^*\\
 \begin{aligned}
-\text{RHS}&=\sum_{n|d}\mu(\frac{d}{n})\sum_{d|t}f(t)\\
-&=\sum_{n|t}f(t)\sum_{k|(t/n)}\mu(k)\\
-&=\sum_{n|t}f(t)S(\frac{t}{n})\\
-&=f(n)=\text{LHS}
+\sum_{n\mid d}\mu(\frac{d}{n})F(d)&=\sum_{n\mid d}\mu(\frac{d}{n})\sum_{d\mid t}f(t)\\
+&=\sum_{n\mid t}f(t)\sum_{\frac{d}{n}\mid \frac{t}{n}}\mu(\frac{d}{n})\\
+&=\sum_{n\mid t}f(t)[\frac{t}{n}=1]\\
+&=f(n)
 \end{aligned}
 $$
-下面是例题。
+其中 $d$ 是 $n$ 的倍数，$t$ 的因数，所以 $d/n$ 是 $t/n$ 的因数。
 
 ## 一个取整公式
 
@@ -96,22 +82,27 @@ $$
 $$
 \lfloor\frac{a}{bc}\rfloor = \lfloor\frac{\lfloor a/b\rfloor }{c}\rfloor
 $$
-证明：
+证明：令 $a=kb+r,k=qc+p$，其中 $r,p$ 分别是带余除法的余数，则有 $r\in[0,b-1],p\in[0,c-1]$：
 $$
-\text{Let }a=kb+r, k=qc+p\\
-\text{Where }r\in[0,b),p\in[0,c)\\
 \begin{aligned}
 a&=kb+r\\
 &=qbc+pb+r\\
 &\le qbc+b(c-1)+b-1\\
-&=qbc+bc-1\\
+&=qbc+bc-1
+\end{aligned}
+$$
+根据定义，$\lfloor a/b\rfloor=k,\lfloor k/c\rfloor=q$，接下来求 $\lfloor a/(bc)\rfloor$ 的范围：
+$$
+\begin{aligned}
+\frac{a}{bc}&=\frac{qbc+pb+r}{bc}\\
+&=q+\frac{pb+r}{bc}\\
+&\ge q\\
 \frac{a}{bc}&\le \frac{bc(q+1)-1}{bc}\\
 &= q+1-\frac{1}{bc}\\
 &\lt q+1\\
-\therefore \text{LHS}&=q=\text{RHS}
 \end{aligned}
 $$
-[原文链接](https://math.stackexchange.com/questions/2557458/is-a-b-c-equal-to-a-bc-for-integer-division)在这里。
+所以 $\lfloor a/(bc)\rfloor = q$，[原文链接](https://math.stackexchange.com/questions/2557458/is-a-b-c-equal-to-a-bc-for-integer-division)在这里。
 
 ## Problem b
 
