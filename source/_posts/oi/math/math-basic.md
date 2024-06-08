@@ -146,10 +146,14 @@ $$
 $$
 \begin{aligned}
 n&=\prod_{i=1}^t p_i^{k_i}\\
-\sigma(n)&=\prod_{i=1}^t (\sum_{j=0}^{k_i} p_i^j)
+\sigma(n)&=\prod_{i=1}^t (\sum_{j=0}^{k_i} p_i^j)=\prod_{i=1}^t\frac{p^{k_i+1}-1}{p-1}
 \end{aligned}
 $$
-根据唯一分解定理，这些能组合成 $n$ 的所有约数。
+根据唯一分解定理，这些能组合成 $n$ 的所有约数。下面对其上界进行估计：
+$$
+\sigma(n)=\sum_{d\mid n}d\le \sum_{i=1}^n\lfloor \frac{n}{i}\rfloor=O(n\ln n)
+$$
+右式比左式多了 $d\not\mid n$ 的项，所以是小于等于的关系。
 
 ## 二项式定理
 
@@ -220,3 +224,24 @@ r_1=r_2+kd=n-kx=n-x\lfloor \frac{n}{x}\rfloor=n\bmod x
 $$
 有 $r_1$ 满足条件，$r_2\le r_1$ 肯定也满足条件。结论得证。
 
+## 自然数 d 次方和
+
+可以证明 $S_d(n)=\sum_{i=1}^{n-1}i^d$ 一定是 $d+1$ 次的多项式。
+
+当 $d=0$ 时显然，设 $d\le k$ 时成立，那么当 $d=k+1$ 时：
+$$
+(j+1)^{d+1}-j^{d+1}=\sum_{i=0}^{d}\binom{d+1}{i}j^i
+$$
+ 两边求和，有：
+$$
+\sum_{j=0}^{n-1}\left((j+1)^{d+1}-j^{d+1}\right)=\sum_{j=0}^{n-1}\sum_{i=0}^d\binom{d+1}{i}j^i
+$$
+即：
+$$
+n^{d+1}=\sum_{i=0}^d\binom{d+1}{i}S_i(n)
+$$
+移项可以得到：
+$$
+(d+1)S_d(n)=n^{d+1}-\sum_{i=0}^{d-1}\binom{d+1}{i}S_i(n)
+$$
+由于 $S_i(n)$ 都是不超过 $d$ 次的多项式，所以 $S_d(n)$ 是一个 $d+1$ 次的多项式。
