@@ -219,7 +219,7 @@ $$
 所以答案为 $S(b,d)-S(b,c-1)-S(a-1,d)+S(a-1,c-1)$，对于求 $S$ 用数论分块可以做到 $O(\sqrt n)$，这样总复杂度为 $O(n\sqrt n)$。
 
 ```cpp
-		#include <bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 50010;
