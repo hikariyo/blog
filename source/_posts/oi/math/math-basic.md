@@ -146,7 +146,7 @@ $$
 $$
 \begin{aligned}
 n&=\prod_{i=1}^t p_i^{k_i}\\
-\sigma(n)&=\prod_{i=1}^t (\sum_{j=0}^{k_i} p_i^j)=\prod_{i=1}^t\frac{p^{k_i+1}-1}{p-1}
+\sigma(n)&=\prod_{i=1}^t (\sum_{j=0}^{k_i} p_i^j)=\prod_{i=1}^t\frac{p_i^{k_i+1}-1}{p_i-1}
 \end{aligned}
 $$
 根据唯一分解定理，这些能组合成 $n$ 的所有约数。下面对其上界进行估计：
