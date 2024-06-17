@@ -25,7 +25,7 @@ $$
 $$
 同乘 $G(x)$ 并移项可以得到：
 $$
-G(x)\equiv G_1(x)\Big(2-F(x)G_1(x)\Big)^2\pmod{x^n}
+G(x)\equiv G_1(x)\Big(2-F(x)G_1(x)\Big)\pmod{x^n}
 $$
 这样做的复杂度是 $T(n)=T(n/2)+O(n\log n)=O(n\log n)$，代码写在最后。
 
