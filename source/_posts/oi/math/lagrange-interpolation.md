@@ -77,7 +77,29 @@ signed main() {
 >
 > 题目链接：[CF622F](https://codeforces.com/problemset/problem/622/F)。
 
-首先令 $f(n)=\sum_{i=1}^n i^k$，可以证明这是一个 $k+1$ 次的多项式。
+首先令 $f(n)=\sum_{i=1}^n i^k$，可以证明这是一个 $k+1$​ 次的多项式，参考本站[数学基础公式及证明](https://blog.hikariyo.net/oi/math/math-basic)。
+
+如果 $k$ 的范围比较小，支持 $O(k^3)$ 的做法，那么这里有一个矩阵的做法。设 $F_i=\begin{bmatrix}i^k\\\vdots\\i^0\\S_{i-1}\end{bmatrix}$，由于 $(i+1)^k=\sum_{j=0}^k\binom{k}{j}i^j$，所以构造这样一个矩阵进行转移：
+$$
+\begin{bmatrix}
+\binom{k}{k}&\cdots&\binom{k}{0}&0\\
+&\ddots&\vdots&\vdots\\
+&&\binom{0}{0}&0
+\\
+1&&&1
+\end{bmatrix}\begin{bmatrix}
+i^k\\
+\vdots\\
+i^0\\
+S_{i-1}
+\end{bmatrix}=\begin{bmatrix}
+(i+1)^k\\
+\vdots\\
+(i+1)^0\\
+S_i
+\end{bmatrix}
+$$
+遗憾的是，本题的 $k$ 达到了 $10^6$，这样是肯定不行的。
 
 下面考虑拉格朗日插值法，并且用 $k+2$ 个点 $(1,f(1)),\dots,(k+1,f(k+1)),(k+2,f(k+2))$ 来插值（即 $x_i=i$），所以 $f(x)$ 的拉格朗日插值式为：
 $$
@@ -86,7 +108,7 @@ f(x)&=\sum_{i=1}^{k+2}f(i)\frac{\prod_{j\ne i}(x-x_j)}{\prod_{j\ne i}(x_i-x_j)}\
 &=\sum_{i=1}^{k+2}f(i)\frac{\prod_{j\ne i}(x-j)}{\prod_{j\ne i}(i-j)}\\
 \end{aligned}
 $$
-对于分母，易知是 $i-(k+2)$ 到 $i-1$ 除了 $0$ 外的连续积，可以预处理；对于分子，可以预处理 $n-j$ 的前后缀积。不记快速幂的时间，这样就可以做到 $O(k)$ 求出 $f(n)$。
+对于分母，易知是 $i-(k+2)$ 到 $i-1$ 除了 $0$ 外的连续积，可以预处理；对于分子，可以预处理 $n-j$ 的前后缀积。不记快速幂的时间，这样就可以做到 $O(k)$ 求出 $f(n)$。由于 $f(n)$ 是多项式，所以可以先 $n\gets n\bmod P$。
 
 ```cpp
 #include <bits/stdc++.h>
@@ -113,6 +135,8 @@ signed main() {
     ifact[m] = qmi(factm, P-2);
     for (int i = m-1; i >= 0; i--) ifact[i] = ifact[i+1] * (i+1) % P;
     pn[0] = sn[m+1] = 1;
+    // 这里 n 如果很大 可能导致溢出
+    n %= P;
     for (int i = 1; i <= m; i++) pn[i] = pn[i-1] * (n - i) % P;
     for (int i = m; i >= 0; i--) sn[i] = sn[i+1] * (n - i) % P;
     int res = 0;
