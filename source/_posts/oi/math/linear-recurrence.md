@@ -29,7 +29,7 @@ G(x)\equiv G_1(x)\Big(2-F(x)G_1(x)\Big)\pmod{x^n}
 $$
 这样做的复杂度是 $T(n)=T(n/2)+O(n\log n)=O(n\log n)$​，代码写在最后。
 
-注意这里我们要求 $F(x)\bmod {x^n}$，$G(x)\bmod {x^{\lceil\frac{n}{2}\rceil}}$，所以递归的过程中 $F(x)$ 最高次是 $x^{n-1}$，$x^{\lceil\frac{n}{2}\rceil-1}$，因此 $G(x)$ 的最高次应当是 $n-1+2\lceil\frac{n}{2}\rceil -2\lt 2n$，所以要把数组留到 $2n$ 的大小才足够我们进行循环卷积。
+注意这里倍增的过程中 $F(x)$ 与 $G_1(x)$ 次数最高次是 $x^{n-1}$ 和 $x^{\lceil\frac{n}{2}\rceil-1}$，因此 $G(x)$ 的最高次应当是 $n-1+2\lceil\frac{n}{2}\rceil -2\lt 2n$，所以要把数组留到 $2n$ 的大小才足够我们进行循环卷积。
 
 ## 多项式取模
 
