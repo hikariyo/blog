@@ -1,6 +1,5 @@
 ---
 date: 2023-06-17 15:01:43
-update: 2024-01-15 03:29:00
 title: 数学 - 快速幂与光速幂
 katex: true
 tags:
@@ -12,25 +11,27 @@ categories:
 
 ## 快速幂
 
-快速幂是在 $O(\log k)$ 的复杂度下计算 $a^k$ 的结果，一般为了防止数太大结果需要对 $p$ 取模。
+快速幂是在 $O(\log k)$ 的复杂度下计算 $a^k\bmod p$ 的结果。
 
-或者可以用二进制的方式理解，将 $k$ 拆成 $\sum_{i=0}^N b_i\cdot2^i(b_i\in\{0, 1\})$ 的形式，然后放到指数上，由指数的运算性质可以知道 $a^k=a^{2^0\cdot b_0}\cdot a^{2^1\cdot b_1}\cdots a^{2^n\cdot{b_n}}$，所以这一串的底数是 $a^1, a^2, a^4, a^8, \cdots, a^{2^n}$，于是可以写成下面的形式：
+可以用二进制的方式理解，令 $k=\sum b_i2^i$，那么 $a^k=a^{\sum b_i2^i}=\prod (a^{2^i})^{b_i}$，所以在每一次循环中处理出 $a\gets a^2$ 即可，相当于处理出 $a_i=a_{i-1}^2=(a^{2^{i-1}})^2=a^{2^i}$，类似于一个滚动数组优化。
 
 ```cpp
-ll fastpow(ll a, ll b, ll p) {
-    ll ans = 1;
-    while (b) {
-        if (k & 1) ans = (ans * a) % p;
-        a = (a*a) % p;
+int qmi(int a, int k, int p) {
+    int res = 1;
+    while (k) {
+        if (k & 1) res = 1ll * res * a % p;
+        a = 1ll * a * a % p;
         k >>= 1;
     }
-    return ans;
+    return res;
 }
 ```
 
 ## 光速幂
 
-当底数不变时，可以做到 $O(\sqrt n)$ 预处理，$O(1)$ 回答的复杂度，原理是分块，预处理出 $a^1,a^2,\dots,a^{B-1}$ 与 $a^B,a^{2B},\dots,a^{n/B}$，然后询问 $a^k$ 将其化为 $a^{k\bmod B+\lfloor k/B\rfloor}$ 即可，所以这样预处理的复杂度是 $O(B+n/B)$，当 $B=\sqrt n$ 时最优。
+当底数不变时，预处理出 $a^1\sim a^{B-1}$ 与 $a^B\sim a^{B\lfloor n/B\rfloor}$，然后询问 $a^k$ 将其化为 $a^{k\bmod B+\lfloor k/B\rfloor B}=a^{k\bmod B}\times (a^B)^{\lfloor k/B\rfloor}$ 即可，所以这样预处理的复杂度是 $O(B+n/B)$，当 $B=\sqrt n$ 时最优为 $O(\sqrt n)$ 的复杂度。
+
+为了方便书写，这里让 $a^i$ 与 $a^{Bi}$ 最高都处理到 $B-1$，这样表达的最大幂次是 $B(B-1)+B-1=B^2-1$，也就若幂次最高为 $n$ 只要让 $B^2-1\ge n$ 即可。
 
 ```cpp
 int el[B], blo[B];
