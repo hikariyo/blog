@@ -27,7 +27,9 @@ $$
 $$
 G(x)\equiv G_1(x)\Big(2-F(x)G_1(x)\Big)\pmod{x^n}
 $$
-这样做的复杂度是 $T(n)=T(n/2)+O(n\log n)=O(n\log n)$，代码写在最后。
+这样做的复杂度是 $T(n)=T(n/2)+O(n\log n)=O(n\log n)$​，代码写在最后。
+
+注意这里我们要求 $F(x)\bmod {x^n}$，$G(x)\bmod {x^{\lceil\frac{n}{2}\rceil}}$，所以递归的过程中 $F(x)$ 最高次是 $x^{n-1}$，$x^{\lceil\frac{n}{2}\rceil-1}$，因此 $G(x)$ 的最高次应当是 $n-1+2\lceil\frac{n}{2}\rceil -2\lt 2n$，所以要把数组留到 $2n$ 的大小才足够我们进行循环卷积。
 
 ## 多项式取模
 
@@ -57,7 +59,7 @@ Q_R(x)\equiv\frac{F_R(x)}{G_R(x)}\pmod{x^{n-m+1}}
 $$
 求出 $Q(x)$ 后反代入原式即可求出 $R(x)=F(x)-G(x)Q(x)$。这样复杂度是 $O(n\log n)$​。
 
-如果 $F(x)$ 真实的次数，即 $F(x)$ 不为 $0$ 的最高次数比 $G(x)$ 小，那么 $F_R(x)$ 的最低 $n-m+1$ 项一定是 $0$，此时 $R(x)=F(x)$，仍然符合我们对 $\bmod$ 运算的认知。
+如果 $F(x)$ 真实的次数，即 $F(x)$ 不为 $0$ 的最高次数比 $G(x)$ 小，那么 $F_R(x)$ 的最低 $n-m+1$ 项一定是 $0$，此时 $Q(x)=0$，$R(x)=F(x)$，仍然符合我们对 $\bmod$ 运算的认知。当然这个可以在代码中直接特判掉来优化。
 
 ## 常系数齐次线性递推
 
@@ -94,17 +96,16 @@ $$
 $$
 a_n=\sum_{i=0}^{k-1} [x^i](x^n\bmod F(x))a_i
 $$
-当然，需要 $a_0\sim a_{k-1}$​ 已知，否则也推不出来定值。多项式的题目最经典的错误是没有清空数组，只能说多注意一下吧，这种错误很难调。有时间我再整理一个更好看一点的板子，现在先用数组凑合一下。
+当然，需要 $a_0\sim a_{k-1}$​ 已知，否则也推不出来定值。多项式的题目最经典的错误是没有清空数组，只能说多注意一下吧，这种错误很难调。这样快速幂加上取模的复杂度是 $O(k\log k\log n)$，如果是矩阵乘法需要 $O(k^3\log n)$​，还是有显著的优化的。
 
-这样快速幂加上取模的复杂度是 $O(k\log k\log n)$，如果是矩阵乘法需要 $O(k^3\log n)$，还是有显著的优化的。
+下面是我整理的一个比较好看一点的封装好的板子。
 
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 #define int long long
-constexpr int N = 650010, P = 998244353;
-int rev[N];
+constexpr int N = 32010, P = 998244353;
 
 constexpr int qmi(int a, int k) {
     int res = 1;
@@ -116,112 +117,141 @@ constexpr int qmi(int a, int k) {
     return res;
 }
 
-void NTT(int A[], int lim, int base) {
-    for (int i = 0; i < lim; i++) if (i < rev[i]) swap(A[i], A[rev[i]]);
+struct Poly {
+    int n, lim, lgn;
+    vector<int> f, rev;
+
+    Poly() = default;
+
+    Poly(const vector<int>& g) {
+        assert(g.size());
+        resize(g.size() - 1);
+        for (int i = 0; i < g.size(); i++) f[i] = g[i];
+    }
+
+    Poly& resize(int n) {
+        this->n = n;
+        lim = 1, lgn = 0;
+        while (lim <= n) lim <<= 1, lgn++;
+        f.resize(lim, 0);
+        rev.resize(lim, 0);
+        for (int i = n+1; i < lim; i++) f[i] = 0;
+        for (int i = 1; i < lim; i++) rev[i] = (rev[i >> 1] >> 1) | ((i & 1) << (lgn - 1));
+        return *this;
+    }
+
+    int& operator[](int x) {
+        return f[x];
+    }
+
+    int operator[](int x) const {
+        return f[x];
+    }
+
+    Poly& ntt(int p) {
+        int base = 3;
+        if (p == -1) base = qmi(3, P - 2);
+
+        for (int i = 0; i < lim; i++) if (i < rev[i]) swap(f[i], f[rev[i]]);
     
-    for (int mid = 1; mid < lim; mid <<= 1) {
-        int len = mid * 2;
-        int g1 = qmi(base, (P-1) / len);
-        for (int i = 0; i < lim; i += len) {
-            int g = 1;
-            for (int j = 0; j < mid; j++, g = g * g1 % P) {
-                int A0 = A[i+j], A1 = g * A[i+j+mid] % P;
-                A[i+j] = (A0 + A1) % P, A[i+j+mid] = (A0 - A1 + P) % P;
+        for (int mid = 1; mid < lim; mid <<= 1) {
+            int len = mid * 2;
+            int g1 = qmi(base, (P - 1) / len);
+            for (int i = 0; i < lim; i += len) {
+                int g = 1;
+                for (int j = 0; j < mid; j++, g = g * g1 % P) {
+                    int A0 = f[i + j], A1 = g * f[i + j + mid] % P;
+                    f[i + j] = (A0 + A1) % P, f[i + j + mid] = (A0 - A1 + P) % P;
+                }
             }
         }
-    }
-}
 
-void mul(int F[], const int G[], int n, int m, int k) {
-    static int A[N];
-    int lim = 1, lgn = 0;
-    for (int i = 0; i <= m; i++) A[i] = G[i];
-    while (lim <= (n+m)) lim <<= 1, lgn++;
-    for (int i = m+1; i < lim; i++) A[i] = F[i] = 0;
-    for (int i = 1; i < lim; i++) rev[i] = (rev[i >> 1] >> 1) | ((i & 1) << (lgn - 1)); 
-    NTT(F, lim, 3), NTT(A, lim, 3);
-    for (int i = 0; i < lim; i++) F[i] = F[i] * A[i] % P;
-    NTT(F, lim, qmi(3, P-2));
-    int invn = qmi(lim, P-2);
-    for (int i = 0; i <= k; i++) F[i] = F[i] * invn % P;
-    for (int i = k+1; i < lim; i++) F[i] = 0;
-}
-
-// Clear numbers exceed n
-void inv(const int F[], int G[], int n) {
-    static int A[N];
-    if (n == 1) return G[0] = qmi(F[0], P-2), void();
-    inv(F, G, (n+1) >> 1);
-    int lim = 1, lgn = 0;
-    while (lim <= (n << 1)) lgn++, lim <<= 1;
-    for (int i = 1; i < lim; i++) rev[i] = (rev[i >> 1] >> 1) | ((i & 1) << (lgn - 1)); 
-    for (int i = ((n+1) >> 1)+1; i < lim; i++) G[i] = 0;
-
-    for (int i = 0; i <= n; i++) A[i] = F[i];
-    for (int i = n+1; i < lim; i++) A[i] = 0;
-
-    NTT(G, lim, 3), NTT(A, lim, 3);
-    for (int i = 0; i < lim; i++) {
-        G[i] = ((2LL - A[i] * G[i]) % P) * G[i] % P;
-        if (G[i] < 0) G[i] += P;
-    }
-    NTT(G, lim, qmi(3, P-2));
-    int invn = qmi(lim, P-2);
-    for (int i = 0; i <= n; i++) G[i] = G[i] * invn % P;
-    for (int i = n+1; i < lim; i++) G[i] = 0;
-}
-
-void div(const int FR[], const int GR[], int Q[], int R[], int n, int m) {
-    static int A[N], IGR[N];
-    inv(GR, IGR, n-m);
-    for (int i = 0; i <= n-m; i++) Q[i] = FR[i];
-    mul(Q, IGR, n-m, n-m, n-m);
-    reverse(Q, Q+n-m+1);
-    for (int i = 0; i < m; i++) A[i] = GR[m-i];
-    mul(A, Q, m-1, m-1, m-1);
-    for (int i = 0; i < m; i++) R[i] = (FR[n-i] - A[i] + P) % P;
-}
-
-int res, n, k, f[N], a[N], A[N];
-
-void fqmi(int A[], int n, const int PR[]) {
-    static int R[N], Q[N], A2[N], R2[N];
-    R[0] = 1;
-    while (n) {
-        if (n & 1) {
-            // R = R * A % P
-            mul(R, A, k-1, k-1, 2*k-2);
-            reverse(R, R+2*k-2+1);
-            div(R, PR, Q, R2, 2*k-2, k);
-            for (int i = 0; i < k; i++) R[i] = R2[i];
-            for (int i = k; i <= 2*k-2; i++) R[i] = 0;
+        if (p == -1) {
+            int invn = qmi(lim, P-2);
+            for (int i = 0; i <= n; i++) f[i] = f[i] * invn % P;
+            for (int i = n+1; i < lim; i++) f[i] = 0;
         }
-        // A = A * A % P
-        for (int i = 0; i < k; i++) A2[i] = A[i];
-        mul(A2, A, k-1, k-1, 2*k-2);
-        reverse(A2, A2+2*k-2+1);
-        div(A2, PR, Q, A, 2*k-2, k);
-        for (int i = k; i <= 2*k-2; i++) A[i] = 0;
-        n >>= 1;
+
+        return *this;
     }
-    for (int i = 0; i < k; i++) A[i] = R[i];
-}
+
+    Poly& reverse() {
+        ::reverse(f.begin(), f.begin() + n + 1);
+        return *this;
+    }
+
+    Poly operator*(const Poly& g) const {
+        Poly F = *this, G = g;
+        int n = F.n + G.n;
+        F.resize(n).ntt(1), G.resize(n).ntt(1);
+        for (int i = 0; i < F.lim; i++) F[i] = F[i] * G[i] % P;
+        F.ntt(-1);
+        return F;
+    }
+
+    Poly operator-(const Poly& g) const {
+        int n = max(this->n, g.n);
+        Poly R;
+        R.resize(n);
+        for (int i = 0; i <= n; i++) R[i] = (P + f[i] - g[i]) % P;
+        return R;
+    }
+
+    Poly inv(int n = -1) const {
+        if (n == -1) n = this->n + 1;
+        if (n == 1) return Poly({qmi(f[0], P - 2)});
+        Poly G = inv((n + 1) / 2);
+        Poly F = *this;
+        F.resize(n * 2);
+        for (int i = n; i <= n * 2; i++) F[i] = 0;
+        F.ntt(1), G.resize(n * 2).ntt(1);
+        for (int i = 0; i < F.lim; i++) {
+            F[i] = (2ll - F[i] * G[i]) % P * G[i] % P;
+            if (F[i] < 0) F[i] += P;
+        }
+        return F.ntt(-1).resize(n - 1);
+    }
+
+    Poly operator/(const Poly& g) const {
+        if (n < g.n) return Poly({0});
+        Poly G = g, Q = *this;
+        int q = n - G.n;
+        Q.reverse().resize(q);
+        return (Q = Q * G.reverse().inv(q + 1)).resize(q).reverse();
+    }
+
+    Poly operator%(const Poly& g) const {
+        if (n < g.n) return *this;
+        Poly Q = *this / g;
+        return (*this - g * Q).resize(g.n - 1);
+    }
+
+    Poly fqmi(int k, const Poly& p) const {
+        Poly res({1}), a = *this;
+        while (k) {
+            if (k & 1) res = res * a % p;
+            a = a * a % p;
+            k >>= 1;
+        }
+        return res;
+    }
+};
+
+
+int n, k, res, a[N];
+Poly A, B;
 
 signed main() {
     ios::sync_with_stdio(false);
     cin.tie(0), cout.tie(0);
     cin >> n >> k;
-    for (int i = 1; i <= k; i++) {
-        cin >> f[i];
-        f[i] = ((-f[i]) % P + P) % P;
-    }
-    f[0] = 1;
-    for (int i = 0; i < k; i++) {
-        cin >> a[i];
-        a[i] = (a[i] % P + P) % P;
-    }
+    B.resize(k);
+    for (int i = 0; i < k; i++) cin >> B[k-i-1], B[k-i-1] = ((-B[k-i-1]) % P + P) % P;
+    B[k] = 1;
+    for (int i = 0; i < k; i++) cin >> a[i], a[i] = (a[i] % P + P) % P;
+    A.resize(1);
     A[1] = 1;
-    fqmi(A, n, f);
+    A = A.fqmi(n, B);
     for (int i = 0; i < k; i++) res = (res + A[i] * a[i]) % P;
     cout << res << endl;
     return 0;
