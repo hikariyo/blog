@@ -118,7 +118,9 @@ constexpr int qmi(int a, int k) {
 }
 
 struct Poly {
-    int n, lim, lgn;
+    // n: deg(F(x))
+    // lim: 2^(ceil(log2(n)))
+    int n, lim;
     vector<int> f, rev;
 
     Poly() = default;
@@ -131,7 +133,8 @@ struct Poly {
 
     Poly& resize(int n) {
         this->n = n;
-        lim = 1, lgn = 0;
+        lim = 1;
+        int lgn = 0;
         while (lim <= n) lim <<= 1, lgn++;
         f.resize(lim, 0);
         rev.resize(lim, 0);
@@ -185,8 +188,7 @@ struct Poly {
         int n = F.n + G.n;
         F.resize(n).ntt(1), G.resize(n).ntt(1);
         for (int i = 0; i < F.lim; i++) F[i] = F[i] * G[i] % P;
-        F.ntt(-1);
-        return F;
+        return F.ntt(-1);
     }
 
     Poly operator-(const Poly& g) const {
@@ -197,6 +199,7 @@ struct Poly {
         return R;
     }
 
+    // 1/F(x) (mod x^n)
     Poly inv(int n = -1) const {
         if (n == -1) n = this->n + 1;
         if (n == 1) return Poly({qmi(f[0], P - 2)});
