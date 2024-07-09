@@ -42,41 +42,25 @@ $$
 
 用模 $p$ 的原根 $g_n^k=g^{(p-1)\frac{k}{n}}$​ 来代替单位根可以避免精度问题。
 
-## 一般化
-
-单位根反演的用处是求一个多项式的在 $k$ 的倍数的次数的系数和，即：
-$$
-\begin{aligned}
-\sum_{i=0}^{\deg F(x)}[k\mid i][x^i]F(x)&=\sum_{i=0}^{\deg F(x)}\left(\frac{1}{k}\sum_{j=0}^{k-1}\omega_k^{ij}\right)[x^i]F(x)\\
-&=\frac{1}{k}\sum_{i=0}^{\deg F(x)}\sum_{j=0}^{k-1}[x^i]F(x)\omega_k^{ji}\\
-&=\frac{1}{k}\sum_{j=0}^{k-1}F(\omega_k^j)
-\end{aligned}
-$$
-
-可以注意到这个式子和 $\deg F(x)$ 无关，这样就把复杂度从 $O(\deg F(x))$ 降到了 $O(k)$，这里假设 $F(x)$ 的值可以快速计算。
-
-当然也可以单纯的把 $[k\mid i]$ 用单位根反演代替，就像莫反代替 $[n=1]$ 那样。
-
 ## [模板] LJJ 学二项式定理
 
-> 给定 $n,s,a_0\sim a_3$ 其中  $n$ 范围 $10^{18}$，其他 $10^8$。求：
+> 给定 $n,s,a_0\sim a_3$ 其中 $n$ 范围 $10^{18}$，其它 $10^8$。求：
 > $$
 > \left(\sum_{i=0}^n\binom{n}{i}s^ia_{i\bmod 4}\right)\bmod 998244353
 > $$
 > 题目链接：[LOJ6485](https://loj.ac/p/6485)。
 
-考虑枚举 $i\bmod 4$ 的值为 $k$，我们希望求 $[4\mid i][x^i]F(x)$ 之和就是答案，那么对于 $F(x)$ 应为：
+考虑枚举 $i\bmod 4=k$，而 $[i\bmod 4=k]=[4\mid (i-k)]$，把同余条件转化为整除条件然后代入单位根反演的式子：
 $$
 \begin{aligned}
-F(x)&=\sum_{i=0}^n\binom{n}{i}s^ix^ia_k\\
-&=a_k(sx+1)^n\\
+\sum_{i=0}^n\binom{n}{i}s^ia_{i\bmod 4}&=\sum_{k=0}^3\sum_{i=0}^n\binom{n}{i}s^ia_k[i\bmod 4=k]\\
+&=\sum_{k=0}^3\sum_{i=0}^n\binom{n}{i}s^ia_k[4\mid (i-k)]\\
+&=\frac{1}{4}\sum_{k=0}^3\sum_{j=0}^3\sum_{i=0}^n\binom{n}{i}s^i\omega_4^{j(i-k)}a_k\\
+&=\frac{1}{4}\sum_{k=0}^3\sum_{j=0}^3\left(a_k\omega_4^{-kj}\sum_{i=0}^n\binom{n}{i}s^i\omega_4^{ji}\right)\\
+&=\frac{1}{4}\sum_{k=0}^3\sum_{j=0}^3a_k\omega_4^{-kj}(s\omega_4^j+1)^n\\
 \end{aligned}
 $$
-当 $k=0$ 时直接操作即可，但是 $k\ne 0$ 时需要对系数进行操作，我们希望新的多项式满足 $[4\mid i][x^i]G(x)=[4\mid (i-k)][x^i]F(x)$，那么显然有 $G(x)=x^{4-k}F(x)$。所以求的答案就是：
-$$
-\sum_{i=0}^{\deg G(x)}[4\mid i][x^i]G(x)=\frac{1}{4}\sum_{j=0}^3G(\omega_4^j)
-$$
-代码如下，单组数据复杂度为 $O(\log n)$，有 $4^2=16$ 的常数：
+单组询问复杂度 $O(\log n)$，有 $16$ 的常数，代码如下：
 
 ```cpp
 #include <bits/stdc++.h>
@@ -96,22 +80,18 @@ int qmi(int a, int k) {
     return res;
 }
 
-int G(int x, int k) {
-    return qmi(x, 4-k) * a[k] % P * qmi((s * x + 1) % P, n) % P;
-}
-
 signed main() {
     cin >> T;
     while (T--) {
         cin >> n >> s >> a[0] >> a[1] >> a[2] >> a[3];
         int res = 0;
         for (int k = 0; k < 4; k++) {
-            int g1 = qmi(3, (P-1)/4);
-            for (int g = 1, j = 0; j < 4; j++, g = g * g1 % P) {
-                res = (res + G(g, k) * I4) % P;
+            int w = qmi(3, (P-1)/4), negwk = qmi(3, P-1-((P-1)/4*k));
+            for (int j = 0, w1 = 1, w2 = 1; j < 4; j++, w1 = w1 * negwk % P, w2 = w2 * w % P) {
+                res = (res + a[k] * w1 % P * qmi((s * w2 + 1) % P, n)) % P;
             }
         }
-        cout << res << endl;
+        cout << res * I4 % P << endl;
     }
     return 0;
 }
