@@ -143,7 +143,7 @@ $$
 $$
 这样就可以做到 $O(k\log n)$ 解决了。对于单位根，由于题目保证 $p\bmod k=1$，因此 $\omega_k^j\equiv g^{\frac{j}{k}(p-1)}\pmod p$，需要找出来一个原根。这里用原根是为了保证当 $k\not\equiv 0\pmod{\varphi(p)}$ 时有 $g^k\not\equiv 1\pmod p$，否则单位根反演的式子就不成立了。
 
-由于最小原根大概是 $O(p^{\frac{1}{4}})$ 的，原根的充要条件是 $\delta_p(g)=\varphi(p)$。对于任意 $g$，由于 $\delta_p(g)$ 保证 $a^0,a^1,\dots,a^{\delta_p(g)-1}$ 互不相同，所以一定有 $\delta_p(g)\mid \varphi(p)$，因此若 $k<\varphi(p),g^k\equiv 1\pmod p$ 一定有 $\delta_p(g)\mid k,k\mid \varphi(p)$，所以只需要验证 $\varphi(p)$ 的所有真因子，即 $\varphi(p)/p_i$ 其中 $p_i\mid \varphi(p),p_i$ 为质数即可。因为如果存在 $k\mid \varphi(p)$ 使得 $g^k\equiv 1\pmod p$，那么 $k$ 的倍数同样满足，所以用 $\varphi(p)/p_i$ 可以枚举到这些所有因数的倍数。
+由于最小原根大概是 $O(p^{\frac{1}{4}})$ 的，原根的充要条件是 $\delta_p(g)=\varphi(p)$。对于任意 $g$，由于 $\delta_p(g)$ 保证 $a^0,a^1,\dots,a^{\delta_p(g)-1}$ 互不相同，所以一定有 $\delta_p(g)\mid \varphi(p)$，直接用 $\varphi(p)$ 的所有因子 $d$ 验证是否有 $g^d\equiv 1\pmod p$ 即可。如果存在 $d\mid \varphi(p)$ 使得 $g^d\equiv 1\pmod p$，那么 $d$ 的倍数一定也满足条件，所以直接枚举 $\varphi(p)/p_i$ 即可，其中 $p_i$ 为 $\varphi(p)$ 的质因子。 
 
 所以质因数分解 $\varphi(p)$，这里的复杂度大概是 $O(\sqrt p)$。然后枚举原根，验证的复杂度不计。找到原根后，复杂度为 $O(k\log n)$。单次复杂度为 $O(\sqrt p+k\log n)$，可以通过。
 
