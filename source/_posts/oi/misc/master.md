@@ -91,7 +91,7 @@ $$
 $$
 \begin{aligned}
 g(n)&=\Theta\left(\sum_{j=0}^{\log_bn}a^j\Big(\frac{n}{b^j}\Big)^{\log_ba}\log^k\frac{n}{b^j}\right)\\
-&=\Theta\left(n^{\log_ba}\sum_{j=0}^{\log_bn}(\log n-j\log b)^k\right)\\
+&=\Theta\left(n^{\log_ba}\sum_{j=0}^{\log_bn}\log^k\frac{n}{b^j}\right)\\
 &=\Theta\left(n^{\log_ba}\log^{k}n\log_bn\right)\\
 &=\Theta\left(n^{\log_ba}\log^{k+1}n\right)\\
 \end{aligned}
