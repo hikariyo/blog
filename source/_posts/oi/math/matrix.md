@@ -1539,3 +1539,124 @@ signed main() {
 }
 ```
 
+## [ABC305G] Banned Substrings
+
+> 给定 $M$ 个长度不超过 $6$ 的仅由 $\texttt{a,b}$ 构成的非空字符串集合 $S=\{s_1,\dots,s_M\}$，求多少个字符串 $T$ 满足：
+>
+> + $|T|=N$
+> + $\forall s_i\in S,s_i\not\subset T$
+>
+> 答案对 $998244353$  取模，其中 $1\le N\le 10^{18},1\le M\le 126$​。
+>
+> 题目链接：[ABC305G](https://atcoder.jp/contests/abc305/tasks/abc305_g)。
+
+首先看作 $01$ 串，设 $dp_{i,s}$ 表示长度为 $i$ 且后缀表示为二进制数 $s$ 的字串数量，其中 $s$ 包含末尾 $5$ 个位置，于是 $s$ 的范围是 $0\sim 2^5-1$ 即 $0\sim 31$。
+
+枚举所有 $s$，并且枚举下一位填 $0/1$，检查是否存在 $s_i\subset (s+0/1)$，这样可以构造出转移矩阵。
+
+对于 $i\le 5$ 时，暴力求解即可。对于 $i>6$​，通过矩阵快速幂解决，下面 $s\to s'$ 表示 $s\to s'$ 的转移是否合法。
+$$
+\begin{bmatrix}
+0\to 0&1\to 0&2\to 0&\cdots&31\to 0\\
+0\to 1&1\to 1&2\to 1&\cdots&31\to 1\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+0\to 31&1\to 31&2\to 31&\cdots&31\to 31
+\end{bmatrix}
+\begin{bmatrix}
+dp_{i,0}\\
+dp_{i,1}\\
+dp_{i,2}\\
+\vdots\\
+dp_{i,31}
+\end{bmatrix}
+=
+\begin{bmatrix}
+dp_{i+1,0}\\
+dp_{i+1,1}\\
+dp_{i+1,2}\\
+\vdots\\
+dp_{i+1,31}
+\end{bmatrix}
+$$
+
+具体地，对于 $s\to s'$ 的转移，需满足 $s,s'$ 均合法，且 $s$ 的后四位是 $s'$ 的前四位，即 $s'=(2s+0/1) \bmod 32$，且对应的 $2s+0/1$ 也应合法。注意到只要 $2s+0/1$ 合法那么 $s,s'$ 都是其子串，也一定合法。
+
+初始状态是 $dp_{5,s}$ 进行矩阵快速幂后对结果向量进行求和就是最终答案。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+const int N = 32, M = 130, P = 998244353;
+int n, m;
+string s[M];
+bool valid[N<<1];
+
+struct Matrix {
+    int dat[N][N];
+    Matrix() { memset(dat, 0, sizeof dat); }
+    Matrix operator*(const Matrix& mat) const {
+        Matrix res;
+        for (int i = 0; i < N; i++)
+            for (int k = 0; k < N; k++)
+                for (int j = 0; j < N; j++)
+                    res.dat[i][j] = (res.dat[i][j] + dat[i][k] * mat.dat[k][j]) % P;
+        return res;
+    }
+    Matrix qmi(int k) const {
+        Matrix a = *this, res;
+        for (int i = 0; i < N; i++) res.dat[i][i] = 1;
+        while (k) {
+            if (k & 1) res = res * a;
+            a = a * a;
+            k >>= 1;
+        }
+        return res;
+    }
+} A;
+
+
+bool chk(int a, const string& b, int sz) {
+    string k;
+    for (int i = 0; i < sz; i++) {
+        k += 'a' + (a >> i & 1);
+    }
+    for (int i = 0; i < sz; i++)
+        if (k.substr(i, b.size()) == b)
+            return false;
+    return true;
+}
+
+bool chk(int a, int sz) {
+    for (int i = 1; i <= m; i++) if (!chk(a, s[i], sz)) return false;
+    return true;
+}
+
+signed main() {
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++) cin >> s[i];
+    for (int i = 0; i < N; i++) {
+        int x = (i & (0b1111)) << 1;
+        A.dat[x][i] = chk(i << 1, 6);
+        A.dat[x | 1][i] = chk(i << 1 | 1, 6);
+    }
+    
+    if (n <= 5) {
+        int cnt = 0;
+        for (int i = 0; i < (1 << n); i++)
+            if (chk(i, n)) cnt++;
+        cout << cnt << endl;
+        return 0;
+    }
+
+    Matrix K = A.qmi(n-5);
+    int res = 0;
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            res = (res + K.dat[i][j] * chk(j, 5)) % P;
+    cout << res << endl;
+    return 0;
+}
+```
+
