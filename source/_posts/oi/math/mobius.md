@@ -54,43 +54,7 @@ $$
 &=0
 \end{aligned}
 $$
-## 莫比乌斯反演
-
-莫比乌斯反演是一个反解的过程，第一个版本是枚举 $n$ 的约数 $d$：
-$$
-\begin{aligned}
-F(n)&=\sum_{d|n}f(d)\\
-f(n)&=\sum_{d|n}\mu(d)F(\frac{n}{d})
-\end{aligned}
-$$
-直接把定理的结论展开进行证明：
-$$
-\begin{aligned}
-\sum_{d|n}\mu(d)F(\frac{n}{d})&=\sum_{d|n}\mu(d)\sum_{t|\frac{n}{d}}f(t)\\
-&=\sum_{t|n}f(t)\sum_{d|\frac{n}{t}}\mu(d)\\
-&=\sum_{t|n}f(t)[\frac{n}{t}=1]\\
-&=f(n)
-\end{aligned}
-$$
-交换求和顺序时，观察到 $d=1$ 时 $t$ 可以取遍 $n$ 的所有约数，那当枚举每一个 $t$ 时，与之对应的 $d$ 一定有 $t|(n/d)$，也就是 $d|(n/t)$，这个写成倍数然后代一下就能看出来。
-
-还有另一个版本，枚举 $n$ 的倍数 $d$：
-$$
-\begin{aligned}
-F(n)&=\sum_{n\mid d}f(d)\\
-f(n)&=\sum_{n\mid d}\mu(\frac{d}{n})F(d)
-\end{aligned}
-$$
-证明：
-$$
-\begin{aligned}
-\sum_{n\mid d}\mu(\frac{d}{n})F(d)&=\sum_{n\mid d}\mu(\frac{d}{n})\sum_{d\mid t}f(t)\\
-&=\sum_{n\mid t}f(t)\sum_{\frac{d}{n}\mid \frac{t}{n}}\mu(\frac{d}{n})\\
-&=\sum_{n\mid t}f(t)[\frac{t}{n}=1]\\
-&=f(n)
-\end{aligned}
-$$
-其中 $d$ 是 $n$ 的倍数，$t$ 的因数，所以 $d/n$ 是 $t/n$ 的因数。
+基本上莫比乌斯反演的题目都是可以用 $[n=1]$ 代换成莫比乌斯函数的求和，然后继续做下去的。
 
 ## 一个取整公式
 
@@ -672,6 +636,152 @@ signed main() {
     for (int i = 1, ni = n; i <= d+1; i++, ni = ni * n % P) {
         res = (res + s[i] * F(i) % P * ni) % P;
     }
+    cout << res << endl;
+    return 0;
+}
+```
+
+## [CF803F] Coprime Subsequences
+
+> 给定长度为 $n$ 的序列 $a_1,\dots,a_n$，问多少个子序列 $T$ 满足 $\gcd(T)=1$，答案对 $10^9+7$ 取模。其中 $1\le n,a_i\le 10^5$。
+>
+> 题目链接：[CF803F](https://codeforces.com/problemset/problem/803/F)。
+
+还是化简式子：
+$$
+\begin{aligned}
+\sum_{T\subset S}[\gcd(T)=1]&=\sum_{T\subset S}\sum_{d\mid \gcd(T)} \mu(d)\\
+&=\sum_{d=1}^{\max(S)}\sum_{d\mid \gcd(T)} \mu(d)\\
+&=\sum_{d=1}^{\max(S)}\mu(d)\left(2^{\sum_{i=1}^n [d\mid a_i]}-1\right)
+\end{aligned}
+$$
+所以枚举 $d$ 再看它的倍数个数就行了，这样开一个桶来储存序列，复杂度是 $O(n\log n)$。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 100010, P = 1e9+7;
+int n, mx, cnt[N], primes[N], mu[N], cntp;
+bitset<N> st;
+
+int qmi(int a, int k) {
+    int res = 1;
+    while (k) {
+        if (k & 1) res = 1ll * res * a % P;
+        a = 1ll * a * a % P;
+        k >>= 1;
+    }
+    return res;
+}
+
+void init(int n) {
+    mu[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        if (!st[i]) primes[cntp++] = i, mu[i] = -1;
+        for (int j = 0; primes[j] <= n / i; j++) {
+            st[i * primes[j]] = 1;
+            if (i % primes[j]) mu[i * primes[j]] = -mu[i];
+            else {
+                mu[i * primes[j]] = 0;
+                break;
+            }
+        }
+    }
+}
+
+int main() {
+    cin >> n;
+    for (int i = 1, a; i <= n; i++) cin >> a, cnt[a]++, mx = max(mx, a);
+    init(mx);
+    int res = 0;
+    for (int d = 1; d <= mx; d++) {
+        int now = 0;
+        for (int nd = d; nd <= mx; nd += d) now += cnt[nd];
+        res = (res + 1ll * mu[d] * (qmi(2, now) - 1)) % P;
+        if (res < 0) res += P;
+    }
+    cout << res << endl;
+    return 0;
+}
+```
+
+进一步地，可以对这个题进行拓展，求满足 $\gcd(T)\times \operatorname{len}(T)=k$ 的字序列个数，其中 $1\le n,a_i,k\le 5\times 10^5$。
+
+思路是首先要枚举最大公约数 $t$，然后化简式子：
+$$
+\sum_{t\mid k}\sum_{T\subset S,\operatorname{len}(T)=k/t}[\gcd(T)=t]
+$$
+对于每一个 $t$，找到所有 $x\in S$ 使得 $t\mid x$，这一步可以通过枚举倍数的方式做到 $O(n\log n)$，接下来假设 $S'$ 为满足上述条件的 $x$ 且 $x\gets \frac{x}{t}$，那么：
+$$
+\begin{aligned}
+\sum_{t\mid k}\sum_{T\subset S',|T|=k/t}[\gcd(T)=1]&=\sum_{t\mid k}\sum_{T\subset S,|T|=k/t}\sum_{d\mid \gcd(T)}\mu(d)\\
+&=\sum_{t\mid k}\sum_{d=1}^{\max(S')}\mu(d)\binom{\sum_{i=1}^{n'}[d\mid a'_i]}{k/t}\\
+&=\sum_{t\mid k}\sum_{d=1}^{\lfloor \max(S)/t\rfloor}\mu(d)\binom{\sum_{i=1}^n[dt\mid a_i]}{k/t}
+\end{aligned}
+$$
+设 $f(x)=\sum_{i=1}^n [x\mid a_i]$，这是可以 $O(n\log n)$ 预处理的；对于最终要计算的式子，这最坏是 $O(\sum_{t=1}^n \frac{n}{t})=O(n\log n)$ 的。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+const int N = 600010, P = 1e9+7;
+int n, mx, k, cnt[N], primes[N], mu[N], fact[N], infact[N], f[N], cntp;
+bitset<N> st;
+
+int qmi(int a, int k) {
+    int res = 1;
+    while (k) {
+        if (k & 1) res = 1ll * res * a % P;
+        a = 1ll * a * a % P;
+        k >>= 1;
+    }
+    return res;
+}
+
+void init(int n) {
+    mu[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        if (!st[i]) primes[cntp++] = i, mu[i] = -1;
+        for (int j = 0; primes[j] <= n / i; j++) {
+            st[i * primes[j]] = 1;
+            if (i % primes[j]) mu[i * primes[j]] = -mu[i];
+            else {
+                mu[i * primes[j]] = 0;
+                break;
+            }
+        }
+    }
+}
+
+int C(int n, int m) {
+    if (n < m) return 0;
+    return 1ll * fact[n] * infact[m] % P * infact[n-m] % P;
+}
+
+signed main() {
+    cin >> n >> k;
+    fact[0] = infact[0] = 1;
+    for (int i = 1; i <= n; i++) fact[i] = 1ll * fact[i-1] * i % P;
+    infact[n] = qmi(fact[n], P-2);
+    for (int i = n-1; i; i--) infact[i] = 1ll * (i+1) * infact[i+1] % P;
+
+    for (int i = 1, a; i <= n; i++) cin >> a, cnt[a]++, mx = max(mx, a);
+    init(mx);
+    for (int i = 1; i <= mx; i++)
+        for (int j = i; j <= mx; j += i)
+            f[i] += cnt[j];
+    
+    int res = 0;
+    for (int t = 1; t <= k; t++) {
+        if (k % t) continue;
+        for (int d = 1; d <= mx / t; d++) {
+            res = (res + 1ll * mu[d] * C(f[d * t], k / t)) % P;
+        }
+    }
+    if (res < 0) res += P;
     cout << res << endl;
     return 0;
 }
