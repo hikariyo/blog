@@ -28,7 +28,7 @@ $$
 
 单位根是 $x^n=1$ 在复数域上的所有解，记做：
 $$
-\omega_n^k = \exp(\frac{2k\pi i}{n})=\cos \frac{2k\pi}{n}+i\sin \frac{2k\pi}{n}
+\omega_n^k = \exp(2\pi i\frac{k}{n})=\cos \frac{2k\pi}{n}+i\sin \frac{2k\pi}{n}
 $$
 根据指数函数和三角函数的性质，我们可以轻松推出下面的性质，下面 $p,q,k,m,n$ 均为实数，其中 $m,n\ne 0$，本文就不讨论复数时是否成立了（应当也是成立的）。
 $$
