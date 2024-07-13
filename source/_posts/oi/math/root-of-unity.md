@@ -40,9 +40,9 @@ $$
 
 也就是 $[x^k]F(x)$ 的值是以 $F(\omega_n^i)$ 为 $[x^i]G(x)$ 求 $G(\omega_n^{-k})$，而 DFT 的过程就是在求一个多项式在 $\omega_n^k$ 处的值，因此 IDFT 可以复用 DFT 的代码，只需要把 $\omega_n^k$ 换成 $\omega_n^{-k}$ 最后再乘一下 $\frac{1}{n}$ 即可。
 
-用模 $p$ 的原根 $g_n^k=g^{(p-1)\frac{k}{n}}$​ 来代替单位根可以避免精度问题。
+用模 $p$ 的原根 $g_n^k=g^{(p-1)\frac{k}{n}}$​​ 来代替单位根可以避免精度问题。
 
-## [模板] LJJ 学二项式定理
+## LJJ 学二项式定理
 
 > 给定 $n,s,a_0\sim a_3$ 其中 $n$ 范围 $10^{18}$，其它 $10^8$。求：
 > $$
@@ -93,6 +93,92 @@ signed main() {
         }
         cout << res * I4 % P << endl;
     }
+    return 0;
+}
+```
+
+## [洛谷月赛] 小猪佩奇学数学
+
+> 给定 $n,p,k$ 满足 $1\le n,p\lt 998244353,k\in\{2^w|0\le w\le 20\}$ 问：
+> $$
+> \sum_{i=0}^n\binom{n}{i}p^i\lfloor\frac{i}{k}\rfloor\bmod 998244353
+> $$
+> 题目链接：[P5591](https://www.luogu.com.cn/problem/P5591)。
+
+根据模的定义，可以将原式子拆成两个部分：
+$$
+\begin{aligned}
+\sum_{i=0}^n\binom{n}{i}p^i\lfloor\frac{i}{k}\rfloor&=\frac{1}{k}\sum_{i=0}^n\binom{n}{i}ip^i-\frac{1}{k}\sum_{i=0}^n\binom{n}{i}p^i(i\bmod k)
+\end{aligned}
+$$
+对于左半部分，根据组合数的性质有：
+$$
+\frac{1}{k}\sum_{i=0}^n\binom{n}{i}ip^i=\frac{np}{k}\sum_{i=1}^n\binom{n-1}{i-1}p^{i-1}=\frac{np(p+1)^{n-1}}{k}
+$$
+对于右半部分，同样是枚举 $i\bmod k$ 的值：
+$$
+\begin{aligned}
+\frac{1}{k}\sum_{r=0}^{k-1}\sum_{i=0}^n\binom{n}{i}p^ir[i\bmod k=r]&=\frac{1}{k}\sum_{r=0}^{k-1}\sum_{i=0}^n\binom{n}{i}p^ir[k\mid(i-r)]\\
+&=\frac{1}{k^2}\sum_{r=0}^{k-1}\sum_{i=0}^n\binom{n}{i}p^ir\sum_{j=0}^{k-1}\omega_k^{(i-r)j}\\
+&=\frac{1}{k^2}\sum_{r=0}^{k-1}\sum_{j=0}^{k-1}\sum_{i=0}^n\binom{n}{i}p^ir\omega_k^{ij}\omega_{k}^{-rj}\\
+&=\frac{1}{k^2}\sum_{r=0}^{k-1}\sum_{j=0}^{k-1}r\omega_{k}^{-rj}\sum_{i=0}^n\binom{n}{i}p^i\omega_k^{ij}\\
+&=\frac{1}{k^2}\sum_{j=0}^{k-1}(p\omega_k^j+1)^n\sum_{r=0}^{k-1}r\omega_{k}^{-rj}\\
+\end{aligned}
+$$
+对于后边这个等差乘等比，这里推一个结论，错位相减法。
+$$
+\begin{aligned}
+S_n&=\sum_{i=1}^{n-1}iq^i\\
+qS_n&=\sum_{i=2}^{n}(i-1)q^{i}\\
+(1-q)S_n&=-(n-1)q^n+\sum_{i=1}^{n-1}q^i\\
+S_n&=\frac{(1-n)q^n}{1-q}+\frac{q(1-q^{n-1})}{(1-q)^2}\\
+&=\frac{q-q^n+(1-q)(1-n)q^n}{(1-q)^2}\\
+&=\frac{q-nq^n+(n-1)q^{n+1}}{(1-q)^2}
+\end{aligned}
+$$
+当然 $q=1$ 时原式等于 $\frac{n(n-1)}{2}$，这个只能特判。带入得到：
+$$
+\begin{aligned}
+\frac{1}{k^2}\sum_{j=0}^{k-1}(p\omega_k^j+1)^n\sum_{r=0}^{k-1}r\omega_{k}^{-rj}&=\frac{1}{k^2}\sum_{j=0}^{k-1}(p\omega_k^j+1)^nS_{k,\omega_k^{-j}}
+\end{aligned}
+$$
+懒得根据单位根性质化简 $S_k$ 了，反正能 $O(1)$ 求出来，代码：
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+const int P = 998244353, I2 = 499122177;
+int n, p, k;
+
+int qmi(int a, int k = P-2) {
+    int res = 1;
+    while (k) {
+        if (k & 1) res = res * a % P;
+        a = a * a % P;
+        k >>= 1;
+    }
+    return res;
+}
+
+int S(int n, int q) {
+    if (q == 1) return n * (n-1) % P * I2 % P;
+    int res = (q - n * qmi(q, n) + (n-1) * qmi(q, n+1)) % P;
+    res = res * qmi((1-q) * (1-q) % P) % P;
+    return (res + P) % P;
+}
+
+signed main() {
+    cin >> n >> p >> k;
+    int r1 = n * p % P * qmi(p+1, n-1) % P * qmi(k) % P;
+    int r2 = 0;
+    int wk = qmi(3, (P-1) / k), wkn = qmi(wk);
+    for (int j = 0, wj = 1, wjn = 1; j < k; j++, wj = wj * wk % P, wjn = wjn * wkn % P) {
+        r2 = (r2 + qmi((p * wj + 1) % P, n) * S(k, wjn)) % P;
+    }
+    int ans = ((r1 - r2 * qmi(k * k % P)) % P + P) % P;
+    cout << ans << endl;
     return 0;
 }
 ```
@@ -177,7 +263,7 @@ signed main() {
         fac.clear();
         cin >> n >> k >> p;
         int phi = p-1;
-        for (int i = 2; i*i < phi; i++) {
+        for (int i = 2; i*i <= phi; i++) {
             if (phi % i) continue;
             while (phi % i == 0) phi /= i;
             fac.eb(i);
