@@ -89,11 +89,11 @@ $$
 $$
 \sum_{i=1}^n \frac{1}{p_i}=O(\ln(\ln n))
 $$
-根据唯一分解定理，可以得到，当 $n\to +\infin$ 时：
+根据唯一分解定理，当 $n\to+\infin$ 可以得到：
 $$
-\prod_{i=1}^n(1+\frac{1}{p_i}+\frac{1}{p_i^2}+\cdots)=\prod_{i=1}^n\frac{1}{1-p_i^{-1}}=\sum_{i=1}^n\frac{1}{i}
+\prod_{i=1}^n\left(\sum_{j=0}^{+\infin}\frac{1}{p_i^j}\right)=\prod_{i=1}^n\frac{1}{1-p_i^{-1}}=\sum_{i=1}^n\frac{1}{i}
 $$
-左边里面是个等比级数，公比为 $1/p<1$，所以它是收敛的。
+左边里面是个等比级数，公比为 $\frac{1}{p_i}<1$，所以它是收敛的。
 
 两边取对数，可以得到：
 $$
