@@ -1,11 +1,11 @@
 ---
 date: 2023-08-10 16:42:00
-title: 数据结构 - AC 自动机
+title: 字符串 - AC 自动机
 katex: true
 tags:
 - Algo
 - C++
-- DS
+- String
 categories:
 - OI
 ---
@@ -395,11 +395,5 @@ int main() {
 }
 ```
 
-$$
-|x|=\begin{cases}
-x& x>0\\
-0& x=0\\
--x& x<0
-\end{cases}
-$$
+
 

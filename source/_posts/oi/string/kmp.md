@@ -1,10 +1,11 @@
 ---
 date: 2023-06-14 16:24:06
-title: 杂项 - KMP
+title: 字符串 - KMP
 katex: true
 tags:
 - Algo
 - C++
+- String
 categories:
 - OI
 description: KMP 算法通过将相同前缀后缀的长度储存到 next 数组中来避免匹配时重复操作，将平方复杂度的的暴力算法优化到了线性复杂度。
