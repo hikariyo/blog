@@ -300,20 +300,23 @@ $$
 
 如果 $F(x)$ 真实的次数，即 $F(x)$ 不为 $0$ 的最高次数比 $G(x)$ 小，那么 $F_R(x)$ 的最低 $n-m+1$ 项一定是 $0$，此时 $Q(x)=0$，$R(x)=F(x)$，仍然符合我们对 $\bmod$ 运算的认知。当然这个可以在代码中直接特判掉来优化。
 
+## 多项式对数函数
+
+对于 $n$ 次多项式 $F(x)$，定义 $\ln F(x)$ 为 $\int\frac{F'(x)}{F(x)}\mathrm{d}x+C$，其中 $C$ 一般是 $0$，具体情况具体分析。
+
+那么也就是需要实现一个多项式的求导和积分，我们知道，对于 $F'(x)$ 和 $F(x)$ 间的系数关系：
+$$
+[x^i]F'(x)=[x^{i+1}]F(x)\times (i+1)
+$$
+同样，知道 $F(x)$ 与 $\int F(x)\mathrm{d}x$ 间的系数关系：
+$$
+[x^i]\int F(x)\mathrm{d}x=[x^{i-1}]F(x)\times \frac{1}{i}
+$$
+所以就是套用一下这些即可。
+
+
+
 ```cpp
-#define int long long
-constexpr int N = 32010, P = 998244353;
-
-constexpr int qmi(int a, int k) {
-    int res = 1;
-    while (k) {
-        if (k & 1) res = res * a % P;
-        a = a * a % P;
-        k >>= 1;
-    }
-    return res;
-}
-
 struct Poly {
     // n: deg(F(x))
     // lim: 2^(ceil(log2(n)))
@@ -424,6 +427,24 @@ struct Poly {
         if (n < g.n) return *this;
         Poly Q = *this / g;
         return (*this - g * Q).resize(g.n - 1);
+    }
+
+    Poly diff() const {
+        Poly df = *this;
+        for (int i = 0; i < n; i++) df[i] = df[i+1] * (i+1) % P;
+        return df;
+    }
+
+    Poly intergal(int C) const {
+        Poly F = *this;
+        F.resize(n+1);
+        for (int i = n+1; i; i--) F[i] = F[i-1] * qmi(i, P-2) % P;
+        F[0] = C;
+        return F;
+    }
+
+    Poly ln(int C) const {
+        return (diff() * inv()).intergal(C);
     }
 
     Poly fqmi(int k, const Poly& p) const {
