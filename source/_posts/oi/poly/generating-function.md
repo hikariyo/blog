@@ -310,17 +310,17 @@ print(res[0][0])
 >
 > 题目链接：[P4841](https://www.luogu.com.cn/problem/P4841)。
 
-设 $g_n$ 表示 $n$ 个点的无向图数量，那么 $g_n=2^{\binom{n}{2}}$，可以枚举 $1$ 的连通块大小为 $x$，有：
+设 $g_n$ 表示 $n$ 个点的无向图数量，那么 $g_n=2^{\binom{n}{2}}$，可以枚举 $1$ 的连通块大小为 $i$，有：
 $$
-g_n=\sum_{x=1}^n\binom{n-1}{x-1}f_xg_{n-x}
+g_n=\sum_{i=1}^n\binom{n-1}{i-1}f_ig_{n-i}
 $$
 展开，并且两边除以 $(n-1)!$ 有：
 $$
-\frac{2^{\binom{n}{2}}}{(n-1)!}=\sum_{x=1}^n\frac{f_x}{(x-1)!} \frac{2^{\binom{n-x}{2}}}{(n-x)!}
+\frac{2^{\binom{n}{2}}}{(n-1)!}=\sum_{i=1}^n\frac{f_x}{(i-1)!} \frac{2^{\binom{n-x}{2}}}{(n-x)!}
 $$
 定义 $f_i,g_i=2^{\binom{i}{2}}$ 的 EGF 为 $F(x),G(x)$，那么有：
 $$
-[x^n]G'(x)=\sum_{i=1}^n [x^i] F'(x)[x^{n-i}]G(x)
+[x^{n-1}]G'(x)=\sum_{i=1}^n [x^{i-1}] F'(x)[x^{n-i}]G(x)
 $$
 即：
 $$
@@ -363,6 +363,142 @@ signed main() {
     G.resize(n);
     for (int i = 0; i <= n; i++) G[i] = qmi(2, i * (i-1) / 2) * infact[i] % P;
     cout << G.ln(0)[n] * fact[n] % P << endl;
+    return 0;
+}
+```
+
+## 付公主的背包
+
+> 有 $n$ 件商品，每件体积 $v_i$，都有无限件，给定 $m$ 问对于 $s=1\sim m$ 恰好装 $s$ 体积的方案数，答案对 $998244353$ 取模。其中 $1\le n,m\le 10^5,1\le v_i\le m$。
+>
+> 题目链接：[P4389](https://www.luogu.com.cn/problem/P4389)。
+
+对于每个物品的 OGF 显然为 $F_i(x)=\sum_{j\ge 0} x^{v_ij}=\frac{1}{1-x^{v_i}}$，答案的 OGF 是 $F(x)=\prod_{i=1}^n F_i(x)$，但显然不能进行 $n$ 次 $O(n\log n)$​ 的多项式乘法。
+
+前置知识，$\ln(1+x)$ 的泰勒展开：
+$$
+\begin{aligned}
+\ln(1+x)&=\sum_{i=1}^{+\infin}\frac{(-1)^{i+1}}{i} x^i\\
+\ln(1-x)&=\sum_{i=1}^{+\infin}-\frac{1}{i}x^i
+\end{aligned}
+$$
+因此对其进行恒等变换：
+$$
+\begin{aligned}
+F(x)&=\exp(\ln F(x))\\
+&=\exp\left(\sum_{i=1}^n \ln F_i(x)\right)\\
+&=\exp\left(\sum_{i=1}^n \ln \frac{1}{1-x^{v_i}}\right)\\
+&=\exp\left(\sum_{i=1}^n \sum_{j\ge1} \frac{x^{v_ij}}{j}\right)\\
+\end{aligned}
+$$
+因为最后要求的是 $[x^s]F(x)$ 其中 $s=1\sim m$，所以对于内部只需要枚举每个 $v_i$ 的值进行贡献，复杂度是 $O(\sum \frac{m}{i})=O(m\log m)$，然后进行 $\exp$ 复杂度也应当是 $O(m\log m)$。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+const int P = 998244353;
+
+constexpr int qmi(int a, int k) {
+    int res = 1;
+    while (k) {
+        if (k & 1) res = res * a % P;
+        a = a * a % P;
+        k >>= 1;
+    }
+    return res;
+}
+
+struct Poly { /* 省略 */ };
+
+const int N = 100010;
+int n, m, cnt[N];
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0), cout.tie(0);
+    cin >> n >> m;
+    Poly f;
+    f.resize(m);
+    for (int i = 1, v; i <= n; i++) cin >> v, cnt[v]++;
+    for (int v = 1; v <= m; v++) {
+        for (int j = v; j <= m; j += v) {
+            f[j] = (f[j] + cnt[v] * qmi(j / v, P-2)) % P;
+        }
+    }
+    f = f.exp();
+    for (int i = 1; i <= m; i++) cout << f[i] << '\n';
+    return 0;
+}
+```
+
+## [CF438E] The Child and Binary Tree
+
+> 给定长度为 $n$ 的互异正整数序列 $c_i$，二叉树有点权，一个树的权值为所有点权之和，所有点权都等于某个 $c_i$，对于 $1\le s\le m$，统计权值为 $s$ 的二叉树个数，答案对 $998244353$ 取模，其中 $1\le n,m,c_i\le 10^5$​。
+>
+> 题目链接：[CF438E](https://codeforces.com/problemset/problem/438/E)。
+
+计数 DP，设 $f_n$ 表示 $n$ 的树的个数，那么枚举根的权值为 $i$，有：
+$$
+f_n=\begin{cases}
+1\quad n=0\\
+\sum_{i=1}^n [i\in C] \sum_{j=0}^{n-i} f_jf_{n-i-j}
+\end{cases}
+$$
+设 $g_i=[i\in C]$，那么可以看出这是一个卷积的形式，设生成函数分别为 $F(x),G(x)$，那么有：
+$$
+F(x)=G(x)F^2(x)+1
+$$
+这里 $+1$ 是因为 $G(x)$ 常数项为 $0$，这个二元一次方程可以解出：
+$$
+F(x)=\frac{1\pm \sqrt{1-4G(x)}}{2G(x)}=\frac{2}{1\mp \sqrt{1-4G(x)}}
+$$
+由于 $G(0)=0$，所以只能取 $+$，因为如果取 $-$ 这个式子无法在 $0$ 处泰勒展开，也就不能写成 $\sum c_ix^i$ 的形式，那么 $F(x)=\frac{2}{1+\sqrt{1-4G(x)}}$。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+const int P = 998244353;
+
+constexpr int qmi(int a, int k) {
+    int res = 1;
+    while (k) {
+        if (k & 1) res = res * a % P;
+        a = a * a % P;
+        k >>= 1;
+    }
+    return res;
+}
+
+struct Poly { /* 省略 */ };
+
+const int N = 100010;
+int c[N];
+Poly G;
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0), cout.tie(0);
+    int n, m;
+    cin >> n >> m;
+
+    G.resize(m);
+    for (int i = 1; i <= n; i++) {
+        cin >> c[i];
+        if (c[i] <= m) G[c[i]] = 1;
+    }
+
+    for (int i = 0; i <= m; i++) G[i] = G[i] * (P - 4) % P;
+    G[0]++;
+    G = G.sqrt();
+    G[0]++;
+    G = G.inv();
+    for (int i = 0; i <= m; i++) G[i] = G[i] * 2 % P;
+    for (int i = 1; i <= m; i++) cout << G[i] << '\n';
+
     return 0;
 }
 ```
