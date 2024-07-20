@@ -2,7 +2,7 @@
 date: 2024-07-16 17:48:00
 title: 多项式 - 初等函数
 katex: true
-description: 基于 FFT 可以 O(nlog(n)) 的计算多项式卷积，可以推出一系列多项式的初等函数，本文记录一些不全面初等函数及模板，包括多项式乘法、乘法逆、除法、取模。
+description: 基于 FFT 可以 O(nlog(n)) 的计算多项式卷积，可以推出一系列多项式的初等函数，本文记录一些不全面初等函数及模板，包括多项式乘法、乘法逆、除法、开根、取模、对数、指数。
 tags:
 - Algo
 - C++
@@ -63,8 +63,6 @@ g_{mn}^{mk}&\equiv g_n^k\\
 \end{aligned}
 $$
 对于倒数第二条：由费马小定理可以知道 $g^{p-1}\equiv 1$，那么 $(g^{\frac{p-1}{2}})^2\equiv 1$，而 $g^0\sim g^{\varphi(p)-1}$ 两两不同余，所以 $g^{\frac{p-1}{2}}\not\equiv g^0$，因此只能有 $g^{\frac{p-1}{2}}\equiv -1$。
-
-## 
 
 ### FFT
 
@@ -302,7 +300,7 @@ $$
 
 ## 多项式对数函数
 
-对于 $n$ 次多项式 $F(x)$，定义 $\ln F(x)$ 为 $\int\frac{F'(x)}{F(x)}\mathrm{d}x+C$，其中 $C$ 一般是 $0$，具体情况具体分析。
+对于 $n$ 次多项式 $F(x)$，定义 $\ln F(x)=\int\frac{F'(x)}{F(x)}\mathrm{d}x+C$，其中 $C$ 一般是 $0$，具体情况具体分析。
 
 那么也就是需要实现一个多项式的求导和积分，我们知道，对于 $F'(x)$ 和 $F(x)$ 间的系数关系：
 $$
@@ -314,9 +312,118 @@ $$
 $$
 所以就是套用一下这些即可。
 
+## 多项式指数函数
 
+对于 $n$ 次多项式 $F(x)$，定义 $G(x)=\exp(F(x))$ 满足 $G'(x)=F'(x)G(x)$，一般使用牛顿迭代法，假设求出 $H$ 满足：
+$$
+H(G_0(x))\equiv 0\pmod{x^{\lceil\frac{n}{2}\rceil}}
+$$
+目标是求出：
+$$
+H(G(x))\equiv 0\pmod{x^n}
+$$
+
+将 $H(G(x))$ 在 $G_0(x)$ 处进行泰勒展开：
+
+$$
+H(G(x)) = \sum_{i=0}^{+\infin}\frac{H^{(i)}(G_0(x))}{i!}(G(x)-G_0(x))^i
+$$
+
+因为 $G(x)$ 和 $G_0(x)$ 在 $0\sim \lceil\frac{n}{2}\rceil-1$ 次数的系数都相同，所以 $G(x)-G_0(x)$ 的最低次数为 $\lceil\frac{n}{2}\rceil$，因此在 $\bmod x^n$ 的意义下可以省略 $i\ge 2$ 的所有项，即：
+
+$$
+H(G(x))\equiv H(G_0(x)) + H'(G_0(x))(G(x)-G_0(x))\pmod{x^n}
+$$
+
+由于 $H(G(x))\equiv 0\pmod{x^n}$，所以得到：
+
+$$
+G(x)\equiv G_0(x)-\frac{H(G_0(x))}{H'(G_0(x))}\pmod{x^n}
+$$
+
+这里要求 $G(x)=\exp(F(x))$，那么有 $\ln G(x) - F(x)=0$，所以 $H(G(x))=\ln G(x)-F(x)$，两边对 $G(x)$ 求导得到：
+
+$$
+H'(G(x))=\frac{1}{G(x)}
+$$
+
+注意，这里的理解方法是我们要求出这样一个 $G(x)$ 满足 $\ln G(x)-F(x)\equiv 0\pmod{x^n}$，那么这里的 $G(x)$ 实际上是自变量，和 $F(x)$ 不存在任何函数关系，因此将其看作常数，所以：
+$$
+\begin{aligned}
+G(x)&\equiv G_0(x)-\frac{\ln G_0(x)-F(x)}{\frac{1}{G_0(x)}}\\
+&\equiv G_0(x)(1-\ln G_0(x)+F(x))
+\pmod {x^n}
+\end{aligned}
+$$
+
+套模板即可，复杂度 $T(n)=T(\frac{n}{2})+O(n\log n)=O(n\log n)$，注意这里 $\ln G_0(x)$ 是在 $\bmod x^n$​ 的意义下的。
+
+## 多项式开根
+
+同样适用牛顿迭代法，只不过换成 $H(x)=G^2(x)-F(x)$，那么：
+$$
+G(x)=\frac{1}{2}\left(G_0(x)+\frac{F(x)}{G_0(x)}\right)\pmod{x^n}
+$$
+对于 $[x^0]F(x)$，如果不是特殊值，需要使用二次剩余算法。
+
+## 模板
 
 ```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+const int P = 998244353;
+
+constexpr int qmi(int a, int k) {
+    int res = 1;
+    while (k) {
+        if (k & 1) res = res * a % P;
+        a = a * a % P;
+        k >>= 1;
+    }
+    return res;
+}
+
+namespace cipolla {
+    int i2;
+
+    struct Complex {
+        int real, imag;
+        Complex operator*(const Complex& c) const {
+            return {(real * c.real + imag * c.imag % P * i2) % P, (real * c.imag + imag * c.real) % P};
+        }
+    };
+
+    mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+
+    Complex qmi(Complex a, int k) {
+        Complex res = {1, 0};
+        while (k) {
+            if (k & 1) res = res * a;
+            a = a * a;
+            k >>= 1;
+        }
+        return res;
+    }
+
+    int solve(int n) {
+        if (!n) return 0;
+        if (::qmi(n, (P-1) / 2) != 1) return -1;
+
+        int a;
+        do {
+            a = uniform_int_distribution<>(1, P-1)(rng);
+            i2 = (a * a - n) % P;
+            if (i2 < 0) i2 += P;
+        } while (::qmi(i2, (P-1) / 2) == 1);
+
+        int ans = qmi(Complex{a, 1}, (P+1) / 2).real;
+        if (ans < P - ans) return ans;
+        return P - ans;
+    }
+}
+
 struct Poly {
     // n: deg(F(x))
     // lim: 2^(ceil(log2(n)))
@@ -399,7 +506,14 @@ struct Poly {
         return R;
     }
 
-    // 1/F(x) (mod x^n)
+    Poly operator+(const Poly& g) const {
+        int n = max(this->n, g.n);
+        Poly R;
+        R.resize(n);
+        for (int i = 0; i <= n; i++) R[i] = (f[i] + g[i]) % P;
+        return R;
+    }
+
     Poly inv(int n = -1) const {
         if (n == -1) n = this->n + 1;
         if (n == 1) return Poly({qmi(f[0], P - 2)});
@@ -437,14 +551,33 @@ struct Poly {
 
     Poly intergal(int C) const {
         Poly F = *this;
-        F.resize(n+1);
-        for (int i = n+1; i; i--) F[i] = F[i-1] * qmi(i, P-2) % P;
+        for (int i = n; i; i--) F[i] = F[i-1] * qmi(i, P-2) % P;
         F[0] = C;
         return F;
     }
 
     Poly ln(int C) const {
-        return (diff() * inv()).intergal(C);
+        return (diff() * inv()).resize(n).intergal(C);
+    }
+
+    Poly exp(int n = -1) const {
+        if (n == -1) n = this->n + 1;
+        if (n == 1) return Poly({1});
+        Poly G0 = exp((n + 1) / 2).resize(n-1);
+        Poly F = *this;
+        F.resize(n-1)[0]++;
+        return (G0 * (F - G0.ln(0))).resize(n-1);
+    }
+
+    Poly sqrt(int n = -1) const {
+        if (n == -1) n = this->n + 1;
+        if (n == 1) return Poly({1});
+        // if (n == 1) return Poly({cipolla::solve(f[0])});
+        Poly G0 = sqrt((n + 1) / 2).resize(n-1);
+        Poly F = *this;
+        Poly R = ((F * G0.inv()).resize(n-1) + G0);
+        for (int i = 0; i < n; i++) R[i] = R[i] * qmi(2, P-2) % P;
+        return R;
     }
 
     Poly fqmi(int k, const Poly& p) const {
