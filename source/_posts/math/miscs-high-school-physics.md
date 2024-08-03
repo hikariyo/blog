@@ -1,6 +1,5 @@
 ---
 date: 2023-07-08 00:39:00
-update: 2023-07-13 22:49:22
 title: 中学物理的一些边角料
 katex: true
 tags:
@@ -88,7 +87,7 @@ $$
 $$
 \Delta S=\pi(r+\Delta r)^2-\pi r^2=2\pi r\Delta r+\pi (\Delta r)^2
 $$
-把 $(\mathrm{d}r)^2$ 忽略不计，也可以把这个圆环拉直看成长为 $2\pi r$，宽为 $\mathrm{d}r$ 的矩形。于是这个圆环对 $P$ 产生的场强为：
+把 $(\Delta r)^2$ 忽略不计，也可以把这个圆环拉直看成长为 $2\pi r$，宽为 $\mathrm{d}r$ 的矩形。就有 $\mathrm{d}S=2\pi r\mathrm{d}r$，于是这个圆环对 $P$ 产生的场强为：
 $$
 \begin{aligned}
 \mathrm{d}E&=\frac{x\mathrm{d}q}{4\pi\varepsilon_0(x^2+r^2)^{\frac{3}{2}}}\\
