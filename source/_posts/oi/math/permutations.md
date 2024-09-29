@@ -944,9 +944,9 @@ signed main() {
 >
 > 题目链接：[CF559C](http://codeforces.com/problemset/problem/559/C)。
 
-设 $dp(i)$ 表示走到第 $i$ 个不能走的格子的方案数，起点为 $S=(1,1)$ 终点为 $T=(h,w)$，然后假设 $slv(A,B)$ 可以求出来在没有限制的情况下 $A\to B$ 的所有方案。走到 $i$ 需要满足不经过它左上方的不能走的格子，即：
+设 $dp(i)$ 表示走到第 $i$ 个不能走的格子的方案数，起点为 $S=(1,1)$ 终点为 $T=(h,w)$，然后假设 $sln(A,B)$ 可以求出来在没有限制的情况下 $A\to B$ 的所有方案。走到 $i$ 需要满足不经过它左上方的不能走的格子，即：
 $$
-dp(i)=sln(S,P_i)-\sum_{P_j\le P_i} dp(j)
+dp(i)=sln(S,P_i)-\sum_{P_j\le P_i} dp(j)\times sln(P_j,P_i)
 $$
 这里的 $P_j\le P_i$ 意思是 $P_j$ 在 $P_i$ 左上角。
 
