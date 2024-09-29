@@ -1,6 +1,6 @@
 ---
 date: 2023-07-08 00:39:00
-title: 中学物理的一些边角料
+title: 中学知识里一些需要用数学解释的边角料
 katex: true
 tags:
 - Math
@@ -156,4 +156,80 @@ $$
 $$
 n_1\sin\theta_1=n_2\sin\theta_2
 $$
-联立就可以推导出 $n_1v_1=n_2v_2$ 了。
+联立就可以推导出 $n_1v_1=n_2v_2$​ 了。
+
+## 连续自由交配淘汰 n 代杂种概率
+
+由于自交中当作不淘汰先算最后 Normalize 一下也是可以的，因为淘汰与否不影响杂种与纯种概率的相对值。但是自由交配时有影响的，所以需要用递推式用 DP 的思想来解决这个问题。
+
+设 $F_n$​ 基因型 $Aa$ 概率为 $a_n$，基因 $A$ 的概率为 $p_n$，基因 $a$ 的概率为 $q_n$，首先起始条件为 $a_0=1,p_0=q_0=0.5$ 且 $p_n+q_n\equiv 1$。
+
+对于 $F_{n+1}$ 中未淘汰前有 $AA=p_n^2,Aa=2p_nq_n,aa=q_n^2$，淘汰后就有：
+$$
+\begin{aligned}
+AA&=\frac{p_n^2}{p_n^2+2p_nq_n}\\
+&=\frac{p_n}{2-p_n}\\
+Aa&=\frac{2p_nq_n}{p_n^2+2p_nq_n}\\
+&=\frac{2-2p_n}{2-p_n}
+\end{aligned}
+$$
+算 $p_{n+1}$：
+$$
+p_{n+1}=\frac{1}{2}Aa+AA=\frac{1}{2-p_n}
+$$
+这样用 $p_n$ 表示 $a_n$ 有：
+$$
+a_{n+1}=\frac{2-2p_n}{2-p_n}=\frac{2-2(2-\frac{1}{p_{n+1}})}{2-(2-\frac{1}{p_{n+1}})}=2-2p_{n+1}
+$$
+代入递推式，整理得到：
+$$
+a_{n+1}=\frac{2a_n}{2+a_n}
+$$
+取倒数，结合 $a_0=1$ 得到最终式子：
+$$
+\frac{1}{a_n}=1+\frac{n}{2}
+$$
+即：
+$$
+a_n=\frac{2}{n+2}
+$$
+
+## 简谐运动周期
+
+首先根据回复力的定义：
+$$
+F=-kx
+$$
+设 $x=A\sin(\omega t+\varphi)$，那么根据牛二处理这个式子：
+$$
+\begin{aligned}
+F&=m\frac{\mathrm{d}^2x}{\mathrm{d}t^2}\\
+&=-m\omega^2 A\sin(\omega t+\varphi)\\
+&=-kA\sin(\omega t+\varphi)
+\end{aligned}
+$$
+所以 $\omega^2=k/m$，所以就有：
+$$
+T=2\pi \frac{1}{\omega}=2\pi\sqrt{\frac{m}{k}}
+$$
+可以根据量纲记忆：$\dim m=M,\dim k= MT^{-2}$。
+
+## 点电荷电势(能)变化量
+
+根据库仑定律有：
+$$
+F=k\frac{Qq}{r^2}
+$$
+设场源电荷的电荷量为 $Q$，试探电荷的电荷量为 $q$，设 $A\to B$ 距离场源电荷距离变化为 $r_A\to r_B$：
+$$
+\begin{aligned}
+\begin{aligned}
+W&=qU_{AB}\\
+&=q(\varphi_A-\varphi_B)\\
+&=\int_{r_A}^{r_B}k\frac{Qq}{r^2}\mathrm{d}r\\
+&=q\left(k\frac{Q}{r_A}-k\frac{Q}{r_B}\right)
+\end{aligned}
+\end{aligned}
+$$
+如果设 $r\to \infin$ 时电势为 $0$，那么就有 $\varphi=k\frac{Q}{r}$ 成立，引力势能同上。
+
