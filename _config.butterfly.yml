@@ -45,7 +45,7 @@ menu:
     分类: /categories/ || fas fa-folder-open
   友链: /links/ || fas fa-link
   关于: /about/ || fas fa-heart
-  开往: https://travellings.cn/go.html || fas fa-subway
+  开往: https://www.travellings.cn/go.html || fas fa-subway
 
 social:
   fab fa-github: https://github.com/hikariyo || GitHub 
