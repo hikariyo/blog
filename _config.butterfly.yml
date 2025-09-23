@@ -89,7 +89,7 @@ aside:
     enable: false
   card_announcement:
     enable: true
-    content: 记录学习过程中遇到的各种题目，以及各种数据结构算法的基本原理与个人理解，便于日后复习。<br>P.S. 用魔法访问本站可以大幅减少加载时间。
+    content: XCPC 算法学习分享。
   card_author:
     description: 喜欢做点有趣的事情
     button:
