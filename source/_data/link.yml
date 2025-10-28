@@ -18,8 +18,8 @@
       avatar: https://blog.ch34k.xyz/images/avatar.jpg
       descr: 代码，是连接碳基生命和硅基生命的桥梁
     - name: HikariLan's Blog
-      link: https://my.minecraft.kim/
-      avatar: https://my.minecraft.kim/avatar.png
+      link: https://blog.hikarilan.life/
+      avatar: https://assets.hikarilan.life/avatar.png
       descr: 兰草凋荡，星辰璀璨
     - name: 豆焰
       link: https://blog.beanflame.cn/
@@ -45,4 +45,7 @@
       link: https://rotcool.me/
       avatar: https://img.rotcool.me/i/2022/12/27/63aaca2a50b7d.jpg
       descr: 跌跌撞撞的人生才是人生
-
+    - name: DruidDoggie
+      link: https://winterinn.cn/
+      avatar: http://winterinn.cn/upload/EDB2E46F1D0BCCEEE1728551D6B6EB89.png
+      descr: Druid's Blog
