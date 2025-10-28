@@ -89,9 +89,9 @@ aside:
     enable: false
   card_announcement:
     enable: true
-    content: XCPC 算法学习分享。
+    content: XCPC 算法学习分享，目前主要更新一些 VP 中写的题目。
   card_author:
-    description: 喜欢做点有趣的事情
+    description: 前 OIer / 现 XCPCer
     button:
       enable: true
       text: 主页
