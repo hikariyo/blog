@@ -1,5 +1,6 @@
 ---
 date: 2025-12-01 21:47:00
+update: 2025-12-02 17:54:00
 title: 字符串 - ACAM
 katex: true
 tags:
@@ -131,3 +132,39 @@ $$
 因此我们的做法就是在 $\text{fail}$ 树上建主席树，存下来每一个 $f(s_{i,1}-s_{i,2})$，然后查询 $f(p_1-p_2)$ 的计数即可。
 
 [AC Code](https://gist.github.com/hikariyo/d3ff774cb85e8e5913d3824f97cd9075)。
+
+## Luogu P7456
+
+看到这个题目，就立马有一个朴素的 DP 想法，设 $dp_i$ 表示前缀 $s[1,i]$ 凑出来的最小单词数，那么转移有：
+$$
+dp_i=\min_{j=i-|a_k|}^{i-1} dp_j+1
+$$
+这里需要满足 $s[1,i]$ 以 $a_k$ 为后缀，于是你就会发现，我们需要的只是最长的满足条件的 $a_k$。
+
+因为你可以观察这个式子，更短的 $a_k$ 对答案的贡献一定会被最长的算进去。
+
+而 ACAM 就可以求出来最长的那个长度。
+
+这道题目剩下的部分就是一个线段树优化 DP 了。
+
+[AC Code](https://gist.github.com/hikariyo/2f80aadab53ac41c08b880a4833b8d1e)。
+
+## Luogu P4052
+
+相当于，在 ACAM 上走 $m$ 步并且不走到 $\text{fail}$ 链上有标记的点的方案数。
+
+设 $dp(u,k)$ 表示节点 $u$ 走 $k$ 步的方案数，那么由能走到的节点 $to$ 的 $dp(to,k-1)$ 转移过来即可。
+
+[AC Code](https://gist.github.com/hikariyo/828f483b3ef7387b1776d330d97ba53c)。
+
+## HDU 2457
+
+设 $dp(i,u)$ 设添加第 $i$ 个字符后，在 ACAM 上匹配到以 $u$ 结尾的最小次数。
+
+当我们添加一个字符时，需要对每个节点 $u$ 都尝试沿着 $\texttt{A,T,G,C}$ 向下走。
+
+形式化地，$dp(i+1,to)\gets dp(i,u)+0/1$，这里 $0/1$ 表示走的边是否等于原始串对应位置的字符。
+
+发现只会由 $i$ 向 $i+1$ 推，所以可以滚动数组优化掉这一维。
+
+[AC Code](https://gist.github.com/hikariyo/c95dc4fd8c32a8b879abe7d3d696c718)。
