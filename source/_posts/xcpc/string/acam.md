@@ -159,7 +159,7 @@ $$
 
 [AC Code](https://gist.github.com/hikariyo/828f483b3ef7387b1776d330d97ba53c)。
 
-## [HDU2457] Repair DNA
+## [HDU2457] DNA repair
 
 设 $dp(i,u)$ 设添加第 $i$ 个字符后，在 ACAM 上匹配到以 $u$ 结尾的最小次数。
 
