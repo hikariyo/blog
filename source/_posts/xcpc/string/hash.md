@@ -24,7 +24,7 @@ description: 字符串哈希，但是也有非字符串的哈希。
 
 我们通过一个题目来看模数怎么选。
 
-## Luogu P12200
+## [P12200] Hash Killer Extra
 
 按照我们的理论，随机一个字符串等价于随机一个 $B$ 进制数，当然其中的 $S_i$ 是 $[1,26]$ 内取的。
 
@@ -38,7 +38,7 @@ description: 字符串哈希，但是也有非字符串的哈希。
 
 [AC Code](https://gist.github.com/hikariyo/0199de58253a59ed1936fa647ed49c9b)。
 
-## JLCPC 2025 H
+## [JLCPC2025 H] Another Palindromes Problem
 
 首先转化为询问 $a_l\sim a_r$ 中，奇数位置元素构成的多重集，与偶数位置构成的多重集是否相同。
 

@@ -58,7 +58,9 @@ void build() {
 }
 ```
 
-## Luogu P5357
+从这个代码可以看出来，这里甚至没有跳 $\text{fail}$ 的循环，所以复杂度显然是线性的。
+
+## [模板] AC 自动机
 
 初始时令当前节点 $u=0$，意思是空串；每添加一个字符 $ch$，我们就尝试在 $T$ 上走 $(u,ch)$ 这条边：
 
@@ -78,7 +80,7 @@ void build() {
 
 [AC Code](https://gist.github.com/hikariyo/fc6e7653df1b8b82ca2ca384f6b673de)。
 
-## Nowcoder 14612
+## [NC14612] string
 
 从构建过程可以看出，ACAM 是一个离线数据结构，并不支持插入这种操作。
 
@@ -92,7 +94,7 @@ void build() {
 
 [AC Code](https://gist.github.com/hikariyo/f9d17332bf14085a8a4acde0ec7d6292)。
 
-## Luogu P14363
+## [CSP-S2025] 谐音替换
 
 听说今年 CSP-S 出了一个 ACAM 的题目，来看看怎么回事。
 
@@ -133,7 +135,7 @@ $$
 
 [AC Code](https://gist.github.com/hikariyo/d3ff774cb85e8e5913d3824f97cd9075)。
 
-## Luogu P7456
+## [CERC2018] The ABCD Murderer
 
 看到这个题目，就立马有一个朴素的 DP 想法，设 $dp_i$ 表示前缀 $s[1,i]$ 凑出来的最小单词数，那么转移有：
 $$
@@ -149,7 +151,7 @@ $$
 
 [AC Code](https://gist.github.com/hikariyo/2f80aadab53ac41c08b880a4833b8d1e)。
 
-## Luogu P4052
+## [JSOI2007] 文本生成器
 
 相当于，在 ACAM 上走 $m$ 步并且不走到 $\text{fail}$ 链上有标记的点的方案数。
 
@@ -157,7 +159,7 @@ $$
 
 [AC Code](https://gist.github.com/hikariyo/828f483b3ef7387b1776d330d97ba53c)。
 
-## HDU 2457
+## [HDU2457] Repair DNA
 
 设 $dp(i,u)$ 设添加第 $i$ 个字符后，在 ACAM 上匹配到以 $u$ 结尾的最小次数。
 

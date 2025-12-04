@@ -68,7 +68,7 @@ for i = 2 to n:
 
 因此 `while` 循环的总执行次数不会超过 $n$，所以这个算法是 $O(n)$ 的。
 
-## Luogu P3375
+## [模板] KMP
 
 这是一个 KMP 算法的经典应用：字符串匹配。
 
@@ -92,7 +92,7 @@ for i = 2 to n:
 
 [AC Code](https://gist.github.com/hikariyo/d83573485b31f18606397ef057041102)。
 
-## Luogu P10475
+## [USACO03FALL] Milking Grid（数据加强版）
 
 显然，我们需要对所有横向的字符串找到它们公共的周期，纵向也要找到公共周期。
 
