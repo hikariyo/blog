@@ -8,7 +8,7 @@ tags:
 - Math
 categories:
 - XCPC
-description: 《具体数学》第三章整值函数在竞赛视角下的阅读笔记。
+description: 竞赛视角下阅读《具体数学》第三章：整值函数。
 ---
 
 ## 关键概念性质
