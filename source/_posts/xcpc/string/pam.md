@@ -95,13 +95,13 @@ int insert(char ch) {
 
 [AC Code](https://gist.github.com/hikariyo/d1f9e9033f0e5dc4479e640fe3f39b27)。
 
-## [2019徐州网络赛] Colorful String
+## [徐州网络赛2019] Colorful String
 
 每一个节点用一个二进制数表示 $26$ 个字母的状态，最后用 $\text{popcount}$ 求每个节点对应的种类数，乘上对应的出现次数累加即可。
 
 [AC Code](https://gist.github.com/hikariyo/81cb1d580cc55be1fa8efcbc2804f7ec)。
 
-## [CCPC2023 秦皇岛] Palindrome
+## [CCPC2023秦皇岛] Palindrome
 
 我们把每次询问的子串称为 $S$，我们下面讨论基于 $S$ 不是一个回文串。
 
