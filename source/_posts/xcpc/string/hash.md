@@ -38,7 +38,7 @@ description: 字符串哈希，但是也有非字符串的哈希。
 
 [AC Code](https://gist.github.com/hikariyo/0199de58253a59ed1936fa647ed49c9b)。
 
-## [JLCPC2025 H] Another Palindromes Problem
+## [JLCPC2025] Another Palindromes Problem
 
 首先转化为询问 $a_l\sim a_r$ 中，奇数位置元素构成的多重集，与偶数位置构成的多重集是否相同。
 
