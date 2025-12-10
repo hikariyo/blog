@@ -58,7 +58,7 @@ description: Palindrome Series 及其应用
 
    直观地看，就是这两个绿串的上一次出现的位置是紫串位置。
 
-   ![Conclusion 1](img/2025/12/ps2.jpeg)
+   ![Conclusion 1](/img/2025/12/ps2.jpeg)
 
    设 $x$ 和 $y=\text{link}(x)$ 是两个在这条链上的节点，根据文章开头所说，$y$ 是 $x$ 的最大 $\text{Border}$，因此我们知道 $y$ 一定在 $p-\text{dif}(x)$ 出现了，那我们只需要证 $p-d+1\sim p-1$ 都没出现即可。
 
@@ -68,7 +68,7 @@ description: Palindrome Series 及其应用
 
 2. 设一条 $\text{slink}$ 链的链底为 $x$，若 $\text{slink}(x)\neq\text{link}(x)$，设 $y=\text{link}(x)$，$\text{pos}(y)$ 是 $y$ 最后出现的位置，那么 $y$ 在 $\text{pos}(y)-\text{dif}(y)$ 这个位置一定是某个链的链底。
 
-   ![Conclusion 2](img/2025/12/ps3.jpeg)
+   ![Conclusion 2](/img/2025/12/ps3.jpeg)
 
    如果存在，说明上图中的 $S_z$ 串存在，并且我们可以推出 $S_z=S_x$，可以进一步推出 $S_a$ 串的存在，那么 $a$ 一定在这个 $\text{slink}$ 链中，并且在 $x$ 的下面，此时 $x$ 就不是链底了，推出矛盾。 
 
