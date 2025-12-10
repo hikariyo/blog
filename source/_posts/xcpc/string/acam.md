@@ -184,3 +184,16 @@ $$
 注意，如果某一个前缀已经含有不合法的子串了，我们就需要及时 `break`。
 
 [AC Code](https://gist.github.com/hikariyo/513450152dc935b15388c7df8da55670)。
+
+## [CF547E] Mike and Friends
+
+题目中的 $\text{call}(i,k)$ 表示 $s_k$ 在 $s_i$ 中的出现次数。
+
+在 ACAM 上考虑，$s_k$ 在 $s_i$ 中出现就等价于 $s_i$ 在 ACAM 上走的过程中，每一个经过的节点的失配链上出现 $s_k$ 的次数。
+
+因此可以给每一个节点维护一颗线段树 $t_u$，在 $s_i$ 插入 ACAM 的同时就给对应的 $t_{u,i}\gets t_{u,i}+1$。
+
+那么对于每个查询，把它们离线下来挂到对应节点上，我们只需要合并子树中的线段树后处理这些询问即可。
+
+[AC Code](https://gist.github.com/hikariyo/99c91147da8186915319a2d105187259)。
+
