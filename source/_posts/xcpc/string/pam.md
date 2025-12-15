@@ -146,3 +146,12 @@ int insert(char ch) {
 
 [AC Code](https://gist.github.com/hikariyo/00f928b0f39f58519b78bb814c5a773f)。
 
+## [SHOI2011] 双倍回文
+
+建完 PAM 后枚举所有的节点。
+
+对于每一个节点 $u$，如果它可能是答案，当且仅当它有一个长度为 $\cfrac{|S_u|}{2}$ 的回文后缀。
+
+怎么找？我们可以倍增找出第一个长度 $\le \cfrac{|S_u|}{2}$ 的回文后缀，然后验证一下即可，复杂度 $O(|s|\log |s|)$。
+
+[AC Code](https://gist.github.com/hikariyo/94d384b5e74d11834bb0b8d44a973cba)。
