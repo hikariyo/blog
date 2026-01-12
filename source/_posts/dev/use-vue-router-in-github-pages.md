@@ -3,7 +3,7 @@ title: 在 GitHub Pages 中使用 Vue Router
 date: 2023-01-25 16:43:45.324
 updated: 2023-01-25 16:45:53.612
 categories: 
-- Bug
+- Dev
 tags: 
 - Vue
 - GitHub

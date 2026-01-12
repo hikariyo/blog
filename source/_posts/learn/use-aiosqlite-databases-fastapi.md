@@ -4,7 +4,7 @@ date: 2023-01-13 10:04:43.473
 updated: 2023-01-13 13:24:25.387
 
 categories: 
-- Dev
+- Learn
 tags: 
 - Python
 ---

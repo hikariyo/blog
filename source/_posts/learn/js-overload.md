@@ -4,7 +4,7 @@ date: 2022-06-01 14:37:23.0
 updated: 2022-12-10 19:52:41.431
 
 categories: 
-- Dev
+- Learn
 tags: 
 - JS
 ---
