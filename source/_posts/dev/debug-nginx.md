@@ -1,5 +1,5 @@
 ---
-title: 记一次 Nginx 调试
+title: 开发 - 记一次 Nginx 调试
 date: 2022-09-10 04:29:05.527
 updated: 2022-09-10 04:34:51.965
 categories: 

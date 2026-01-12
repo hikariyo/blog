@@ -1,5 +1,5 @@
 ---
-title: 使用 FastAPI+aiosqlite+databases 搭建服务端的基础用法
+title: 学习 - 使用 FastAPI+aiosqlite+databases 搭建服务端的基础用法
 date: 2023-01-13 10:04:43.473
 updated: 2023-01-13 13:24:25.387
 

@@ -1,5 +1,5 @@
 ---
-title: Python 使用 pkgutil 访问包内资源
+title: 开发 - Python 使用 pkgutil 访问包内资源
 date: 2022-10-31 17:42:21.424
 updated: 2022-10-31 17:42:21.424
 categories: 

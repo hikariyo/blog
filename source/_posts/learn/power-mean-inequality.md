@@ -1,5 +1,5 @@
 ---
-title: 数学 - 幂平均不等式
+title: 学习 - 幂平均不等式
 date: 2024-06-03 23:37:00
 katex: true
 categories:

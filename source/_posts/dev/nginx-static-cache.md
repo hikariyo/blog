@@ -1,5 +1,5 @@
 ---
-title: Nginx处理静态资源缓存问题
+title: 开发 - Nginx 处理静态资源缓存问题
 date: 2022-05-15 00:00:00.0
 updated: 2022-08-10 15:41:21.701
 categories: 

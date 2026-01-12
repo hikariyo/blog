@@ -1,5 +1,5 @@
 ---
-title: 基于 inspect 实现重载
+title: 学习 - 基于 inspect 实现重载
 date: 2023-02-04 19:36:32.019
 updated: 2023-02-05 21:41:01.335
 description: 通常情况下 Python 只能做到在函数体内部判断参数类型进行重载，但我们可以借助 inspect 来实现像一般静态语言那样的重载。为了简化代码，不考虑 positional only 和 keyword only 的参数。

@@ -1,5 +1,5 @@
 ---
-title: Nginx部署Vue项目
+title: 开发 - Nginx 部署 Vue 项目
 date: 2022-05-03 00:00:00.0
 updated: 2022-08-10 15:27:51.013
 categories: 

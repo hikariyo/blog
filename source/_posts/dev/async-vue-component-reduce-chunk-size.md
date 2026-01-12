@@ -1,5 +1,5 @@
 ---
-title: 异步加载 Vue 组件以减小 chunk 体积
+title: 开发 - 异步加载 Vue 组件以减小 chunk 体积
 date: 2022-11-05 23:19:39.413
 updated: 2022-11-06 21:39:05.631
 categories: 

@@ -1,5 +1,5 @@
 ---
-title: 数学 - 超几何分布的期望和方差
+title: 学习 - 超几何分布的期望和方差
 date: 2024-04-20 18:15:00
 katex: true
 categories:
