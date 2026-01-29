@@ -1,5 +1,6 @@
 ---
 date: 2023-07-14 15:05:05
+updated: 2023-07-14 15:05:05
 title: 搜索 - A*
 katex: true
 tags:

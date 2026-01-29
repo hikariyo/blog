@@ -1,6 +1,6 @@
 ---
 date: 2024-01-22 20:37:00
-update: 2024-05-27 15:25:00
+updated: 2024-05-27 15:25:00
 title: 数学 - Pollard Rho
 katex: true
 description: Pollard Rho 算法利用生日悖论，可以在优秀的复杂度内找到一个合数的非 1 非自身因数，使用时需要搭配 Miller Rabin 算法首先判断一个数是否为质数。

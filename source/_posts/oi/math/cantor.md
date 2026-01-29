@@ -1,5 +1,6 @@
 ---
 date: 2023-11-16 18:21:00
+updated: 2023-11-16 18:21:00
 title: 数学 - 康托展开
 katex: true
 tags:

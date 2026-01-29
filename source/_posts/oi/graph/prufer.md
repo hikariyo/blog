@@ -1,5 +1,6 @@
 ---
 date: 2023-09-05 16:00:00
+updated: 2023-09-05 16:00:00
 title: 图论 - Prufer 编码
 katex: true
 tags:

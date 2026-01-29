@@ -1,5 +1,6 @@
 ---
 date: 2023-08-16 16:10:00
+updated: 2023-08-16 16:10:00
 title: 动态规划 - 斜率优化
 katex: true
 tags:

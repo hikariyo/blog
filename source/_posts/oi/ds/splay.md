@@ -1,5 +1,6 @@
 ---
 date: 2023-08-06 16:21:00
+updated: 2023-08-06 16:21:00
 title: 数据结构 - Splay
 katex: true
 tags:

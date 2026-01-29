@@ -1,5 +1,6 @@
 ---
 date: 2025-09-25 09:01:00
+updated: 2025-09-25 09:01:00
 title: 数学 - 概率与期望
 katex: true
 tags:

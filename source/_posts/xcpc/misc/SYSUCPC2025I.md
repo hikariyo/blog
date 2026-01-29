@@ -1,5 +1,6 @@
 ---
 date: 2025-11-02 20:10:00
+updated: 2025-11-02 20:10:00
 title: "[SYSUCPC 2025 I] Sum"
 katex: true
 tags:

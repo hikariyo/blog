@@ -1,5 +1,6 @@
 ---
 date: 2023-08-15 19:57:00
+updated: 2023-08-15 19:57:00
 title: 动态规划 - 数位 DP
 katex: true
 tags:

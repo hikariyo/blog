@@ -1,5 +1,6 @@
 ---
 date: 2025-11-02 17:53:00
+updated: 2025-11-02 17:53:00
 title: "[SYSUCPC 2025 E] Ecosystem"
 katex: true
 tags:

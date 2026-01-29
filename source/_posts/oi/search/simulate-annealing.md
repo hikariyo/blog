@@ -1,5 +1,6 @@
 ---
 date: 2023-08-18 09:35:00
+updated: 2023-08-18 09:35:00
 title: 搜索 - 模拟退火
 katex: true
 tags:

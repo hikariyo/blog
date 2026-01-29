@@ -1,5 +1,6 @@
 ---
 date: 2024-01-22 00:24:00
+updated: 2024-01-22 00:24:00
 title: 数学 - 二次剩余
 description: 二次剩余即模意义开根，当模数为奇素数时，用 Cipolla 算法利用扩域的思想进行求解。
 katex: true

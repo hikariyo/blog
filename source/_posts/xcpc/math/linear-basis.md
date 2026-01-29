@@ -1,5 +1,6 @@
 ---
 date: 2026-01-29 23:11:00
+updated: 2026-01-29 23:11:00
 title: 数学 - 异或线性基
 katex: true
 tags:

@@ -1,5 +1,6 @@
 ---
 date: 2023-08-12 17:30:00
+updated: 2023-08-12 17:30:00
 title: 动态规划 - 区间 DP
 katex: true
 tags:

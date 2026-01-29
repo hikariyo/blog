@@ -1,5 +1,6 @@
 ---
 date: 2025-12-15 12:14:00
+updated: 2025-12-15 12:14:00
 title: 数学 - 生成函数基础
 katex: true
 tags:

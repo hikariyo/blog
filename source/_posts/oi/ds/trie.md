@@ -1,6 +1,6 @@
 ---
 date: 2023-06-14 20:52:27
-update: 2024-01-21 01:10:00
+updated: 2024-01-21 01:10:00
 title: 数据结构 - Trie 树
 katex: true
 tags:

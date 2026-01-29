@@ -1,6 +1,6 @@
 ---
 date: 2025-12-01 17:59:00
-update: 2025-12-08 09:35:00
+updated: 2025-12-08 09:35:00
 title: 字符串 - KMP
 katex: true
 tags:

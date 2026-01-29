@@ -1,6 +1,6 @@
 ---
 date: 2023-07-12 10:11:12
-update: 2023-07-14 14:34:12
+updated: 2023-07-14 14:34:12
 title: 搜索 - BFS
 katex: true
 tags:

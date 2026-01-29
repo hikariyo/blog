@@ -1,5 +1,6 @@
 ---
 date: 2025-12-09 00:00:00
+updated: 2025-12-09 00:00:00
 title: 字符串 - Palindrome Series
 katex: true
 tags:

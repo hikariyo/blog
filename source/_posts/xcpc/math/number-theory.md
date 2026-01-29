@@ -1,5 +1,6 @@
 ---
 date: 2025-12-05 23:22:00
+updated: 2025-12-05 23:22:00
 title: 数学 - 数论基础
 katex: true
 tags:

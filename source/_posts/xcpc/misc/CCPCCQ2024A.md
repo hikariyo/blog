@@ -1,5 +1,6 @@
 ---
 date: 2025-10-28 19:23:00
+updated: 2025-10-28 19:23:00
 title: "[CCPC重庆 2024 A] 乘积，欧拉函数，求和"
 katex: true
 tags:

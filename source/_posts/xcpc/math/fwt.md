@@ -1,5 +1,6 @@
 ---
 date: 2025-10-08 09:30:00
+updated: 2025-10-08 09:30:00
 title: 数学 - 位运算卷积与 FWT
 katex: true
 tags:

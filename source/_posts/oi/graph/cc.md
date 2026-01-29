@@ -1,5 +1,6 @@
 ---
 date: 2023-09-19 20:55:00
+updated: 2023-09-19 20:55:00
 title: 图论 - 连通分量模板
 katex: true
 tags:

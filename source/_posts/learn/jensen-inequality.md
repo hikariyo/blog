@@ -1,7 +1,7 @@
 ---
 title: 学习 - Jensen 不等式
 date: 2024-05-04 18:28:00
-update: 2024-06-03 23:36:00
+updated: 2024-06-03 23:36:00
 katex: true
 categories:
 - Learn

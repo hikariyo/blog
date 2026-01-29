@@ -1,5 +1,6 @@
 ---
 date: 2025-12-15 12:14:00
+updated: 2025-12-15 12:14:00
 title: 数学 - 拉格朗日插值
 katex: true
 tags:

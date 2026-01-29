@@ -1,5 +1,6 @@
 ---
 date: 2023-10-22 20:20:00
+updated: 2023-10-22 20:20:00
 title: 数学 - 逆元
 katex: true
 tags:

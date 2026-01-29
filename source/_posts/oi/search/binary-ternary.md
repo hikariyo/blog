@@ -2,7 +2,7 @@
 title: 搜索 - 二分和三分
 katex: true
 date: 2023-06-13 12:00:00
-update: 2023-09-12 19:49:00
+updated: 2023-09-12 19:49:00
 tags:
 - Algo
 - C++

@@ -1,5 +1,6 @@
 ---
 date: 2024-01-16 16:46:00
+updated: 2024-01-16 16:46:00
 title: 杂项 - CDQ 分治
 katex: true
 tags:

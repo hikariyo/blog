@@ -1,5 +1,6 @@
 ---
 date: 2025-10-31 16:05:00
+updated: 2025-10-31 16:05:00
 title: "[ICPC杭州 2024 B] Barkley III"
 katex: true
 tags:

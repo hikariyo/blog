@@ -1,5 +1,6 @@
 ---
 date: 2025-11-20 18:07:00
+updated: 2025-11-20 18:07:00
 title: 图论 - DSU On Tree
 katex: true
 tags:

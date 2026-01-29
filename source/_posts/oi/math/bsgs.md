@@ -1,5 +1,6 @@
 ---
 date: 2024-01-21 02:50:00
+updated: 2024-01-21 02:50:00
 title: 数学 - BSGS
 description: BSGS 算法即大步小步算法是利用分块与哈希表，在根号的复杂度求解离散对数问题的算法。
 katex: true

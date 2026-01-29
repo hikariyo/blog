@@ -1,6 +1,6 @@
 ---
 date: 2023-08-05 16:06:00
-update: 2023-10-11 14:54:00
+updated: 2023-10-11 14:54:00
 title: 数据结构 - ST 表
 katex: true
 tags:

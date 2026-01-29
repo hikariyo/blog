@@ -1,5 +1,6 @@
 ---
 date: 2024-07-09 18:09:00
+updated: 2024-07-09 18:09:00
 title: 数学 - 单位根反演
 katex: true
 tags:

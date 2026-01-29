@@ -1,5 +1,6 @@
 ---
 date: 2023-08-05 16:59:00
+updated: 2023-08-05 16:59:00
 title: 数学 - 莫比乌斯反演
 katex: true
 tags:

@@ -1,5 +1,6 @@
 ---
 date: 2023-09-19 20:57:00
+updated: 2023-09-19 20:57:00
 title: 图论 - 连通分量例题
 katex: true
 tags:

@@ -1,5 +1,6 @@
 ---
 date: 2024-01-22 16:19:00
+updated: 2024-01-22 16:19:00
 title: 数学 - Miller Rabin
 katex: true
 description: Miller Rabin 算法是一种用来快速判断一个数是否为质数的随机化算法，当数字选择恰当时可以保证在 uint64 范围内准确。

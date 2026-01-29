@@ -1,5 +1,6 @@
 ---
 date: 2023-09-24 10:04:00
+updated: 2023-09-24 10:04:00
 title: 图论 - 基环树
 katex: true
 tags:

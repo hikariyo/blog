@@ -1,5 +1,6 @@
 ---
 date: 2023-08-03 23:16:00
+updated: 2023-08-03 23:16:00
 title: 数学 - 容斥原理
 katex: true
 tags:

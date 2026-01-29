@@ -1,5 +1,6 @@
 ---
 date: 2023-10-17 20:59:00
+updated: 2023-10-17 20:59:00
 title: 图论 - 树链剖分
 katex: true
 tags:

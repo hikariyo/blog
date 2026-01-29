@@ -1,5 +1,6 @@
 ---
 date: 2023-12-22 23:03:00
+updated: 2023-12-22 23:03:00
 title: 数据结构 - Kruskal 重构树
 katex: true
 tags:

@@ -1,5 +1,6 @@
 ---
 date: 2023-10-31 15:54:00
+updated: 2023-10-31 15:54:00
 title: 数据结构 - 单调栈
 katex: true
 tags:

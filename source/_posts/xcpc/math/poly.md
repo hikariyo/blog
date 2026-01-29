@@ -1,5 +1,6 @@
 ---
 date: 2025-12-22 18:14:00
+updated: 2025-12-22 18:14:00
 title: 数学 - 多项式
 katex: true
 tags:

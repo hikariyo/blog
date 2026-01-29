@@ -1,5 +1,6 @@
 ---
 date: 2025-11-06 15:30:00
+updated: 2025-11-06 15:30:00
 title: "[ICPC南京 2023 M] Trapping Rain Water"
 katex: true
 tags:

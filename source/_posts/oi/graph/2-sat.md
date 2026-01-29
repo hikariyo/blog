@@ -1,5 +1,6 @@
 ---
 date: 2023-09-04 19:00:00
+updated: 2023-09-04 19:00:00
 title: 图论 - 2 SAT
 katex: true
 tags:

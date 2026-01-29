@@ -1,5 +1,6 @@
 ---
 date: 2025-11-18 14:54:00
+updated: 2025-11-18 14:54:00
 title: 贪心 - Huffman 树
 katex: true
 tags:

@@ -1,5 +1,6 @@
 ---
 date: 2023-08-02 12:11:00
+updated: 2023-08-02 12:11:00
 title: 数学 - 组合计数
 katex: true
 tags:

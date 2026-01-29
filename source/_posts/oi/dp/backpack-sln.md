@@ -1,5 +1,6 @@
 ---
 date: 2023-07-05 15:12:12
+updated: 2023-07-05 15:12:12
 title: 动态规划 - 背包方案
 katex: true
 tags:

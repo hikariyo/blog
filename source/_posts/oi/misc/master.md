@@ -1,5 +1,6 @@
 ---
 date: 2024-01-16 18:26:00
+updated: 2024-01-16 18:26:00
 title: 杂项 - 主定理及证明
 katex: true
 tags:

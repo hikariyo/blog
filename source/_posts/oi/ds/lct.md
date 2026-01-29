@@ -1,5 +1,6 @@
 ---
 date: 2023-12-24 06:52:00
+updated: 2023-12-24 06:52:00
 title: 数据结构 - Link Cut Tree
 katex: true
 tags:

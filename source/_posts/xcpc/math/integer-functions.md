@@ -1,5 +1,6 @@
 ---
 date: 2025-12-04 22:04:00
+updated: 2025-12-04 22:04:00
 title: 数学 - 整值函数
 katex: true
 tags:

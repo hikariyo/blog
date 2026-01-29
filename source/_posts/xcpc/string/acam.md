@@ -1,6 +1,6 @@
 ---
 date: 2025-12-01 21:47:00
-update: 2025-12-02 17:54:00
+updated: 2025-12-02 17:54:00
 title: 字符串 - ACAM
 katex: true
 tags:

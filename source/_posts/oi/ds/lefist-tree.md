@@ -1,5 +1,6 @@
 ---
 date: 2024-01-15 05:11:00
+updated: 2024-01-15 05:11:00
 title: 数据结构 - 左偏树
 katex: true
 tags:

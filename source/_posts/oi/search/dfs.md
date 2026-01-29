@@ -1,6 +1,6 @@
 ---
 date: 2023-07-16 11:38:22
-update: 2023-07-16 23:59:22
+updated: 2023-07-16 23:59:22
 title: 搜索 - DFS
 katex: true
 tags:

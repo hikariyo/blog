@@ -1,5 +1,6 @@
 ---
 date: 2025-10-31 13:28:00
+updated: 2025-10-31 13:28:00
 title: "[ICPC杭州 2024 M] Make It Divisible"
 katex: true
 tags:

@@ -1,5 +1,6 @@
 ---
 date: 2023-07-21 12:27:01
+updated: 2023-07-21 12:27:01
 title: 图论 - SPFA 负环
 katex: true
 tags:

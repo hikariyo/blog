@@ -1,5 +1,6 @@
 ---
 date: 2023-10-27 16:30:00
+updated: 2023-10-27 16:30:00
 title: 数学 - 同余最短路
 katex: true
 tags:
