@@ -1,7 +1,7 @@
 ---
 date: 2026-01-30 16:23:00
 updated: 2026-01-31 20:22:00
-title: 构造 - 专题训练 I
+title: 专题训练 - 构造 I
 katex: true
 tags:
 - Algo
