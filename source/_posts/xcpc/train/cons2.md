@@ -9,7 +9,7 @@ tags:
 - Constructive
 categories:
 - XCPC
-description: 本专题记录广义的构造题目，只要带有构造性步骤的都算，每篇文章至多 10 题。
+description: 10 道带有 Constructive 标签的 CF 题目。
 ---
 
 ## [CF1463B] Find The Array
