@@ -259,7 +259,7 @@ array<tuple<int,int,int>, 16> init() {
     array<tuple<int,int,int>, 16> res{};
     for (int rule = 0; rule < 16; rule++) {
         for (int h = 0; h < pow3[4]; h++) {
-            // validate whether h is inversable
+            // validate whether h is invertible
             int h00 = h % 3 - 1;
             int h01 = h / 3 % 3 - 1;
             int h10 = h / 9 % 3 - 1;
