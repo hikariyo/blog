@@ -1,14 +1,14 @@
 ---
 date: 2026-02-20 18:23:00
 updated: 2026-02-20 18:23:00
-title: VP - Codeforces Round 1078 (Div. 2)
+title: 题解 - Codeforces Round 1078 (Div. 2)
 katex: true
 tags:
 - Algo
 - C++
 categories:
 - XCPC
-description: Codeforces Round 1078 (Div. 2) 题解。
+description: Codeforces Round 1078 (Div. 2) 部分题解。
 ---
 
 ## [CF2194D] Table Cut
