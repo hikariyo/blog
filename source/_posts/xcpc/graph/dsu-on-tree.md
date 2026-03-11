@@ -6,7 +6,7 @@ katex: true
 tags:
 - Algo
 - C++
-- DS
+- Graph
 categories:
 - XCPC
 description: DSU On Tree 的应用。
