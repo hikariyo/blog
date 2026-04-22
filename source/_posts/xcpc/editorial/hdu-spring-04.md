@@ -84,7 +84,7 @@ description: 2026 杭电春季联赛第四场题解。
    + 上边界或右边界；
    + 下边界或左边界。
 
-我们可以用并查集判断，这样复杂度就是 $O(nm\alpha(nm))$。
+我们可以用 BFS 判断，复杂度是 $O(nm)$。
 
 ## 1005 列车停放站
 
@@ -122,9 +122,9 @@ description: 2026 杭电春季联赛第四场题解。
 
 对于每一个询问，我们可以先暴力的找出这 $O(\log n)$ 个区间，然后对于每一个区间 $[L,R]$ 来说，我们有这样的一个贪心的调整论证法：如果最优解存在一个不在 $L$ 处的操作，我们可以把它取消掉，并且让这个操作在 $L$ 处进行，那么操作仍然是合法的。根据这样的思路，每一段的操作都可以在区间的左端点处进行。
 
-对于第一个区间 $[L_1,R_1]$，容易看出 $L_1$ 处的操作数 $t_1\ge \left\lceil\cfrac{\max_{L_1\le j\le R_1} a_j}{g}\right\rceil$。
+对于第一个区间 $[L_1,R_1]$，容易看出 $L_1$ 处的操作数 $t_1\ge \left\lceil\cfrac{\max_{L_1\le j\le R_1} a_j}{g_{L_1}}\right\rceil$。
 
-如果 $t_1>\left\lceil\cfrac{\max_{L_1\le i\le R_1} a_i}{g}\right\rceil$，我们可以把多出来的操作都放到 $L_2$ 处，由于 $g_{L_2}>g_{L_1}$，所以操作仍然合法，那么我们就可以断定 $t_1=\left\lceil\cfrac{\max_{L_1\le j\le R_1} a_j}{g}\right\rceil$。
+如果 $t_1>\left\lceil\cfrac{\max_{L_1\le j\le R_1} a_j}{g_{L_1}}\right\rceil$，我们可以把多出来的操作都放到 $L_2$ 处，由于 $g_{L_2}>g_{L_1}$，所以操作仍然合法，那么我们就可以断定 $t_1=\left\lceil\cfrac{\max_{L_1\le j\le R_1} a_j}{g_{L_1}}\right\rceil$。
 
 对于后续的段，我们可以记录一下前面累积减去了多少，然后最大值用 ST 表查，于是单次询问复杂度 $O(\log n)$。
 
