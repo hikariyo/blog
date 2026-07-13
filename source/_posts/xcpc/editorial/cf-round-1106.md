@@ -1,7 +1,7 @@
 ---
 date: 2026-06-29 16:22:00
 updated: 2026-06-29 16:22:00
-title: 题解 - Codeforces Round 1106 (Div. 2) A-E
+title: 题解 - Codeforces Round 1106 (Div. 2)
 katex: true
 tags:
 - Algo
