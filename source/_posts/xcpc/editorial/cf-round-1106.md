@@ -8,7 +8,7 @@ tags:
 - C++
 categories:
 - XCPC
-description: Codeforces Round 1078 (Div. 2) A-E 题解。
+description: Codeforces Round 1106 (Div. 2) A-E 题解。
 ---
 
 ## A

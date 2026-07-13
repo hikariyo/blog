@@ -1,14 +1,14 @@
 ---
 date: 2026-07-13 16:22:00
 updated: 2026-07-13 16:22:00
-title: 题解 - Codeforces Round 1106 (Div. 2)
+title: 题解 - Codeforces Round 1108 (Div. 2)
 katex: true
 tags:
 - Algo
 - C++
 categories:
 - XCPC
-description: Codeforces Round 1078 (Div. 2) A-E 题解。
+description: Codeforces Round 1108 (Div. 2) A-E 题解。
 ---
 
 ## A
