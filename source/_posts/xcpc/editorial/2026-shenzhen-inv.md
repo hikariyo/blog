@@ -1,7 +1,7 @@
 ---
 date: 2026-09-11 13:18:00
 updated: 2026-09-11 16:44:00
-title: 题解 - The 4th Universal Cup. Extra Stage 5: Shenzhen
+title: "题解 - The 4th Universal Cup. Extra Stage 5: Shenzhen"
 katex: true
 tags:
 - Algo
